@@ -1,0 +1,38 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn{
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.46px;
+
+}
+
+.login-header{
+    color: #000;
+    font-family: "Sofija";
+    font-size: 96px;
+}
+
+.orange-button{
+    background-color: #FA7525;
+    color:#fff;
+}
+
+.orange-button:hover{
+    background-color: #ec630d;
+    color:#fff;
+}
+
+.orange-outline-button{
+    background-color: #fff;
+    color: #FA7525;
+    border-color: #ec630d;
+}
+
+.orange-outline-button:hover{
+    background-color: #d4d4d4;
+    color: #ec630d;
+    border-color: #ec630d;
+}

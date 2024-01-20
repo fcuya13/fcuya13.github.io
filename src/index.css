@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'Sofija';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Sofija'), url("./fonts/Sofija/Sofija.woff") format('woff');
+}
+
