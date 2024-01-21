@@ -36,3 +36,66 @@ body{
     color: #ec630d;
     border-color: #ec630d;
 }
+
+.recommend {
+    position: relative;
+}
+
+.carousel {
+    height: 420px;
+}
+
+.carousel-text {
+    position: absolute;
+    bottom: 15%;
+    left: 10%;
+}
+
+.carousel-buton {
+    position: absolute;
+    bottom: 13%;
+    left: 71%;
+}
+
+.tittle-recommend {
+    color: white;
+    font-family: "Sofija";
+    font-size: 90px;
+}
+
+.buton-stile {
+    border-width: 3px;
+    font-weight: bold;
+}
+
+.search-page {
+    margin: 40px 30%;
+    font-family: 'Roboto', sans-serif;
+}
+
+#search1-text {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#placeholder-text {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.38);
+}
+
+.navbar1 {
+    border-style: none none solid none;
+    border-radius: 0px;
+}
+
+#movies-buton {
+    margin-left: 25%;
+    margin-right: 7%
+}
+
+#cinemas-buton {
+    margin-right: 25%;
+    margin-left: 7%
+}
+
+
