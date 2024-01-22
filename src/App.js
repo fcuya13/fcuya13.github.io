@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import MoviesPage from "./pages/MoviesPage"
 
+
 function App() {
   return (
     <div>

@@ -1,63 +1,140 @@
-import React, { useState } from 'react'
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css'
-
+import { Container, TextField, Button, Typography, alpha } from "@mui/material";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const RegisterPage = () => {
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [password, setPassword] = useState("");
+  const [passConf, setPassConf] = useState("");
 
-    const [nombre, setNombre] = useState("")
-    const [apellido, setApellido] = useState("")
-    const [correo, setCorreo] = useState("")
-    const [password, setPassword] = useState("")
-    const [passConf, setPassConf] = useState("")
-    
-    const imprimirValores = () => {
-        console.log({
-            nombre, apellido, correo, password, passConf, same: password === passConf
-        })
-    }
 
-    document.body.style.background = "rgba(250, 117, 37, 0.30)";
+  const imprimirValores = () => {
+    console.log({
+      nombre,
+      apellido,
+      correo,
+      password,
+      passConf,
+      same: password === passConf,
+    });
+  };
 
-    return (
-      <div className='vh-100 d-flex flex-column justify-content-center align-items-center'>
-        
-        <div className='row mb-3' >
-          <h1 className='login-header'>SALAS DE CINE ULIMA</h1>
-        </div>
-  
-        <div className='row mb-3' style={{width: "550px"}}>
-        <div className='container rounded-1 p-3' style={{background: "white"}}>
-          <form>
+  return (
+    <Container maxWidth={false}
+    sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        fontFamily: 'Roboto, sans-serif',
+        backgroundColor: alpha("#FA7525", 0.3)
+      }}
+    >
+      <Typography
+        variant="h1"
+        align="center"
+        sx={{
+          marginBottom: 5,
+          color: "#000",
+          fontFamily: "Sofija",
+          fontSize: 96,
+        }}
+      >
+        SALAS DE CINE ULIMA
+      </Typography>
+      <Container
+        sx={{
+          width: "80%",
+          maxWidth: "550px",
+          marginBottom: 5,
+          '@media (min-width:600px)': {
+            width: "40%",
+          },
+          backgroundColor: "white",
+          p: "20px",
+          borderRadius: 2,
+        }}
+      >
+        <form
+          sx={{
+            background: "white",
+            borderRadius: 1,
+          }}
+        >
           <div className="mb-3">
-              <label htmlFor="nombre" className="form-label">Nombre</label>
-              <input type="text" className="form-control" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="apellido" className="form-label">Apellidos</label>
-              <input type="text" className="form-control" id="apellido" value={apellido} onChange={(e) => setApellido(e.target.value)}/>
-            </div>
-          <div className="mb-3">
-              <label htmlFor="correo" className="form-label">Correo</label>
-              <input type="email" className="form-control" id="correo" value={correo} onChange={(e) => setCorreo(e.target.value)}/>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">Contraseña</label>
-              <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="passwordConfirm" className="form-label">Confirmar Contraseña</label>
-              <input type="password" className="form-control" id="passwordConfirm" value={passConf} onChange={(e) => setPassConf(e.target.value)}/>
-            </div>
-            <div className="d-grid gap-2">
-              <button className="btn btn-primary orange-button" type="button" onClick={imprimirValores}>INGRESAR</button>
-            </div>
-          </form>
-        </div>
+            <TextField
+              label="Nombre"
+              variant="outlined"
+              fullWidth
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+            />
           </div>
-      </div>
-    )
-}
+          <div className="mb-3">
+            <TextField
+              label="Apellidos"
+              variant="outlined"
+              fullWidth
+              value={apellido}
+              onChange={(e) => setApellido(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <TextField
+              label="Correo"
+              variant="outlined"
+              fullWidth
+              type="email"
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <TextField
+              label="Contraseña"
+              variant="outlined"
+              fullWidth
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <TextField
+              label="Confirmar Contraseña"
+              variant="outlined"
+              fullWidth
+              type="password"
+              value={passConf}
+              onChange={(e) => setPassConf(e.target.value)}
+            />
+          </div>
+          <div className="d-grid gap-2">
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{
+                marginTop: 2,
+                fontSize: 15,
+                fontWeight: 500,
+                letterSpacing: 0.46,
+                backgroundColor: "#FA7525",
+              }}
+              onClick={imprimirValores}
+              component={Link}
+              to={"/peliculas"}
+            >
+              INGRESAR
+            </Button>
+          </div>
+        </form>
+      </Container>
+    </Container>
+  );
+};
 
-export default RegisterPage
+export default RegisterPage;

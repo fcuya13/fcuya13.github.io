@@ -1,62 +1,103 @@
-import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css";
+import { Container, TextField, Button, Typography, alpha } from "@mui/material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
 
-  document.body.style.background = "rgba(250, 117, 37, 0.30)";
 
   return (
-    <div className="vh-100 d-flex flex-column justify-content-center align-items-center">
-      <div className="row mb-5">
-        <h1 className="login-header">SALAS DE CINE ULIMA</h1>
-      </div>
-
-      <div className="row mb-5" style={{ width: "550px" }}>
-        <div
-          className="container rounded-1 p-3"
-          style={{ background: "white" }}
+    <Container maxWidth={false}
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        fontFamily: 'Roboto, sans-serif',
+        backgroundColor: alpha("#FA7525", 0.3)
+      }}
+    >
+      <Typography
+        variant="h1"
+        align="center"
+        sx={{
+          marginBottom: 5,
+          color: "#000",
+          fontFamily: "Sofija",
+          fontSize: 96,
+        }}
+      >
+        SALAS DE CINE ULIMA
+      </Typography>
+      <Container sx={{ width: "80%",
+          maxWidth: "500px",
+          marginBottom: 5,
+          '@media (min-width:600px)': {
+            width: "40%",
+          },
+          backgroundColor: "white",
+          p: "20px",
+          borderRadius: 2, }}>
+        <form
+          sx={{
+            background: "white",
+            borderRadius: 1,
+          }}
         >
-          <form>
-            <div className="mb-3">
-              <label htmlFor="correo" className="form-label">
-                Correo
-              </label>
-              <input
-                type="email"
-                className="form-control"
-                id="correo"
-                value={correo}
-                onChange={(e) => setCorreo(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Contraseña
-              </label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className="d-grid gap-2">
-              <Link className="btn btn-warning orange-button" to={"/"}>
-                INGRESAR
-              </Link>
-              <Link className="btn btn-light orange-outline-button" to={"/registro"}>
-                REGISTRARSE
-              </Link>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+          <TextField
+            label="Usuario"
+            variant="outlined"
+            fullWidth
+            sx={{ marginBottom: 3 }}
+            value={correo}
+            onChange={(e) => setCorreo(e.target.value)}
+          />
+          <TextField
+            label="Contraseña"
+            variant="outlined"
+            fullWidth
+            type="password"
+            sx={{ marginBottom: 3 }}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            variant="contained"
+            color="warning"
+            fullWidth
+            sx={{
+              marginTop: 2,
+              fontSize: 15,
+              fontWeight: 500,
+              letterSpacing: 0.46,
+              backgroundColor: "#FA7525",
+            }}
+            component={Link}
+            to={"/"}
+          >
+            INGRESAR
+          </Button>
+          <Button
+            variant="outlined"
+            color="warning"
+            fullWidth
+            sx={{
+              marginTop: 2,
+              fontSize: 15,
+              fontWeight: 500,
+              letterSpacing: 0.46,
+              backgroundColor: "#fff",
+            }}
+            component={Link}
+            to={"/registro"}
+          >
+            REGISTRARSE
+          </Button>
+        </form>
+      </Container>
+    </Container>
   );
 };
 
