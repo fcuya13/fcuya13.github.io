@@ -37,67 +37,27 @@ body{
     border-color: #ec630d;
 }
 
-.recommend {
-    position: relative;
+.img-carousel {
+    height: 450px;
 }
 
-.carousel {
-    height: 420px;
-}
-
-.carousel-text {
+.movie-name-r {
     position: absolute;
-    bottom: 15%;
+    bottom: 18%;
     left: 10%;
-}
-
-.carousel-buton {
-    position: absolute;
-    bottom: 13%;
-    left: 85%;
-}
-
-.tittle-recommend {
     color: white;
     font-family: "Sofija";
     font-size: 90px;
+    width: 60%;
 }
 
-.buton-stile {
+.button-buy-tickets {
+    position: absolute;
+    bottom: 15%;
+    right: 3%;
     border-width: 3px;
     font-weight: bold;
 }
-
-.search-page {
-    margin: 40px 30%;
-    font-family: 'Roboto', sans-serif;
-}
-
-#search1-text {
-    font-size: 12px;
-    font-weight: bold;
-}
-
-#placeholder-text {
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.38);
-}
-
-.navbar1 {
-    border-style: none none solid none;
-    border-radius: 0px;
-}
-
-#movies-buton {
-    margin-left: 25%;
-    margin-right: 7%
-}
-
-#cinemas-buton {
-    margin-right: 25%;
-    margin-left: 7%
-}
-
 
 .carousel .carousel-control-prev {
     height: 70%;
@@ -105,114 +65,4 @@ body{
 
 .carousel .carousel-control-next {
     height: 70%;
-}
-
-.pages-content {
-    font-family: 'Roboto', sans-serif;
-}
-
-.toolbox {
-    background-color: #FA7525;
-    padding: 15px 24px 10px 24px;
-    height: 55px;
-    color: white;
-}
-
-.list-icon {
-    margin-bottom: 5px;
-}
-
-.toolbox-text{
-    margin-left: 20px;
-    margin-right: 69%;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.start-icon {
-    margin-left: 25px;
-}
-
-.movies-body {
-    margin-top: 10px;
-}
-
-.logo-university {
-    width: 128px;
-    height: auto;
-    margin: 0px 25%;
-}
-
-.navbar2 {
-    margin: 0px 8px 30px 8px;
-}
-
-.click-pages {
-    margin: 15px 20px;
-}
-
-.pages-icon {
-    color: gray;
-}
-
-.link-pages {
-    text-decoration: none;
-    color: black;
-    margin-left: 25px;
-}
-
-.movies-content {
-    padding: 15px 30px 80px 20px;
-}
-
-.tittle-movies-or-cinemas {
-    border-width: 1px;
-    border-color: lightgray;
-    border-style: none none solid none;
-    margin-bottom: 50px;
-}
-
-.available {
-    margin: 0px 20px;
-}
-
-.movie-card {
-    padding-bottom: 30px;
-}
-
-.padding-cards {
-    padding-bottom: 30px;
-}
-
-.margin-cards {
-    margin-left: 50px;
-    width: 250px;
-}
-
-.img-card {
-    background-color: gray;
-    height: 250px;
-}
-
-.tag-info {
-    color: #2196F3;
-    font-size: 14px;
-}
-
-.description {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 30px;
-}
-
-.tag {
-    background-color: lightgray;
-    border-radius: 40%;
-    padding: 8px;
-    font-size: 13px;
-    margin: 0px 10px;
-}
-
-.pages-content {
-    text-decoration: none;
 }
