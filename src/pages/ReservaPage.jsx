@@ -1,4 +1,4 @@
-import {Container,Typography,Grid,Button,TextField,Divider,Link} from '@mui/material';
+import {Container,Typography,Grid,Button,TextField,Divider,Link, Box} from '@mui/material';
 import { useState } from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -159,12 +159,22 @@ const ReservaPage = () => {
         <DialogTitle>Reserva confirmada</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <Container>
+            <Box
+                sx={{
+                backgroundColor: '#fff9f6',
+                border: "2px dotted #fc823b",
+                color: "#fa7525",
+                px: 6,
+                py: 1,
+                borderRadius: '5px',
+                width: "400px"
+                }}
+            >
                 <Typography>{nombre}</Typography>
                 <Typography>{apellido}</Typography>
                 <Typography>{codigo}</Typography>
                 <Typography>{cantidad} pases</Typography>
-            </Container>
+            </Box>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
