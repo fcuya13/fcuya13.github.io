@@ -1,6 +1,6 @@
 import { Container, Box, Grid } from "@mui/material"
 import MoviesBody from "../components/MoviesBody"
-import DrawerBar from "../components/extra/DrawerBar"
+import DrawerBar from "../components/DrawerBar"
 
 const MoviesPage = () => {
   return <Box>

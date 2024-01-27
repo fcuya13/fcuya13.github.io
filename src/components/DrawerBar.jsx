@@ -3,7 +3,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
 import { Star } from '@mui/icons-material';
 import { Box } from "@mui/material"
-import LeftPanel from "./LeftPanel";
+import LeftPanel from "./extra/LeftPanel";
 
 const DrawerBar = () => {
     const [drawerOpen, setDrawerOpen] = useState(false)
@@ -63,7 +63,7 @@ const DrawerBar = () => {
                             marginTop: "64px",
                         },
                     }}>
-                    <LeftPanel />
+                    <LeftPanel/>
                 </Drawer>
         </div>
     )
