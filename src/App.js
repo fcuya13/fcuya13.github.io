@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import MoviesPage from "./pages/MoviesPage"
 import ReservaPage from "./pages/ReservaPage"
+import SalaItemPage from "./pages/SalaItemPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/registro" Component={RegisterPage}/>
         <Route path="/peliculas" Component={MoviesPage}/>
         <Route path="/reserva" Component={ReservaPage}/>
+        <Route path="/salaItem" Component={SalaItemPage}/>
       </Routes>
     </div>
   );
