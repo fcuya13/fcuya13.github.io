@@ -11,7 +11,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
-import DrawerBar from '../components/DrawerBar';
+import PageLayout from '../components/PageLayout';
+import Main from '../components/PageLayout';
+import DrawerHeader from '../components/PageLayout';
 
 const ReservaPage = () => {
     const [nombre, setNombre] = useState();
@@ -34,16 +36,9 @@ const ReservaPage = () => {
     };
   
     return (
-    <div>
-    <DrawerBar/>
-        <Grid container>
-            <Grid item xs={2}>
-
-            </Grid>
-            <Grid item xs={10} sx={{
-                mt:5
-            }}>
-                <Container>
+    <>
+    <PageLayout>
+        <Container>
                     <Typography variant="h4">
                         Reserva
                     </Typography>
@@ -152,8 +147,7 @@ const ReservaPage = () => {
                         </Grid>
                     </Container>   
                 </Container>
-            </Grid>
-        </Grid>
+    </PageLayout>          
         <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Reserva confirmada</DialogTitle>
         <DialogContent>
@@ -182,7 +176,7 @@ const ReservaPage = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+</>
 )}
 
 export default ReservaPage;

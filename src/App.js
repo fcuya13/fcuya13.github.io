@@ -6,7 +6,7 @@ import MoviesPage from "./pages/MoviesPage"
 import ReservaPage from "./pages/ReservaPage"
 import SalaItemPage from "./pages/SalaItemPage";
 import PeliculaItemPage from "./pages/PeliculaItemPage";
-import DrawerPrueba from "./components/DrawerPrueba";
+import DrawerPrueba from "./components/PageLayout";
 
 function App() {
   return (

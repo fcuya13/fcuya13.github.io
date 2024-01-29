@@ -1,5 +1,5 @@
 import { Container, Box, Grid, Typography, Chip, Card, CardMedia, CardContent } from "@mui/material"
-import DrawerBar from "../components/DrawerBar"
+import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardHeader } from "react-bootstrap";
 import ListaDisponibles from "../components/ListaDisponibles";
@@ -29,8 +29,8 @@ const PeliculaItemPage=()=>{
         }
     ]
 
-    return <Box>
-    <DrawerBar />
+    return (
+    <PageLayout>
     <Grid
       container
       style={{ marginTop: '20px', fontFamily: 'Roboto, sans-serif' }}>
@@ -98,7 +98,8 @@ const PeliculaItemPage=()=>{
         </Grid>
       </Container> 
     </Grid>
-  </Box>
+    </PageLayout>
+  )
 }
 
 export default PeliculaItemPage

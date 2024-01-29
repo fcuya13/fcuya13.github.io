@@ -1,5 +1,5 @@
 import { Container, Box, Grid, Typography, Link, Card, CardMedia, CardContent, CardActions, Button } from "@mui/material"
-import DrawerBar from "../components/DrawerBar"
+import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -22,11 +22,11 @@ const SalaItemPage = () => {
         marginTop: '24px',
     };
 
-return <Box>
-    <DrawerBar />
+return (
+    <PageLayout>
     <Grid
       container
-      style={{ marginTop: '20px', fontFamily: 'Roboto, sans-serif' }}>
+      style={{ fontFamily: 'Roboto, sans-serif' }}>
       <Container>
         <h2 style={{
           borderBottom: '1px solid #0000001F',
@@ -152,8 +152,9 @@ return <Box>
         </Grid>
         </Container>
       </Container> 
-    </Grid>
-  </Box>
+      </Grid>
+      </PageLayout>
+)
 }
 
 export default SalaItemPage;

@@ -1,10 +1,10 @@
 import { Container, Box, Grid } from "@mui/material"
 import MoviesBody from "../components/MoviesBody"
-import DrawerBar from "../components/DrawerBar"
+import PageLayout from "../components/PageLayout"
 
 const MoviesPage = () => {
-  return <Box>
-    <DrawerBar />
+  return(
+    <PageLayout>
     <Grid
       container
       style={{ marginTop: '20px', fontFamily: 'Roboto, sans-serif' }}>
@@ -20,7 +20,7 @@ const MoviesPage = () => {
         <MoviesBody />
       </Container>
     </Grid>
-  </Box>
+    </PageLayout>)
 }
 
 export default MoviesPage
