@@ -1,4 +1,4 @@
-import { Container, Box, Grid } from "@mui/material"
+import { Container, Grid } from "@mui/material"
 import MoviesBody from "../components/MoviesBody"
 import PageLayout from "../components/PageLayout"
 
@@ -7,17 +7,17 @@ const MoviesPage = () => {
     <PageLayout>
     <Grid
       container
-      style={{ marginTop: '20px', fontFamily: 'Roboto, sans-serif' }}>
+      style={{ fontFamily: 'Roboto, sans-serif' }}>
       <Container>
         <h2 style={{
           borderBottom: '1px solid #0000001F',
-          marginTop: '30px',
           marginBottom: '5%',
+          marginTop: "25px",
           fontSize: '34px',
           fontWeight: 400,
           letterSpacing: 0.25
         }}>Películas</h2>
-        <MoviesBody />
+        <MoviesBody/>
       </Container>
     </Grid>
     </PageLayout>)

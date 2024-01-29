@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material"
-import MovieCards from "./MovieCards"
+import Cards from "./Cards"
 
 const MovieRowCards = (props) => {
     return <Grid
@@ -7,11 +7,10 @@ const MovieRowCards = (props) => {
         sx={ {marginBottom : '25px'}}>
             {
             props.row.map((elem) => {
-                return <MovieCards 
+                return <Cards 
                     inf={ elem.inf }
                     tittle= { elem.tittle }
-                    label1 = { elem.label1 }
-                    label2 = { elem.label2 }
+                    labels = { elem.labels }
                     path = { elem.path }
                 />
             })

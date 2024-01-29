@@ -1,4 +1,4 @@
-import { Container, Box, Grid, Typography, Link, Card, CardMedia, CardContent, CardActions, Button } from "@mui/material"
+import { Container, Grid, Typography, Link, Card, CardMedia, CardContent, CardActions, Button } from "@mui/material"
 import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Avatar from '@mui/material/Avatar';
@@ -30,8 +30,8 @@ return (
       <Container>
         <h2 style={{
           borderBottom: '1px solid #0000001F',
-          marginTop: '30px',
           marginBottom: '5%',
+          marginTop: "25px",
           fontSize: '34px',
           fontWeight: 400,
           letterSpacing: 0.25

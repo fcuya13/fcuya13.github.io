@@ -10,7 +10,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import LeftPanel from './extra/LeftPanel';
 import { Star } from '@mui/icons-material';
-import ReservaPage from '../pages/ReservaPage'
 
 const drawerWidth = 240;
 
@@ -68,8 +67,7 @@ export default function PageLayout({children}) {
   }
 
   return (
-    <>
-    
+    <> 
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>

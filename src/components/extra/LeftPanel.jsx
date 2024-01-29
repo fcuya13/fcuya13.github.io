@@ -10,14 +10,14 @@ const LeftPanel = () => {
       <img
           src="https://tierrafilms.pe/images/logos/ULIMA.png"
           alt="logo-ulima"
-          style={{ width: '128px', height: '126.954px', marginLeft : '23%' }}></img>
+          style={{ width: '128px', height: '126.954px', marginLeft : '22%', marginTop: "20px" }}></img>
         <TextField 
           id="outlined-basic" 
           label="Busca" 
           variant="outlined"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          sx={ { marginLeft : "10px", marginBottom : "15%" } }/>
+          sx={ { marginLeft : "8px", marginBottom : "15%" } }/>
           <List>
             <ListItem key={"peliculas"}>
               <Typography component={Link} to="/peliculas"
@@ -35,7 +35,7 @@ const LeftPanel = () => {
             </ListItem>
             
             <ListItem key={"salas"}>
-              <Typography component={Link} to="/"
+              <Typography component={Link} to="/salas"
               sx={{ 
                 fontSize : '16px',
                 fontWeight : 400,

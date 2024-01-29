@@ -4,8 +4,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Topnav from '../components/Topnav';
-import LeftItem from '../components/LeftItem';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';

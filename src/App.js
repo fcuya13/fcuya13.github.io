@@ -6,7 +6,6 @@ import MoviesPage from "./pages/MoviesPage"
 import ReservaPage from "./pages/ReservaPage"
 import SalaItemPage from "./pages/SalaItemPage";
 import PeliculaItemPage from "./pages/PeliculaItemPage";
-import DrawerPrueba from "./components/PageLayout";
 
 function App() {
   return (
@@ -18,7 +17,7 @@ function App() {
         <Route path="/peliculas" Component={MoviesPage}/>
         <Route path="/reserva" Component={ReservaPage}/>
         <Route path="/salaItem" Component={SalaItemPage}/>
-        <Route path="/peliculaItem" Component={PeliculaItemPage}/>
+        <Route path="/peliculas/beekeeper-sentencia-de-muerte" Component={PeliculaItemPage}/>
       </Routes>
     </div>
   );
