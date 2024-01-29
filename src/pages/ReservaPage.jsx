@@ -11,6 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
+import DrawerBar from '../components/DrawerBar';
 
 const ReservaPage = () => {
     const [nombre, setNombre] = useState();
@@ -34,10 +35,10 @@ const ReservaPage = () => {
   
     return (
     <div>
-    <Topnav/>
+    <DrawerBar/>
         <Grid container>
             <Grid item xs={2}>
-                <LeftItem/>
+
             </Grid>
             <Grid item xs={10} sx={{
                 mt:5

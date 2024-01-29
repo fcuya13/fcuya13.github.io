@@ -6,6 +6,7 @@ import MoviesPage from "./pages/MoviesPage"
 import ReservaPage from "./pages/ReservaPage"
 import SalaItemPage from "./pages/SalaItemPage";
 import PeliculaItemPage from "./pages/PeliculaItemPage";
+import DrawerPrueba from "./components/DrawerPrueba";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/reserva" Component={ReservaPage}/>
         <Route path="/salaItem" Component={SalaItemPage}/>
         <Route path="/peliculaItem" Component={PeliculaItemPage}/>
+        <Route path="/test" Component={DrawerPrueba}/>
       </Routes>
     </div>
   );
