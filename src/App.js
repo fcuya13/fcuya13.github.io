@@ -19,7 +19,6 @@ function App() {
         <Route path="/reserva" Component={ReservaPage}/>
         <Route path="/salaItem" Component={SalaItemPage}/>
         <Route path="/peliculaItem" Component={PeliculaItemPage}/>
-        <Route path="/test" Component={DrawerPrueba}/>
       </Routes>
     </div>
   );
