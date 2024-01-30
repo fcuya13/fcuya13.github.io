@@ -1,0 +1,73 @@
+{
+  "buildings": [
+    {
+      "name": "Skytower Plaza",
+      "address": "123 Main Street, Cityville, USA",
+      "image": "skytower_plaza.jpg",
+      "available_times": [
+        "03:00pm",
+        "05:00pm",
+        "06:00pm",
+        "08:00pm",
+        "09:00pm",
+        "11:00pm"
+      ]
+    },
+    {
+      "name": "Tech Hub Center",
+      "address": "456 Tech Avenue, Tech City, USA",
+      "image": "tech_hub_center.jpg",
+      "available_times": [
+        "02:00pm",
+        "05:00pm",
+        "06:00pm",
+        "07:00pm",
+        "10:00pm",
+        "11:00pm"
+      ]
+    },
+    {
+      "name": "Green Gardens Tower",
+      "address": "789 Park Lane, Greenvale, USA",
+      "image": "green_gardens_tower.jpg",
+      "available_times": [
+        "01:00pm",
+        "05:00pm",
+        "07:00pm",
+        "09:00pm",
+        "11:00pm"
+      ]
+    },
+    {
+      "name": "Harbor View Complex",
+      "address": "101 Waterfront Road, Harbor City, USA",
+      "image": "harbor_view_complex.jpg",
+      "available_times": [
+        "03:00pm",
+        "05:00pm",
+        "08:00pm",
+        "10:00pm"
+      ]
+    },
+    {
+      "name": "Urban Heights Tower",
+      "address": "555 High Street, Urbanville, USA",
+      "image": "urban_heights_tower.jpg",
+      "available_times": [
+        "01:00pm",
+        "08:00pm",
+        "09:00pm"
+      ]
+    },
+    {
+      "name": "Downtown Plaza",
+      "address": "777 Central Avenue, Downtown, USA",
+      "image": "downtown_plaza.jpg",
+      "available_times": [
+        "08:00pm",
+        "09:00pm",
+        "11:00pm"
+      ]
+    }
+  ]
+}
