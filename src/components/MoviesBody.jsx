@@ -58,9 +58,8 @@ const MoviesBody = () => {
         },
     ]
 
-
     return <div style={ { marginLeft: '30px', marginRight: '10px'}}>
-        <CardList row = { movieList }/>
+        <CardList list={movieList} size={4} />
     </div>
 }
 
