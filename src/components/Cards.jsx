@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Cards = (props) => {
     return (
-        <Grid item xs={4} justifyContent="center">
+        <Grid item xs={props.size} justifyContent="center">
             <Card sx={{ marginRight: "20px", marginBottom: "20px" }}>
                 <CardActionArea>
                     <CardMedia
