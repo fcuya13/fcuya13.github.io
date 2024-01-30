@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import LeftPanel from './extra/LeftPanel';
 import { Star } from '@mui/icons-material';
+import {useAppContext} from "../context";
 
 const drawerWidth = 240;
 
@@ -59,12 +60,13 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PageLayout({children}) {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpenClose = () =>{
     setOpen(!open);
   }
+
+  const {user} = useAppContext()
 
   return (
     <> 
@@ -85,11 +87,15 @@ export default function PageLayout({children}) {
             Salas de Cine ULima
           </Typography>
             <Box position="absolute" top={0} right={0} mt={2.5} mr={4}>
-                            <Star sx={{ marginRight: '15px' }} />
-                            <Star sx={{ marginRight: '15px' }} />
-                            <Star sx={{ marginRight: '15px' }} />
-                            <Star sx={{ marginRight: '15px' }} />
-                            <Star sx={{ marginRight: '15px' }} />
+                {user ? `Bienvenido de vuelta ${user.nombre}`: (
+                    <>
+                    <Star sx={{ marginRight: '15px' }} />
+                    <Star sx={{ marginRight: '15px' }} />
+                    <Star sx={{ marginRight: '15px' }} />
+                    <Star sx={{ marginRight: '15px' }} />
+                    <Star sx={{ marginRight: '15px' }} />
+                    </>)
+            }
             </Box>
         </Toolbar>
       </AppBar>

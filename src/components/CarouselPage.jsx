@@ -11,7 +11,7 @@ const CarouselPage = () => {
                     className='d-block w-100 img-carousel'
                     src="https://cdn.atomix.vg/wp-content/uploads/2023/12/Diseno-sin-titulo-2023-12-19T155337.668.png" 
                     alt='img1'/>
-                <h3 className='movie-name-r'>el niño y la garza</h3>
+                <h3 className='movie-name-r'>el nino y la garza</h3>
                 <Link className="btn btn-outline-light button-buy-tickets" to={"/peliculas/nino-y-la-garza"}>
                     COMPRAR TICKETS
                 </Link>

@@ -1,6 +1,9 @@
 import { Container, TextField, Button, Typography, alpha } from "@mui/material";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
+import {useAppContext} from "../context";
 
 const RegisterPage = () => {
   const [nombre, setNombre] = useState("");
@@ -8,18 +11,58 @@ const RegisterPage = () => {
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
   const [passConf, setPassConf] = useState("");
+  const [usuarios, setUsuarios] = useState([]);
+  const [error, setError] = useState(false);
+  const [existingUserError, setExistingUserError] = useState(false);
+  const [passNotSame, setPassNotSame] = useState(false);
+  const navigate = useNavigate();
+  const {setUser} = useAppContext();
 
+    const obtenerUsuarios = async () => {
+        const response = await fetch ("/users.json");
+        const data = await response.json()
+        setUsuarios(data)
+    }
 
-  const imprimirValores = () => {
-    console.log({
-      nombre,
-      apellido,
-      correo,
-      password,
-      passConf,
-      same: password === passConf,
-    });
-  };
+    useEffect(() => {
+        obtenerUsuarios()
+    }, []);
+
+    const validarInputs = () => {
+        const email = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+        return nombre.trim().length !== 0 &&
+            apellido.trim().length !== 0 &&
+            correo.trim().length !== 0 &&
+            email.test(correo.trim()) &&
+            password.trim().length >= 8;
+    };
+  const validateRegisterForm = async () => {
+
+      if (!validarInputs()){
+          setError(true);
+          return;
+      }
+
+      if (password !== passConf){
+          setPassNotSame(true);
+          return;
+      }
+
+      const existingUser = usuarios.filter((user) => {
+          return user.correo === correo;
+      })
+
+      if (existingUser.length > 0){
+          setExistingUserError(true)
+      }
+      else{
+          const usuarioAgregar = {
+              nombre, apellido, correo, password
+          }
+          setUser(usuarioAgregar);
+          navigate("/home")
+      }
+  }
 
   return (
     <Container maxWidth={false}
@@ -59,7 +102,7 @@ const RegisterPage = () => {
         }}
       >
         <form
-          sx={{
+          style={{
             background: "white",
             borderRadius: 1,
           }}
@@ -115,24 +158,56 @@ const RegisterPage = () => {
           <div className="d-grid gap-2">
             <Button
               variant="contained"
-              color="primary"
+              color="warning"
               fullWidth
               sx={{
                 marginTop: 2,
                 fontSize: 15,
                 fontWeight: 500,
                 letterSpacing: 0.46,
-                backgroundColor: "#FA7525",
               }}
-              onClick={imprimirValores}
-              component={Link}
-              to={"/peliculas"}
+              onClick={validateRegisterForm}
             >
               INGRESAR
             </Button>
           </div>
         </form>
+          {error && (
+              <Alert
+                  icon={<CheckIcon fontSize="inherit" />}
+                  severity="error"
+                  sx={ { mt : 2 } }
+                  onClose={() => {
+                      setError(false);
+                  }}>
+                  Complete apropiadamente los campos
+              </Alert>
+          )}
+
+          {passNotSame && (
+              <Alert
+                  icon={<CheckIcon fontSize="inherit" />}
+                  severity="error"
+                  sx={ { mt : 2 } }
+                  onClose={() => {
+                      setPassNotSame(false);
+                  }}>
+                  Las contraseñas no coinciden.
+              </Alert>
+          )}
+          {existingUserError && (
+              <Alert
+                  icon={<CheckIcon fontSize="inherit" />}
+                  severity="error"
+                  sx={ { mt : 2 } }
+                  onClose={() => {
+                      setExistingUserError(false);
+                  }}>
+                  Usuario ya existente
+              </Alert>
+          )}
       </Container>
+
     </Container>
   );
 };

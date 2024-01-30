@@ -7,26 +7,29 @@ import ReservaPage from "./pages/ReservaPage"
 import PeliculaItemPage from "./pages/PeliculaItemPage";
 import SalasPage from "./pages/SalasPage";
 import SalaItemPage from "./pages/SalaItemPage";
+import {AppProvider} from "./context";
 
-function App() {
-  return (
-    <div>
-      <Routes>
-        <Route
-            path="*"
-            element={<Navigate to="/login" replace={true} />}
-        />
-        <Route path="/home" Component={HomePage}/>
-        <Route path="/login" Component={LoginPage}/>
-        <Route path="/registro" Component={RegisterPage}/>
-        <Route path="/peliculas" Component={MoviesPage}/>
-        <Route path="/reserva" Component={ReservaPage}/>
-        <Route path="/peliculas/beekeeper-sentencia-de-muerte" Component={PeliculaItemPage}/>
-        <Route path="/salas" Component={SalasPage}/>
-        <Route path="/salas/sala-a" Component={SalaItemPage}/>
-      </Routes>
-    </div>
-  );
-}
+
+const App = () => {
+    return (
+        <AppProvider>
+          <Routes>
+            <Route
+                path="*"
+                element={<Navigate to="/login" replace={true} />}
+            />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/registro" element={<RegisterPage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/peliculas" element={<MoviesPage />} />
+            <Route path="/reserva" element={<ReservaPage />} />
+            <Route path="/peliculas/beekeeper-sentencia-de-muerte" element={<PeliculaItemPage />} />
+            <Route path="/salas" element={<SalasPage />} />
+            <Route path="/salas/sala-a" element={<SalaItemPage />} />
+          </Routes>
+        </AppProvider>
+    );
+};
+
 
 export default App;

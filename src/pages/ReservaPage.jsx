@@ -20,11 +20,13 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import PageLayout from "../components/PageLayout";
 import Alert from "@mui/material/Alert";
+import {useAppContext} from "../context";
 
 const ReservaPage = () => {
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [codigo, setCodigo] = useState("");
+  const {user} = useAppContext();
+  const [nombre, setNombre] = useState(user ? user.nombre : "");
+  const [apellido, setApellido] = useState(user ? user.apellido : "");
+  const [codigo, setCodigo] = useState(user ? user.correo : "");
   const [cantidad, setCantidad] = useState("");
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
@@ -38,7 +40,7 @@ const ReservaPage = () => {
   };
 
   const handleReservar = () => {
-    var email = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+    const email = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
     if (
       nombre.trim().length !== 0 &&
       apellido.trim().length !== 0 &&
@@ -60,16 +62,16 @@ const ReservaPage = () => {
       <PageLayout>
         <Container>
           <Typography variant="h4">Reserva</Typography>
-          <Divider sx={{ borderBottomWidth: 2, borderColor: "gray" }} />
+          <Divider sx={{borderBottomWidth: 2, borderColor: "gray"}}/>
           <Container>
-            <Container sx={{ mt: 5 }}>
+            <Container sx={{mt: 5}}>
               <Typography variant="h4">Titulo de Pelicula</Typography>
-              <Typography variant="subtitle1" color="gray" sx={{ mb: 2 }}>
-                <LocationOnIcon sx={{ mr: 2 }} />
+              <Typography variant="subtitle1" color="gray" sx={{mb: 2}}>
+                <LocationOnIcon sx={{mr: 2}}/>
                 <Link href="#" underline="none">
                   Tiempo
                 </Link>
-                <LocationOnIcon sx={{ mx: 2 }} />
+                <LocationOnIcon sx={{mx: 2}}/>
                 <Link href="#" underline="none">
                   Sala N
                 </Link>
@@ -84,86 +86,86 @@ const ReservaPage = () => {
                       Lunes 08 - 15:00 hrs
                     </Typography>
                     <Divider
-                      sx={{ borderBottomWidth: 2, borderColor: "gray" }}
+                        sx={{borderBottomWidth: 2, borderColor: "gray"}}
                     />
-                    <Grid container rowSpacing={2} sx={{ mt: 1 }}>
+                    <Grid container rowSpacing={2} sx={{mt: 1}}>
                       <Grid item xs={12}>
                         <TextField
-                          label="Nombre"
-                          fullWidth
-                          value={nombre}
-                          sx={{
-                            "& .MuiInputLabel-root": {
-                              color: "black",
-                            },
-                          }}
-                          variant="filled"
-                          onChange={(e) => setNombre(e.target.value)}
+                            label="Nombre"
+                            fullWidth
+                            value={nombre}
+                            sx={{
+                              "& .MuiInputLabel-root": {
+                                color: "black",
+                              },
+                            }}
+                            variant="filled"
+                            onChange={(e) => setNombre(e.target.value)}
                         />
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
-                          label="Apellido"
-                          fullWidth
-                          value={apellido}
-                          sx={{
-                            "& .MuiInputLabel-root": {
-                              color: "black",
-                            },
-                          }}
-                          variant="filled"
-                          onChange={(e) => setApellido(e.target.value)}
+                            label="Apellido"
+                            fullWidth
+                            value={apellido}
+                            sx={{
+                              "& .MuiInputLabel-root": {
+                                color: "black",
+                              },
+                            }}
+                            variant="filled"
+                            onChange={(e) => setApellido(e.target.value)}
                         />
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
-                          label="Código"
-                          fullWidth
-                          value={codigo}
-                          sx={{
-                            "& .MuiInputLabel-root": {
-                              color: "black",
-                            },
-                          }}
-                          variant="filled"
-                          onChange={(e) => setCodigo(e.target.value)}
+                            label="Código"
+                            fullWidth
+                            value={codigo}
+                            sx={{
+                              "& .MuiInputLabel-root": {
+                                color: "black",
+                              },
+                            }}
+                            variant="filled"
+                            onChange={(e) => setCodigo(e.target.value)}
                         />
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
-                          label="Cantidad"
-                          fullWidth
-                          value={cantidad}
-                          sx={{
-                            "& .MuiInputLabel-root": {
-                              color: "black",
-                            },
-                          }}
-                          variant="filled"
-                          onChange={(e) => setCantidad(e.target.value)}
+                            label="Cantidad"
+                            fullWidth
+                            value={cantidad}
+                            sx={{
+                              "& .MuiInputLabel-root": {
+                                color: "black",
+                              },
+                            }}
+                            variant="filled"
+                            onChange={(e) => setCantidad(e.target.value)}
                         />
                       </Grid>
                       <Grid item xs={12}>
                         <Button
-                          variant="contained"
-                          fullWidth
-                          onClick={handleReservar}
-                          color="warning"
+                            variant="contained"
+                            fullWidth
+                            onClick={handleReservar}
+                            color="warning"
                         >
                           Reservar
                         </Button>
                       </Grid>
                       {error && (
-                        <Grid item xs={12}>
-                          <Alert
-                            severity="warning"
-                            onClose={() => {
-                              setError(false);
-                            }}
-                          >
-                            Datos invalidos, porfavor reingrese datos validos
-                          </Alert>{" "}
-                        </Grid>
+                          <Grid item xs={12}>
+                            <Alert
+                                severity="warning"
+                                onClose={() => {
+                                  setError(false);
+                                }}
+                            >
+                              Datos invalidos, porfavor reingrese datos validos
+                            </Alert>{" "}
+                          </Grid>
                       )}
                     </Grid>
                   </CardContent>
@@ -172,8 +174,8 @@ const ReservaPage = () => {
               <Grid item xs={6}>
                 <Card variant="outlined">
                   <CardMedia
-                    component="img"
-                    image="https://placehold.co/600x400"
+                      component="img"
+                      image="https://placehold.co/600x400"
                   />
                 </Card>
               </Grid>

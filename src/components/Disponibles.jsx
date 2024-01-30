@@ -1,4 +1,5 @@
 import {Box, Avatar, Typography, Button } from "@mui/material"
+import {Link} from "react-router-dom"
 
 const Disponibles = (props) => {
     const estiloBoton ={
@@ -23,7 +24,7 @@ const Disponibles = (props) => {
                 {props.descripcionDisponible}
         </Typography>
         <Box>
-            <Button style={estiloBoton}>
+            <Button style={estiloBoton} component={Link} to={"/reserva"}>
                 {props.horario1}
             </Button>
             <Button style={estiloBoton} sx={{ml:2}}>
