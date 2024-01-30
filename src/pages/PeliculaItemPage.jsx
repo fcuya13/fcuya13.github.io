@@ -75,7 +75,7 @@ const PeliculaItemPage=()=>{
                         </Typography>
                     </CardHeader>
                     <CardContent>
-                        <Typography variant="body1" sx={{ fontSize: { xs: '1em', sm: '0.8em', md:'1em' } }}>
+                        <Typography variant="body1" color="text.secondary" sx={{ fontSize: { xs: '1em', sm: '0.8em', md:'1em' } }}>
                         La brutal campaña de venganza de un hombre adquiere dimensiones nacionales cuando se descubre que es un antiguo agente de una poderosa organización clandestina conocida como "Los apicultores".
                         </Typography>
                     </CardContent>

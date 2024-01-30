@@ -5,8 +5,9 @@ const Disponibles = (props) => {
         border: '1px dashed #9747FF',
         backgroundColor: 'rgba(151, 71, 255, 0.04)',
         color: '#9747FF',
-        paddingLeft: '2em',
-        paddingRight: '2em'
+        padding: '4px 24px 4px 24px',
+        width: '80px',
+        height: '28px'
     }
 
     return <Box item xs = {6} width="50%" minWidth="25em" sx={{mt:8}}>

@@ -1,28 +1,35 @@
-import { Container, Grid, Typography, Link, Card, CardMedia, CardContent, CardActions, Button } from "@mui/material"
+import { Container, Grid, Typography, Card, CardMedia, CardContent } from "@mui/material"
 import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import { CardHeader } from "react-bootstrap";
+import ListaDisponibles from "../components/ListaDisponibles";
 
+const SalaItemPage=()=>{
+    const listaSalas=[
+        {
+            avatarTitulo: "BS",
+            nombreDisponible: "Beekeper Sentencia de Muerte",
+            descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+            horario1: "15:00",
+            horario2: "17:00"
+        },
+        {
+            avatarTitulo: "NG",
+            nombreDisponible: "El Niño y la Garza",
+            descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+            horario1: "16:00",
+            horario2: "18:00"
+        },
+        {
+            avatarTitulo: "JC",
+            nombreDisponible: "Jack en la Caja Maldita 3",
+            descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+            horario1: "20:00",
+            horario2: "22:00"
+        }
+    ]
 
-const SalaItemPage = () => {
-    
-    const buttonStyle = {
-        width: '80px',
-        height: '28px',
-        padding: '4px 24px',
-        borderRadius: '4px',
-        border: '1px dashed #9747FF',
-        background: 'rgba(151, 71, 255, 0.04)',
-        color: '#9747FF',
-    };
-    
-    const cardStyle = {
-        marginTop: '24px',
-    };
-
-return (
+    return (
     <PageLayout>
     <Grid
       container
@@ -38,123 +45,53 @@ return (
         }}>Salas</h2>
             <Container sx={{ mt: 5 }}>
                             <Typography variant="h4">
-                                SALA A 
+                                SALA A
                             </Typography>
-                            <Typography variant='subtitle1' color="gray" sx={{ mb: 2 }}>
-                                <LocationOnIcon sx={{ mr: 2 }}/>
-                                <Link href="#" underline="none">Pabellón X - ULima</Link>
-                            </Typography>
+                            <box>
+                                <Typography variant='subtitle1' color="gray" sx={{ mb: 2,  display:'inline-flex'}}>
+                                    <LocationOnIcon sx={{ mr: 2 }}/>
+                                    <Typography color="#009CD2">Pabellón X - ULima</Typography>
+                                </Typography>
+                            </box>
             </Container>
         <Grid container spacing={2}>
-        <Grid item xs = {8}>
-            <Card>
-                <CardMedia
-                    component="img"
-                    image="https://placehold.co/600x400"
-                />
-            </Card>
-        </Grid> 
-        <Grid item xs = {4}>
-            <Card>
-                <CardHeader>
-                    <Typography variant="h5" sx={{ padding: 2 }}>
-                        Historia
-                    </Typography>
-                </CardHeader>
-                <CardContent>
-                    <Typography variant="body1" color="text.secondary">
-                    La Facultad de Comunicación tiene tres estudios, los cuales son sets profesionales que se utilizan para televisión, streaming y diversas realizaciones audiovisuales. Cada uno de ellos está equipado con tres cámaras de video digitales full HD, switcher digital, pantallas de monitoreo tanto en Control y Estudio, dos tituladores y grabadoras/reproductoras de video. El sonido comprende: consola de audio, micrófonos de mano, de pecho, boom y de vincha. El sistema de iluminación trabaja con control de iluminación, luces alógenas de varios tipos: Fresnel, Scoop, Broad, Cañón, además del rack de control técnico con instrumentos de medición.
-                    </Typography>
-                </CardContent>
-            </Card>
+            <Grid item sm = {8} sx={{height: "100%"}}>
+                <Card variant="outlined">
+                    <CardMedia
+                        component="img"
+                        image="https://placehold.co/540x280"
+                    />
+                </Card>
+            </Grid> 
+            <Grid item sm = {4} minWidth="10rem">
+                <Card sx={{height: "100%"}}>
+                    <CardHeader>
+                        <Typography variant="h5" sx={{ padding: 2, pb:{xs:'0rem'}}}>
+                            Historia
+                        </Typography>
+                    </CardHeader>
+                    <CardContent>
+                        <Typography variant="body1" color="text.secondary" sx={{ fontSize: { xs: '1em', sm: '0.8em', md:'1em' } }}>
+                        La Facultad de Comunicación tiene tres estudios, los cuales son sets profesionales que se utilizan para televisión, streaming y diversas realizaciones audiovisuales. Cada uno de ellos está equipado con tres cámaras de video digitales full HD, switcher digital, pantallas de monitoreo tanto en Control y Estudio, dos tituladores y grabadoras/reproductoras de video. El sonido comprende: consola de audio, micrófonos de mano, de pecho, boom y de vincha. El sistema de iluminación trabaja con control de iluminación, luces alógenas de varios tipos: Fresnel, Scoop, Broad, Cañón, además del rack de control técnico con instrumentos de medición.
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
         </Grid>
-        </Grid>
-        <Grid>
-            <Grid item xs = {6}>
-                <Typography variant="h4" sx={{ mt: 2}}>
+        <Grid item xs = {12} sx={{mt:4, mb:5}}>
+            <Typography variant="h4" sx={{ mt: 2}}>
                     Películas disponibles
-                </Typography>
-            </Grid>
+            </Typography>
+            <Container sx={{mt: 4}}>
+                <ListaDisponibles
+                    listaDisponibles={listaSalas}>
+                </ListaDisponibles>
+            </Container>
         </Grid>
-        <Container>
-        <Grid>
-            <Grid item xs = {8}>
-            <Card elevation={0} style={cardStyle}>
-                <CardHeader>
-                    <Stack direction="row" spacing={2} sx={{ml: 2, mt: 2}}>
-                        <><Avatar variant="rounded" sx={{background: '#BDBDBD'}}>BS</Avatar></>
-                        <><Typography variant='h6' color="text.primary">Beekeper Sentencia de Muerte</Typography></>
-                    </Stack>
-                </CardHeader>
-                <CardContent>
-                    <Typography variant="body1" color="text.secondary">
-                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                    </Typography>
-                </CardContent>   
-                <CardActions>
-                    <Button 
-                    variant="outlined"
-                    style={buttonStyle}
-                >15:00</Button>
-                    <Button 
-                    variant="outlined"
-                    style={buttonStyle}
-                    >17:00</Button>
-                </CardActions>
-            </Card>
-            <Card elevation={0} style={cardStyle}>
-                <CardHeader>
-                    <Stack direction="row" spacing={2} sx={{ml: 2, mt: 2}}>
-                        <><Avatar variant="rounded" sx={{background: '#BDBDBD'}}>NG</Avatar></>
-                        <><Typography variant='h6' color="text.primary">El Niño y la Garza</Typography></>
-                    </Stack>
-                </CardHeader>
-                <CardContent>
-                    <Typography variant="body1" color="text.secondary">
-                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                    </Typography>
-                </CardContent>   
-                <CardActions>
-                    <Button 
-                    variant="outlined"
-                    style={buttonStyle}
-                    >16:00</Button>
-                    <Button 
-                    variant="outlined"
-                    style={buttonStyle}
-                    >18:00</Button>
-                </CardActions>
-            </Card>
-            <Card elevation={0} style={cardStyle}>
-                <CardHeader>
-                    <Stack direction="row" spacing={2} sx={{ml: 2, mt: 2}}>
-                        <><Avatar variant="rounded" sx={{background: '#BDBDBD'}}>JC</Avatar></>
-                        <><Typography variant='h6' color="text.primary">Jack en la Caja Maldita 3</Typography></>
-                    </Stack>
-                </CardHeader>
-                <CardContent>
-                    <Typography variant="body1" color="text.secondary">
-                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                    </Typography>
-                </CardContent>   
-                <CardActions>
-                    <Button 
-                    variant="outlined"
-                    style={buttonStyle}
-                    >20:00</Button>
-                    <Button 
-                    variant="outlined"
-                    style={buttonStyle}
-                    >22:00</Button>
-                </CardActions>
-            </Card>
-            </Grid>
-        </Grid>
-        </Container>
       </Container> 
-      </Grid>
-      </PageLayout>
-)
+    </Grid>
+    </PageLayout>
+  )
 }
 
-export default SalaItemPage;
+export default SalaItemPage
