@@ -14,7 +14,7 @@ const LoginPage = () => {
   const {setUser} = useAppContext();
 
   const obtenerUsuarios = async () => {
-      const response = await fetch ("http://localhost:3000/users.json");
+      const response = await fetch ("/users.json");
       const data = await response.json()
       setUsuarios(data)
   }
