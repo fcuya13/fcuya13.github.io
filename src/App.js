@@ -23,9 +23,9 @@ const App = () => {
             <Route path="/home" element={<HomePage />} />
             <Route path="/peliculas" element={<MoviesPage />} />
             <Route path="/reserva" element={<ReservaPage />} />
-            <Route path="/peliculas/beekeeper-sentencia-de-muerte" element={<PeliculaItemPage />} />
+            <Route path="/peliculas/:path" element={<PeliculaItemPage />} />
             <Route path="/salas" element={<SalasPage />} />
-            <Route path="/salas/sala-a" element={<SalaItemPage />} />
+            <Route path="/salas/:path" element={<SalaItemPage />} />
           </Routes>
         </AppProvider>
     );

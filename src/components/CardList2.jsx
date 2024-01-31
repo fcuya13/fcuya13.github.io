@@ -13,6 +13,7 @@ const CardList2 = (props) => {
                 <Cards2
                 name={e.name}
                 address={e.address}
+                image={e.image}
                 available_times={e.available_times}
             />
             )

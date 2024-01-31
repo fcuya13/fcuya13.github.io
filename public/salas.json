@@ -2,7 +2,7 @@
     {
       "name": "Skytower Plaza",
       "address": "123 Main Street, Cityville, USA",
-      "image": "skytower_plaza.jpg",
+      "image": "https://skytower.com.tr/wp-content/uploads/2023/04/IMG-20230417-WA0048.jpg",
       "available_times": [
         "03:00pm",
         "05:00pm",
@@ -15,7 +15,7 @@
     {
       "name": "Tech Hub Center",
       "address": "456 Tech Avenue, Tech City, USA",
-      "image": "tech_hub_center.jpg",
+      "image": "https://images.adsttc.com/media/images/5cb9/fc6c/284d/d198/f600/027f/newsletter/1.jpg?1555692647",
       "available_times": [
         "02:00pm",
         "05:00pm",
@@ -28,7 +28,7 @@
     {
       "name": "Green Gardens Tower",
       "address": "789 Park Lane, Greenvale, USA",
-      "image": "green_gardens_tower.jpg",
+      "image": "https://static.dezeen.com/uploads/2013/04/Dezeen_Agora-Garden-by-Vincent-Callebaut-Architectures_ss_2.jpg",
       "available_times": [
         "01:00pm",
         "05:00pm",
@@ -40,7 +40,7 @@
     {
       "name": "Harbor View Complex",
       "address": "101 Waterfront Road, Harbor City, USA",
-      "image": "harbor_view_complex.jpg",
+      "image": "https://harborviewmadison.com/wp-content/uploads/2023/03/Use-4.jpg",
       "available_times": [
         "03:00pm",
         "05:00pm",
@@ -51,7 +51,7 @@
     {
       "name": "Urban Heights Tower",
       "address": "555 High Street, Urbanville, USA",
-      "image": "urban_heights_tower.jpg",
+      "image": "https://media.wired.co.uk/photos/619facd0424af1246ccd296a/master/w_1600%2Cc_limit/WW2022-WIRED-26.jpg",
       "available_times": [
         "01:00pm",
         "08:00pm",
@@ -61,7 +61,7 @@
     {
       "name": "Downtown Plaza",
       "address": "777 Central Avenue, Downtown, USA",
-      "image": "downtown_plaza.jpg",
+      "image": "https://gawcapital.s3.ap-southeast-1.amazonaws.com/media/wp-content/uploads/2021/04/1fd4537eb078b99a2961574a9a1d58dc.jpeg",
       "available_times": [
         "08:00pm",
         "09:00pm",
