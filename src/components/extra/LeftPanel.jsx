@@ -4,8 +4,13 @@ import { Star } from '@mui/icons-material'
 import { Link } from "react-router-dom"
 import { useState } from "react"
 
-const LeftPanel = () => {
+const LeftPanel = ({searchOn}) => {
   const [search, setSearch] = useState("")
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+    searchOn(e.target.value);
+  }
 
   return <div>
       <img
@@ -17,7 +22,7 @@ const LeftPanel = () => {
           label="Busca" 
           variant="outlined"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleSearchChange}
           sx={ { marginLeft : "8px", marginBottom : "15%" } }/>
           <List>
             <ListItem key={"peliculas"}>

@@ -1,10 +1,12 @@
 import { Container, Grid, Typography } from "@mui/material"
 import MovieBody from "../components/MovieBody"
 import PageLayout from "../components/PageLayout"
+import { useState } from "react"
 
 const MoviesPage = () => {
+  const [searchTerm, setSearchTerm] = useState("")
   return(
-    <PageLayout>
+    <PageLayout onSearchChange={setSearchTerm}>
     <Grid
       container
       sx={{ fontFamily: 'Roboto, sans-serif' }}>
@@ -18,7 +20,7 @@ const MoviesPage = () => {
           fontWeight: 400,
           letterSpacing: 0.25
         }}>Películas</Typography>
-        <MovieBody/>
+        <MovieBody searchTerm={searchTerm}/>
       </Container>
     </Grid>
     </PageLayout>)

@@ -58,7 +58,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PageLayout({children}) {
+export default function PageLayout({children,onSearchChange}) {
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpenClose = () =>{
@@ -116,7 +116,7 @@ export default function PageLayout({children}) {
             },
         }}
       >
-        <LeftPanel/>
+        <LeftPanel searchOn = { onSearchChange }/>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />

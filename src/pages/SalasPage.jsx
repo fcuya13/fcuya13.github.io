@@ -1,10 +1,12 @@
 import { Container, Grid,Typography } from "@mui/material"
 import PageLayout from "../components/PageLayout"
 import SalasBody from "../components/SalasBody"
+import { useState } from "react"
 
 const SalasPage = () => {
+  const [searchTerm, setSearchTerm] = useState("")
   return(
-    <PageLayout>
+    <PageLayout onSearchChange={setSearchTerm}>
     <Grid
       container
       style={{ fontFamily: 'Roboto, sans-serif' }}>
@@ -19,7 +21,7 @@ const SalasPage = () => {
             fontWeight: 400,
             letterSpacing: 0.25
         }}>Salas Disponibles</Typography>
-        <SalasBody/>
+        <SalasBody searchTerm={searchTerm}/>
       </Container>
     </Grid>
     </PageLayout>)
