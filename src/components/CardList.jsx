@@ -1,22 +1,29 @@
-import { Grid } from "@mui/material"
 import Cards from "./Cards"
+import { Grid } from "@mui/material"
 
 const CardList = (props) => {
-    return (
-        <Grid container sx={{ marginBottom: '25px' }}>
-            {props.list.map((elem) => {
-                return (
-                    <Cards
-                        inf={elem.inf}
-                        tittle={elem.tittle}
-                        size={props.size}
-                        labels={elem.labels}
-                        path={elem.path}
+  return (
+    <Grid 
+      container 
+      sx={{ marginBottom: '25px'}}>
+      {
+        props.list.map((e) => {
+            return (
+                <Cards 
+                    id={e.id}
+                    title={e.title}
+                    year={e.year}
+                    cast={e.cast}
+                    genres={e.genres}
+                    extract={e.extract}
+                    thumbnail={e.thumbnail}
+                    path={e.path}
                     />
-                )
-            })}
-        </Grid>
-    )
+            )
+        })
+      }
+    </Grid>
+  )
 }
 
 export default CardList

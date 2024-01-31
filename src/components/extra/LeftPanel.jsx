@@ -3,6 +3,7 @@ import { TextField, Typography, List, ListItem } from "@mui/material"
 import { Star } from '@mui/icons-material'
 import { Link } from "react-router-dom"
 import { useState } from "react"
+
 const LeftPanel = () => {
   const [search, setSearch] = useState("")
 

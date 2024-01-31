@@ -1,0 +1,25 @@
+import Cards2 from "./Cards2"
+import { Grid } from "@mui/material"
+
+const CardList2 = (props) => {
+  return (
+    <Grid 
+      container 
+      style={{
+        marginBottom: '25px'}}>
+      {
+        props.list.map((e) => {
+            return (
+                <Cards2
+                name={e.name}
+                address={e.address}
+                available_times={e.available_times}
+            />
+            )
+        })
+      }
+    </Grid>
+  )
+}
+
+export default CardList2

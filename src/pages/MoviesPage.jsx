@@ -1,5 +1,5 @@
 import { Container, Grid, Typography } from "@mui/material"
-import MoviesBody from "../components/MoviesBody"
+import MovieBody from "../components/MovieBody"
 import PageLayout from "../components/PageLayout"
 
 const MoviesPage = () => {
@@ -18,7 +18,7 @@ const MoviesPage = () => {
           fontWeight: 400,
           letterSpacing: 0.25
         }}>Películas</Typography>
-        <MoviesBody/>
+        <MovieBody/>
       </Container>
     </Grid>
     </PageLayout>)

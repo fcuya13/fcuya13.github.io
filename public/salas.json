@@ -1,5 +1,4 @@
-{
-  "buildings": [
+[
     {
       "name": "Skytower Plaza",
       "address": "123 Main Street, Cityville, USA",
@@ -69,5 +68,4 @@
         "11:00pm"
       ]
     }
-  ]
-}
+]

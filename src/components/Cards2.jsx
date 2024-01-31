@@ -1,19 +1,19 @@
 import { Grid, Card, CardActionArea, CardMedia, CardContent, Typography, Chip } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-const Cards = (props) => {
+const Cards2 = (props) => {
     return (
-        <Grid item xs={4} justifyContent="center">
+        <Grid item xs={6} justifyContent="center">
             <Card sx={{ marginRight: "30px", marginBottom: "30px" }}>
                 <CardActionArea>
                     <CardMedia
                         sx={{
                             width: "100%", 
-                            height: "390px"
+                            height: "250px"
                         }}
                         component={Link}
-                        to={props.path}>
-                        <img src={props.thumbnail} alt={props.title} style={{ width: '100%', height: "100%" }} /> 
+                        to={"/"}>
+                        <img src={props.image} alt={props.name} style={{ width: '100%', height: "100%" }} /> 
                     </CardMedia>
                     <CardContent>
                         <Typography
@@ -24,7 +24,7 @@ const Cards = (props) => {
                                 fontWeight: 500,
                                 lineHeight: "157%",
                                 letterSpacing: 0.1
-                            }} >{props.year}
+                            }} >{props.address}
                         </Typography>
                         <Typography
                             sx={{
@@ -35,9 +35,9 @@ const Cards = (props) => {
                                 fontWeight: 550,
                                 lineHeight: "160%",
                                 letterSpacing: 0.15
-                            }}>{props.title}</Typography>
+                            }}>{props.name}</Typography>
                             
-                        {props.genres.map(label => {
+                        {props.available_times.map(label => {
                             return <Chip
                                 label={label}
                                 sx={{ marginRight: "10px", marginBottom: "5px" }} />
@@ -49,6 +49,4 @@ const Cards = (props) => {
     )
 }
 
-export default Cards
-
-
+export default Cards2

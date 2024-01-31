@@ -1,48 +1,36 @@
-import CardList from "./CardList"
+import { useEffect, useState } from "react";
+import CardList2 from "./CardList2";
 
 const SalasBody = () => {
-    const salasList = [
-        {
-            inf: "JohnJohn Doe • 4 Feb 2022",
-            tittle: "Sala A",
-            labels: ["12:00","14:00","15:00","16:00"],
-            path : "/salas/sala-a"
-        },
-        {
-            inf: "JohnJohn Doe • 4 Feb 2022",
-            tittle: "Sala B",
-            labels: ["Security","Back-end"],
-            path : "/salas/sala-b"
-        },
-        {
-            inf: "JohnJohn Doe • 4 Feb 2022",
-            tittle: "Sala C",
-            labels: ["13:00","14:00","15:00","16:00","17:00"],
-            path : "/salas/sala-c"
-        },
-        {
-            inf: "JohnJohn Doe • 4 Feb 2022",
-            tittle: "Sala D",
-            labels: ["Security","Back-end"],
-            path : "/salas/sala-d"
-        },
-        {
-            inf: "JohnJohn Doe • 4 Feb 2022",
-            tittle: "Sala E",
-            labels: ["13:00","14:00","15:00","16:00","17:00"],
-            path : "/salas/sala-e"
-        },
-        {
-            inf: "JohnJohn Doe • 4 Feb 2022",
-            tittle: "Sala F",
-            labels: ["Security","Back-end"],
-            path : "/salas/sala-f"
-        },
-    ]
+    const [salasData, setSalasData] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
 
-    return <div style={ { marginLeft: '30px', marginRight: '10px'}}>
-        <CardList list = { salasList } size = {6}/>
-    </div>
+    const obtenerSalas = async() => {
+        const response = await fetch("http://localhost:3000/salas.json");
+        const data = await response.json();
+        setSalasData(data);
+    }
+
+    useEffect(() =>{
+        obtenerSalas();
+    }, [])
+
+    const filtrarSalas = (sala) => {
+        return sala.name.toLowerCase().includes(searchTerm.toLowerCase())
+    }
+
+    return (
+        <div style={{ marginLeft: '40px', marginRight: '10px' }}>
+            <input
+                type="text"
+                placeholder="Buscar sala por nombre"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{ marginBottom: '10px' }}
+            />
+            <CardList2 list={salasData.filter(filtrarSalas)} />
+        </div>
+    )
 }
 
 export default SalasBody
