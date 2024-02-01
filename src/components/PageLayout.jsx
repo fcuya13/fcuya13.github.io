@@ -69,11 +69,11 @@ export default function PageLayout({children,onSearchChange}) {
   }
 
   const handleLogOut = () => {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     navigate("/login")
   }
 
-  const user = localStorage.getItem("user");
+  const user = sessionStorage.getItem("user");
   const userJSON = user ? JSON.parse(user) : null;
 
   return (

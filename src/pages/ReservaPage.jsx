@@ -24,7 +24,7 @@ import { useLocation } from "react-router-dom";
 
 const ReservaPage = () => {
 
-  const user = localStorage.getItem("user");
+  const user = sessionStorage.getItem("user");
   const userJSON = JSON.parse(user);
 
   const [nombre, setNombre] = useState(userJSON ? userJSON.nombre : "");
@@ -75,7 +75,7 @@ const ReservaPage = () => {
               <Typography variant="subtitle1" color="gray" sx={{mb: 2}}>
                 <LocationOnIcon sx={{mr: 2}}/>
                 <Link href="#" underline="none">
-                  Tiempo
+                  {datos.horario}
                 </Link>
                 <LocationOnIcon sx={{mx: 2}}/>
                 <Link href="#" underline="none">
@@ -88,9 +88,7 @@ const ReservaPage = () => {
                 <Card variant="outlined">
                   <CardContent>
                     <Typography variant="h6">Información de reserva</Typography>
-                    <Typography variant="subtitle1">
-                      {datos.horario}
-                    </Typography>
+                    
                     <Divider
                         sx={{borderBottomWidth: 2, borderColor: "gray"}}
                     />

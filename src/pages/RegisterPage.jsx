@@ -23,7 +23,7 @@ const RegisterPage = () => {
     }
 
     useEffect(() => {
-      const user = localStorage.getItem("user");
+      const user = sessionStorage.getItem("user");
         if (user){
           navigate("/home");
         }
@@ -59,11 +59,11 @@ const RegisterPage = () => {
       }
       else{
           const usuarioAgregar = {
-              nombre, apellido, correo, password
+              nombre, apellido, correo
           }
 
           const data = JSON.stringify(usuarioAgregar);
-          localStorage.setItem("user", data)
+          sessionStorage.setItem("user", data)
           navigate("/home")
       }
   }

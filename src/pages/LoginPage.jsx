@@ -18,7 +18,7 @@ const LoginPage = () => {
   }
 
     useEffect(() => {
-        const user = localStorage.getItem("user");
+        const user = sessionStorage.getItem("user");
         if (user){
           navigate("/home");
         }
@@ -31,10 +31,14 @@ const LoginPage = () => {
       })
 
       if (listaFiltrada.length > 0){
-          const us = listaFiltrada[0]
+          const us = {
+            "nombre": listaFiltrada[0].nombre,
+            "apellido": listaFiltrada[0].apellido,
+            "correo": listaFiltrada[0].correo,
+          }
           const data = JSON.stringify(us);
           navigate("/home")
-          localStorage.setItem("user", data);
+          sessionStorage.setItem("user", data);
       }
       else{
           setError(true)
