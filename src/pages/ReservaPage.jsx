@@ -4,6 +4,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn"
 import PageLayout from "../components/PageLayout"
 import { useLocation } from "react-router-dom"
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const ReservaPage = () => {
 
@@ -64,7 +65,7 @@ const ReservaPage = () => {
             <Container sx={{mt: 5}}>
               <Typography variant="h4">{datos.pelicula.title}</Typography>
               <Typography variant="subtitle1" color="gray" sx={{mb: 2}}>
-                <LocationOnIcon sx={{mr: 1}}/>
+                <AccessTimeIcon sx={{mr: 1}}/>
                 <Link href="#" underline="none">
                   {datos.horario}
                 </Link>
