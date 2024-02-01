@@ -1,12 +1,17 @@
-import { Container, TextField, Button, Typography, alpha } from "@mui/material";
+import {Container, TextField, Button, Typography, alpha, Modal, Box} from "@mui/material";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
 
 const RecuperaPage = () => {
     const [correo, setCorreo] = useState("")
     const [usuarios, setUsuarios] = useState([])
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
+    const [notFound, setNotFound] = useState(false);
+    const [sent, setSent] = useState(false);
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
 
     const obtenerUsuarios = async () => {
         const response = await fetch ("http://localhost:3000/users.json");
@@ -36,13 +41,15 @@ const RecuperaPage = () => {
                   console.log("Email sent");
                 } else {
                   console.log("Error sending email");
+                  setError(true);
                 }
               } catch (error) {
                 console.log("Error sending email", error);
+                setError(true)
               }
-          navigate("/login");
+          setOpen(true);
         } else {
-          setError(true);
+          setNotFound(true);
         }
       };
 
@@ -110,6 +117,70 @@ const RecuperaPage = () => {
           </Button>
         </form>
       </Container>
+        {error && (
+            <Alert
+                icon={<CheckIcon fontSize="inherit" />}
+                severity="error"
+                sx={ { mt : 2 } }>
+                Ha ocurrido un error. Inténtelo nuevamente
+            </Alert>
+        )}
+        {notFound && (
+            <Alert
+                icon={<CheckIcon fontSize="inherit" />}
+                severity="error"
+                sx={ { mt : 2 } }>
+                Cuenta no existe. Ingrese una cuenta válida
+            </Alert>
+        )}
+        {sent && (
+            <Alert
+                icon={<CheckIcon fontSize="inherit" />}
+                severity="success"
+                sx={ { mt : 2 } }>
+                Credenciales incorrectas. Inténtelo nuevamente
+            </Alert>
+        )}
+
+        <Modal
+            open={open}
+            onClose={() => {
+                navigate("/login");
+            }}
+
+        >
+            <Box sx={{position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: 600,
+                bgcolor: 'background.paper',
+                boxShadow: 24,
+                borderRadius: 2,
+                p: 4,}}>
+                <Typography variant="h6" component="h2" textAlign="center">
+                    Correo enviado. Por favor revise su bandeja de entrada
+                </Typography>
+                <Button
+                    variant="contained"
+                    color="warning"
+                    fullWidth
+                    sx={{
+                        marginTop: 2,
+                        fontSize: 15,
+                        fontWeight: 500,
+                        letterSpacing: 0.46,
+                        backgroundColor: "#FA7525",
+
+                    }}
+                    onClick={() => {
+                        navigate("/login")
+                    }}
+                >
+                    Ir al login
+                </Button>
+            </Box>
+        </Modal>
     </Container>
   )
 };
