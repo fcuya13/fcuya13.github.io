@@ -13,7 +13,7 @@ const RecuperaPage = () => {
     const [open, setOpen] = useState(false);
 
     const obtenerUsuarios = async () => {
-        const response = await fetch ("http://localhost:3000/users.json");
+        const response = await fetch ("/users.json");
         const data = await response.json()
         setUsuarios(data)
     }
@@ -21,7 +21,7 @@ const RecuperaPage = () => {
     useEffect(() => {
         obtenerUsuarios()
     }, []);
-    const validateUserPassword = async () => {
+    const validateUserPasswordOld = async () => {
         const listaFiltrada = usuarios.filter((usuario) => {
           return usuario.correo === correo;
         });
@@ -51,6 +51,40 @@ const RecuperaPage = () => {
           setNotFound(true);
         }
       };
+
+    const validateUserPassword = async () => {
+        const listaFiltrada = usuarios.filter((usuario) => {
+            return usuario.correo === correo;
+        });
+
+        if (listaFiltrada.length > 0) {
+            const usuarioEncontrado = listaFiltrada[0]
+            fetch('https://api.postmarkapp.com/email', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-Postmark-Server-Token': '03e0b67c-4d69-41f6-b1c6-de4811ecf021'
+                },
+                body: JSON.stringify({
+                    "From": "20210773@aloe.ulima.edu.pe",
+                    "To": usuarioEncontrado.correo,
+                    "Subject": "¿Olvidó su contraseña?",
+                    "TextBody": `Su contraseña es ${usuarioEncontrado.password}`,
+                    "MessageStream": "broadcast"
+                })
+            })
+                .then(response => {
+                    if (response.ok){
+                        setOpen(true);
+                    }
+                })
+                .then(data => console.log(data))
+                .catch(error => setError(true));
+        } else {
+            setNotFound(true);
+        }
+    };
 
   return (
     <Container maxWidth={false}
