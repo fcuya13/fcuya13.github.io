@@ -6,11 +6,11 @@ const MovieBody = ({ searchTerm }) => {
     const [filteredMovies, setFilteredMovies] = useState([])
 
     const obtenerPeliculas = async () => {
-        const response = await fetch("http://localhost:3000/peliculas.json")
+        const response = await fetch("/peliculas.json")
         const data = await response.json()
         setMoviesData(data)
     }
-
+    
     useEffect(() => {
         obtenerPeliculas()
     }, [])

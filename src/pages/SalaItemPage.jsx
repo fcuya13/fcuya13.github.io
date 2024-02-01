@@ -3,29 +3,31 @@ import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardHeader } from "react-bootstrap";
 import ListaDisponibles from "../components/ListaDisponibles";
+import { useLocation } from "react-router-dom";
 
 const SalaItemPage=()=>{
+
+    const location= useLocation()
+    const sala=location.state.sala
+
     const listaSalas=[
         {
-            avatarTitulo: "BS",
-            nombreDisponible: "Beekeper Sentencia de Muerte",
+            siglas: "BS",
+            name: "Beekeper Sentencia de Muerte",
             descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            horario1: "15:00",
-            horario2: "17:00"
+            available_times: ["15:00","17:00"]
         },
         {
-            avatarTitulo: "NG",
-            nombreDisponible: "El Niño y la Garza",
+            siglas: "NG",
+            name: "El Niño y la Garza",
             descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            horario1: "16:00",
-            horario2: "18:00"
+            available_times: ["16:00","18:00"]
         },
         {
-            avatarTitulo: "JC",
-            nombreDisponible: "Jack en la Caja Maldita 3",
+            siglas: "JC",
+            name: "Jack en la Caja Maldita 3",
             descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            horario1: "20:00",
-            horario2: "22:00"
+            available_times: ["20:00","22:00"]
         }
     ]
 
@@ -45,12 +47,12 @@ const SalaItemPage=()=>{
         }}>Salas</h2>
             <Container sx={{ mt: 5 }}>
                             <Typography variant="h4">
-                                SALA A
+                                {sala.name}
                             </Typography>
                             <box>
                                 <Typography variant='subtitle1' color="gray" sx={{ mb: 2,  display:'inline-flex'}}>
                                     <LocationOnIcon sx={{ mr: 2 }}/>
-                                    <Typography color="#009CD2">Pabellón X - ULima</Typography>
+                                    <Typography color="#009CD2">{sala.address}</Typography>
                                 </Typography>
                             </box>
             </Container>
@@ -59,7 +61,7 @@ const SalaItemPage=()=>{
                 <Card variant="outlined">
                     <CardMedia
                         component="img"
-                        image="https://placehold.co/540x280"
+                        image={sala.image}
                     />
                 </Card>
             </Grid> 

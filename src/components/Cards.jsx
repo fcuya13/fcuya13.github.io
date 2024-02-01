@@ -1,7 +1,12 @@
 import { Grid, Card, CardActionArea, CardMedia, CardContent, Typography, Chip } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Cards = (props) => {
+    const navigate= useNavigate()
+    const cardOnClick=()=>{
+        navigate(props.path, {state: {pelicula: props.pelicula}})
+    }
+
     return (
         <Grid item xs={4} justifyContent="center">
             <Card sx={{ marginRight: "30px", marginBottom: "30px" }}>
@@ -11,8 +16,7 @@ const Cards = (props) => {
                             width: "100%", 
                             height: "390px"
                         }}
-                        component={Link}
-                        to={props.path}>
+                        onClick={cardOnClick}>
                         <img src={props.thumbnail} alt={props.title} style={{ width: '100%', height: "100%" }} /> 
                     </CardMedia>
                     <CardContent>

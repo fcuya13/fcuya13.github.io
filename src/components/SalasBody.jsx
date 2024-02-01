@@ -6,7 +6,7 @@ const SalasBody = ({ searchTerm }) => {
     const [filteredSalas, setFilteredSalas] = useState([])
 
     const obtenerSalas = async() => {
-        const response = await fetch("http://localhost:3000/salas.json")
+        const response = await fetch("/salas.json")
         const data = await response.json()
         setSalasData(data)
     }

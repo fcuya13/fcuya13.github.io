@@ -20,7 +20,11 @@
         "thumbnail": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/3\/34\/The_Grudge_2020_Poster.jpeg",
         "thumbnail_width": 220.0,
         "thumbnail_height": 326.0,
-        "path": "the-grudge"
+        "path": "the-grudge",
+        "salas": [
+            "Skytower Plaza",
+            "Tech Hub Center"
+        ]
     },
     {
         "id": 2,
@@ -44,7 +48,12 @@
         "thumbnail": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/4\/4a\/Underwater_poster.jpeg",
         "thumbnail_width": 250.0,
         "thumbnail_height": 398.0,
-        "path": "underwater"
+        "path": "underwater",
+        "salas": [
+            "Green Gardens Tower",
+            "Harbor View Complex",
+            "Urban Heights Tower"
+        ]
     },
     {
         "id": 3,
@@ -65,7 +74,11 @@
         "thumbnail": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/9\/9a\/LikeaBossPoster.jpg",
         "thumbnail_width": 259.0,
         "thumbnail_height": 383.0,
-        "path": "like-a-boss"
+        "path": "like-a-boss",
+        "salas": [
+            "Downtown Plaza",
+            "Tech Hub Center"
+        ]
     },
     {
         "id": 4,
@@ -85,7 +98,11 @@
         "thumbnail": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/a\/a1\/Three_Christs_poster.jpg",
         "thumbnail_width": 259.0,
         "thumbnail_height": 383.0,
-        "path": "three-christs"
+        "path": "three-christs",
+        "salas": [
+            "Skytower Plaza",
+            "Tech Hub Center"
+        ]
     },
     {
         "id": 5,
@@ -107,7 +124,11 @@
         "thumbnail": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/1\/1c\/Inherit_the_Viper_%282019%29_Film_Poster.jpg",
         "thumbnail_width": 236.0,
         "thumbnail_height": 350.0,
-        "path": "inherit-the-viper"
+        "path": "inherit-the-viper",
+        "salas": [
+            "Skytower Plaza",
+            "Tech Hub Center"
+        ]
     },
     {
         "id": 6,
@@ -128,7 +149,12 @@
         "thumbnail": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/1\/13\/The_Sonata_%282018%29_Film_Poster.jpg",
         "thumbnail_width": 246.0,
         "thumbnail_height": 350.0,
-        "path": "the-sonata"
+        "path": "the-sonata",
+        "salas": [
+            "Skytower Plaza",
+            "Downtown Plaza",
+            "Tech Hub Center"
+        ]
     },
     {
         "id": 7,
@@ -148,7 +174,11 @@
         "thumbnail": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/e\/ed\/The_Murder_of_Nicole_Brown_Simpson_poster.jpg",
         "thumbnail_width": 263.0,
         "thumbnail_height": 380.0,
-        "path": "the-murder-of-nicole-brown-simpson"
+        "path": "the-murder-of-nicole-brown-simpson",
+        "salas": [
+            "Skytower Plaza",
+            "Tech Hub Center"
+        ]
     },
     {
         "id": 8,
@@ -174,7 +204,12 @@
         "thumbnail": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/9\/90\/Bad_Boys_for_Life_poster.jpg",
         "thumbnail_width": 219.0,
         "thumbnail_height": 325.0,
-        "path": "bad-boys-for-life"
+        "path": "bad-boys-for-life",
+        "salas": [
+            "Green Gardens Tower",
+            "Skytower Plaza",
+            "Urban Heights Tower"
+        ]
     },
     {
         "id": 9,
@@ -204,7 +239,11 @@
         "thumbnail": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/1\/1f\/Dolittle_%282020_film_poster%29.png",
         "thumbnail_width": 220.0,
         "thumbnail_height": 326.0,
-        "path": "dolittle"
+        "path": "dolittle",
+        "salas": [
+            "Urban Heights Tower",
+            "Tech Hub Center"
+        ]
     },
     {
         "id": 10,
@@ -226,6 +265,11 @@
         "thumbnail": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/4\/4e\/AFallFromGrace.png",
         "thumbnail_width": 259.0,
         "thumbnail_height": 383.0,
-        "path": "a-fall-from-grace"
+        "path": "a-fall-from-grace",
+        "salas": [
+            "Skytower Plaza",
+            "Tech Hub Center",
+            "Urban Heights Tower"
+        ]
     }
 ]

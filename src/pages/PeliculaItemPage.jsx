@@ -3,31 +3,31 @@ import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardHeader } from "react-bootstrap";
 import ListaDisponibles from "../components/ListaDisponibles";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const PeliculaItemPage=()=>{
-    const listaSalas=[
-        {
-            avatarTitulo: "S1",
-            nombreDisponible: "Sala A",
-            descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            horario1: "15:00",
-            horario2: "17:00"
-        },
-        {
-            avatarTitulo: "S2",
-            nombreDisponible: "Sala B",
-            descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            horario1: "16:00",
-            horario2: "18:00"
-        },
-        {
-            avatarTitulo: "S3",
-            nombreDisponible: "Sala C",
-            descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            horario1: "20:00",
-            horario2: "22:00"
-        }
-    ]
+    const [salasData, setSalasData] = useState([])
+    const location= useLocation()
+    const pelicula=location.state.pelicula
+
+    const obtenerSalas = async () => {
+        const response = await fetch("/salas.json")
+        const data = await response.json()
+        setSalasData(data)
+    }
+
+    useEffect(() => {
+        obtenerSalas()
+    }, [])
+
+    const filtrarSalas = (nombres, salas) => {
+        return salas.filter(sala => nombres.includes(sala.name));
+    }
+
+    const listaSalas=filtrarSalas(pelicula.salas, salasData)
+
+    console.log(listaSalas)
 
     return (
     <PageLayout>
@@ -44,30 +44,42 @@ const PeliculaItemPage=()=>{
           letterSpacing: 0.25
         }}>Películas</h2>
             <Container sx={{ mt: 5 }}>
-                            <Typography variant="h4">
-                                Beekeper Sentencia de Muerte
+                            <Typography variant="h4" sx={{mb:2}}>
+                                {pelicula.title}
                             </Typography>
                             <box>
                                 <Typography variant='subtitle1' color="gray" sx={{ mb: 2,  display:'inline-flex'}}>
                                     <LocationOnIcon sx={{ mr: 2 }}/>
-                                    <Typography color="#009CD2">1 hrs 50min</Typography>
+                                    <Typography color="#009CD2">{pelicula.year}</Typography>
                                 </Typography>
-                                <Typography variant='subtitle1' color="gray" sx={{ mb: 2, ml:2 , display: 'inline-flex' }}>
-                                    <LocationOnIcon sx={{ mr: 2 }}/>
-                                    <Typography color="#009CD2">Director</Typography>
-                                </Typography>
+                                <Box sx={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    alignItems: 'center'}}>
+                                    <Typography variant='subtitle1' color="gray" sx={{ display:'inline-flex'}}>
+                                        <LocationOnIcon sx={{ mr: 2 }}/>
+                                    </Typography>
+                                    {pelicula.cast.map(label => {
+                                        return <Typography 
+                                            variant='subtitle1' 
+                                            color="#009CD2" 
+                                            sx={{ ml:1 , display: 'inline-flex' }}>
+                                            {label} •
+                                        </Typography>
+                                    })}
+                                </Box>
                             </box>
             </Container>
-        <Grid container spacing={2}>
-            <Grid item sm = {8} sx={{height: "100%"}}>
+        <Grid container spacing={2} sx={{mt:2}}>
+            <Grid item sm = {5} sx={{height: "100%"}}>
                 <Card variant="outlined">
                     <CardMedia
                         component="img"
-                        image="https://placehold.co/540x280"
+                        image={pelicula.thumbnail}
                     />
                 </Card>
             </Grid> 
-            <Grid item sm = {4} minWidth="10rem">
+            <Grid item sm = {7} minWidth="10rem">
                 <Card variant="outlined" sx={{height: "100%"}}>
                     <CardHeader>
                         <Typography variant="h5" sx={{ padding: 2, pb:{xs:'0rem'}}}>
@@ -76,12 +88,16 @@ const PeliculaItemPage=()=>{
                     </CardHeader>
                     <CardContent>
                         <Typography variant="body1" color="text.secondary" sx={{ fontSize: { xs: '1em', sm: '0.8em', md:'1em' } }}>
-                        La brutal campaña de venganza de un hombre adquiere dimensiones nacionales cuando se descubre que es un antiguo agente de una poderosa organización clandestina conocida como "Los apicultores".
+                        {pelicula.extract}
                         </Typography>
                     </CardContent>
+                    
                     <Box sx={{m: 1, mt:0 }}>
-                        <Chip sx={{ml:1,}} label="Acción" />
-                        <Chip sx={{ml:1}} label="+14" />
+                        {pelicula.genres.map(label => {
+                            return <Chip
+                                label={label}
+                                sx={{ml:1}} />
+                        })}
                     </Box>
                 </Card>
             </Grid>
