@@ -9,8 +9,8 @@ const MoviesPage = () => {
     <PageLayout onSearchChange={setSearchTerm}>
     <Grid
       container
-      sx={{ fontFamily: 'Roboto, sans-serif' }}>
-      <Container>
+      sx={{ fontFamily: 'Roboto, sans-serif'}}>
+      <Container >
         <Typography variant="h4"  
           sx={{
           borderBottom: '1px solid #0000001F',

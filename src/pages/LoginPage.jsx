@@ -2,7 +2,7 @@ import { Container, TextField, Button, Typography, alpha } from "@mui/material";
 import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Alert from "@mui/material/Alert";
-import CheckIcon from "@mui/icons-material/Check"
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 const LoginPage = () => {
   const [correo, setCorreo] = useState("");
@@ -23,7 +23,7 @@ const LoginPage = () => {
           navigate("/home");
         }
         obtenerUsuarios()
-    }, []);
+    }, [navigate]);
   const validateUserPassword = () => {
 
       const listaFiltrada = usuarios.filter((usuario) => {
@@ -70,12 +70,9 @@ const LoginPage = () => {
       >
         SALAS DE CINE ULIMA
       </Typography>
-      <Container sx={{ width: "80%",
+      <Container sx={{ width: {xs:"80%", md: "40%"},
           maxWidth: "500px",
           marginBottom: 5,
-          '@media (min-width:600px)': {
-            width: "40%",
-          },
           backgroundColor: "white",
           p: "20px",
           borderRadius: 2, }}>
@@ -89,7 +86,7 @@ const LoginPage = () => {
             label="Usuario"
             variant="outlined"
             fullWidth
-            sx={{ marginBottom: 3 }}
+            sx={{ marginBottom: 2 }}
             value={correo}
             onChange={(e) => setCorreo(e.target.value)}
           />
@@ -105,14 +102,14 @@ const LoginPage = () => {
           <Typography component={Link} to="/recupera" color="#FA7525" 
           sx={{ 
                 fontSize : '15px'}}>
-            Olvide mi contraseña
+            Olvidé mi contraseña
           </Typography>
           <Button
             variant="contained"
             color="warning"
             fullWidth
             sx={{
-              marginTop: 2,
+              marginTop: 3,
               fontSize: 15,
               fontWeight: 500,
               letterSpacing: 0.46,
@@ -127,7 +124,7 @@ const LoginPage = () => {
             color="warning"
             fullWidth
             sx={{
-              marginTop: 2,
+              marginTop: 1,
               fontSize: 15,
               fontWeight: 500,
               letterSpacing: 0.46,
@@ -139,16 +136,20 @@ const LoginPage = () => {
             REGISTRARSE
           </Button>
         </form>
+          {error && (
+              <Alert
+                  icon={<ErrorOutlineIcon fontSize="inherit" />}
+                  severity="error"
+                  sx={ { mt : 2 } }
+                  onClose={() => {
+                      setError(false);
+                  }}>
+                  Credenciales incorrectas. Inténtelo nuevamente
+              </Alert>
+          )}
       </Container>
 
-        {error && (
-            <Alert
-                icon={<CheckIcon fontSize="inherit" />}
-                severity="error"
-                sx={ { mt : 2 } }>
-                Credenciales incorrectas. Inténtelo nuevamente
-            </Alert>
-        )}
+
     </Container>
   );
 };

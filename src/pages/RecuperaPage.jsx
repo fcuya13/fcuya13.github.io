@@ -1,8 +1,8 @@
 import {Container, TextField, Button, Typography, alpha, Modal, Box} from "@mui/material";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Alert from "@mui/material/Alert";
-import CheckIcon from "@mui/icons-material/Check";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const RecuperaPage = () => {
     const [correo, setCorreo] = useState("")
@@ -24,7 +24,7 @@ const RecuperaPage = () => {
           navigate("/home");
         }
         obtenerUsuarios()
-    }, []);
+    }, [navigate]);
     const validateUserPasswordOld = async () => {
         const listaFiltrada = usuarios.filter((usuario) => {
           return usuario.correo === correo;
@@ -116,12 +116,9 @@ const RecuperaPage = () => {
       >
         SALAS DE CINE ULIMA
       </Typography>
-      <Container sx={{ width: "80%",
-          maxWidth: "500px",
+      <Container sx={{
+          width: {xs:"80%", md: "40%"},
           marginBottom: 5,
-          '@media (min-width:600px)': {
-            width: "40%",
-          },
           backgroundColor: "white",
           p: "20px",
           borderRadius: 2, }}>
@@ -154,22 +151,46 @@ const RecuperaPage = () => {
           >
             ENVIAR CONTRASEÑA
           </Button>
+            <Button
+                variant="outlined"
+                color="warning"
+                fullWidth
+                sx={{
+                    marginTop: 1,
+                    fontSize: 15,
+                    fontWeight: 500,
+                    letterSpacing: 0.46,
+                    backgroundColor: "#fff",
+                }}
+                component={Link}
+                to={"/login"}
+            >
+                REGRESAR AL LOGIN
+            </Button>
         </form>
       </Container>
         {error && (
             <Alert
-                icon={<CheckIcon fontSize="inherit" />}
+                icon={<ErrorOutlineIcon fontSize="inherit" />}
                 severity="error"
-                sx={ { mt : 2 } }>
+                sx={ { mt : 2 } }
+                onClose={() => {
+                    setError(false);
+                }}>
                 Ha ocurrido un error. Inténtelo nuevamente
+
             </Alert>
         )}
         {notFound && (
             <Alert
-                icon={<CheckIcon fontSize="inherit" />}
+                icon={<ErrorOutlineIcon fontSize="inherit" />}
                 severity="error"
-                sx={ { mt : 2 } }>
+                sx={ { mt : 2 } }
+                onClose={() => {
+                    setNotFound(false);
+                }}>
                 Cuenta no existe. Ingrese una cuenta válida
+
             </Alert>
         )}
 
@@ -210,6 +231,7 @@ const RecuperaPage = () => {
                 >
                     Ir al login
                 </Button>
+
             </Box>
         </Modal>
     </Container>

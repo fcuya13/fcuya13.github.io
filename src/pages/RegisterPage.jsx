@@ -1,8 +1,8 @@
 import { Container, TextField, Button, Typography, alpha } from "@mui/material";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Alert from "@mui/material/Alert";
-import CheckIcon from "@mui/icons-material/Check";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const RegisterPage = () => {
   const [nombre, setNombre] = useState("");
@@ -28,7 +28,7 @@ const RegisterPage = () => {
           navigate("/home");
         }
         obtenerUsuarios()
-    }, []);
+    }, [navigate]);
 
     const validarInputs = () => {
         const email = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
@@ -94,12 +94,8 @@ const RegisterPage = () => {
       </Typography>
       <Container
         sx={{
-          width: "80%",
-          maxWidth: "550px",
+          width: {xs:"80%", md: "40%"},
           marginBottom: 5,
-          '@media (min-width:600px)': {
-            width: "40%",
-          },
           backgroundColor: "white",
           p: "20px",
           borderRadius: 2,
@@ -111,61 +107,56 @@ const RegisterPage = () => {
             borderRadius: 1,
           }}
         >
-          <div className="mb-3">
             <TextField
               label="Nombre"
               variant="outlined"
+              sx={{ marginBottom: 1 }}
               fullWidth
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
             />
-          </div>
-          <div className="mb-3">
             <TextField
               label="Apellidos"
               variant="outlined"
+              sx={{ marginBottom: 1 }}
               fullWidth
               value={apellido}
               onChange={(e) => setApellido(e.target.value)}
             />
-          </div>
-          <div className="mb-3">
+
             <TextField
               label="Correo"
               variant="outlined"
+              sx={{ marginBottom: 1 }}
               fullWidth
               type="email"
               value={correo}
               onChange={(e) => setCorreo(e.target.value)}
             />
-          </div>
-          <div className="mb-3">
             <TextField
               label="Contraseña"
               variant="outlined"
               fullWidth
+              sx={{ marginBottom: 1 }}
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
-          <div className="mb-3">
             <TextField
               label="Confirmar Contraseña"
               variant="outlined"
               fullWidth
+              sx={{ marginBottom: 1 }}
               type="password"
               value={passConf}
               onChange={(e) => setPassConf(e.target.value)}
             />
-          </div>
-          <div className="d-grid gap-2">
             <Button
               variant="contained"
               color="warning"
               fullWidth
               sx={{
-                marginTop: 2,
+                marginTop: 1,
                 fontSize: 15,
                 fontWeight: 500,
                 letterSpacing: 0.46,
@@ -174,11 +165,26 @@ const RegisterPage = () => {
             >
               INGRESAR
             </Button>
-          </div>
+              <Button
+                  variant="outlined"
+                  color="warning"
+                  fullWidth
+                  sx={{
+                      marginTop: 1,
+                      fontSize: 15,
+                      fontWeight: 500,
+                      letterSpacing: 0.46,
+                      backgroundColor: "#fff",
+                  }}
+                  component={Link}
+                  to={"/login"}
+              >
+                  REGRESAR AL LOGIN
+              </Button>
         </form>
           {error && (
               <Alert
-                  icon={<CheckIcon fontSize="inherit" />}
+                  icon={<ErrorOutlineIcon fontSize="inherit" />}
                   severity="error"
                   sx={ { mt : 2 } }
                   onClose={() => {
@@ -190,7 +196,7 @@ const RegisterPage = () => {
 
           {passNotSame && (
               <Alert
-                  icon={<CheckIcon fontSize="inherit" />}
+                  icon={<ErrorOutlineIcon fontSize="inherit" />}
                   severity="error"
                   sx={ { mt : 2 } }
                   onClose={() => {
@@ -201,7 +207,7 @@ const RegisterPage = () => {
           )}
           {existingUserError && (
               <Alert
-                  icon={<CheckIcon fontSize="inherit" />}
+                  icon={<ErrorOutlineIcon fontSize="inherit" />}
                   severity="error"
                   sx={ { mt : 2 } }
                   onClose={() => {

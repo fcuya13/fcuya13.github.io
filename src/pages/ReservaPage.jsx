@@ -3,6 +3,7 @@ import { useState } from "react"
 import LocationOnIcon from "@mui/icons-material/LocationOn"
 import PageLayout from "../components/PageLayout"
 import { useLocation } from "react-router-dom"
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const ReservaPage = () => {
 
@@ -58,25 +59,25 @@ const ReservaPage = () => {
             fontSize: '34px',
             fontWeight: 400,
             letterSpacing: 0.25
-        }}>Salas Disponibles</Typography>
+        }}>Reserva</Typography>
           <Container>
             <Container sx={{mt: 5}}>
               <Typography variant="h4">{datos.pelicula.title}</Typography>
               <Typography variant="subtitle1" color="gray" sx={{mb: 2}}>
-                <LocationOnIcon sx={{mr: 2}}/>
+                <LocationOnIcon sx={{mr: 1}}/>
                 <Link href="#" underline="none">
                   {datos.horario}
                 </Link>
-                <LocationOnIcon sx={{mx: 2}}/>
+                <LocationOnIcon sx={{mx: 1}}/>
                 <Link href="#" underline="none">
                   {datos.sala}
                 </Link>
               </Typography>
             </Container>
-            <Grid container spacing={2}>
-              <Grid item xs={7}>
-                <Card variant="outlined">
-                  <CardContent>
+            <Grid container spacing={2} sx={{justifyContent:{xs:"center", sm:"left"}}}>
+              <Grid  item sm={7}>
+                <Card  variant="outlined">
+                  <CardContent >
                     <Typography variant="h6">Información de reserva</Typography>
                     
                     <Divider
@@ -152,6 +153,7 @@ const ReservaPage = () => {
                       {error && (
                           <Grid item xs={12}>
                             <Alert
+                                icon={<ErrorOutlineIcon fontSize="inherit" />}
                                 severity="warning"
                                 onClose={() => {
                                   setError(false);
@@ -165,7 +167,7 @@ const ReservaPage = () => {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid item xs={5}>
+              <Grid sx={{display:{xs:"none", sm:"block"}}} item xs={5}>
                 <Card variant="outlined">
                   <CardMedia
                       component="img"
@@ -186,10 +188,9 @@ const ReservaPage = () => {
                 backgroundColor: "#fff9f6",
                 border: "2px dotted #fc823b",
                 color: "#fa7525",
-                px: 6,
+                px: {xs:1, sm: 6},
                 py: 1,
                 borderRadius: "5px",
-                width: "400px",
               }}
             >
               <Typography>{nombre}</Typography>

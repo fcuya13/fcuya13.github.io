@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import CardList from "./CardList"
+import {Box} from "@mui/material";
 
 const MovieBody = ({ searchTerm }) => {
     const [moviesData, setMoviesData] = useState([])
@@ -23,9 +24,9 @@ const MovieBody = ({ searchTerm }) => {
     }, [moviesData, searchTerm])
 
     return (
-        <div style={{marginLeft: "8.5%" }}>
+        <Box sx={{marginLeft: {sm:"8.5%" }}}>
             <CardList list={filteredMovies}/>
-        </div>
+        </Box>
     )
 }
 

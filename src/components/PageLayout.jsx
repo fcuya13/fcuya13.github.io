@@ -90,13 +90,13 @@ export default function PageLayout({children,onSearchChange}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography sx={{display:{xs:"none", sm:"block"}}} variant="h6" noWrap component="div">
             Salas de Cine ULima
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
             {userJSON ? (
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography>Bienvenido de vuelta {userJSON.nombre}</Typography>
+                <Typography sx={{display:{xs:"none", sm:"block"}}}>Bienvenido de vuelta {userJSON.nombre}</Typography>
                 <LogoutIcon sx={{ ml: 2, cursor: 'pointer' }} onClick={handleLogOut} />
               </Box>
             ) : (
