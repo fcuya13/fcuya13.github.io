@@ -4,7 +4,7 @@ import { Grid } from "@mui/material"
 const CardList = (props) => {
   return (
     <Grid 
-      container 
+      container
       sx={{ marginBottom: '25px'}}>
       {
         props.list.map((e) => {

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -94,24 +93,21 @@ export default function PageLayout({children,onSearchChange}) {
           <Typography variant="h6" noWrap component="div">
             Salas de Cine ULima
           </Typography>
-            <Box position="absolute" top={0} right={0} mt={2.5} mr={4}>
-                {userJSON ?
-                <>
-                <Grid sx={{display: "flex"}}>
-                  <Typography>Bienvenido de vuelta {userJSON.nombre}</Typography>
-                  <LogoutIcon sx={{ml: 2}} cursor="pointer" onClick={handleLogOut}/>
-                </Grid>
-                </> 
-                : 
-                    <>
-                    <Star sx={{ marginRight: '15px' }} />
-                    <Star sx={{ marginRight: '15px' }} />
-                    <Star sx={{ marginRight: '15px' }} />
-                    <Star sx={{ marginRight: '15px' }} />
-                    <Star sx={{ marginRight: '15px' }} />
-                    </>
-            }
-            </Box>
+          <Box sx={{ flexGrow: 1 }} />
+            {userJSON ? (
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography>Bienvenido de vuelta {userJSON.nombre}</Typography>
+                <LogoutIcon sx={{ ml: 2, cursor: 'pointer' }} onClick={handleLogOut} />
+              </Box>
+            ) : (
+              <>
+                <Star sx={{ marginRight: '15px' }} />
+                <Star sx={{ marginRight: '15px' }} />
+                <Star sx={{ marginRight: '15px' }} />
+                <Star sx={{ marginRight: '15px' }} />
+                <Star sx={{ marginRight: '15px' }} />
+              </>
+            )}
         </Toolbar>
       </AppBar>
       <Drawer

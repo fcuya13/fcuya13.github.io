@@ -22,9 +22,11 @@ const MovieBody = ({ searchTerm }) => {
         setFilteredMovies(filtered)
     }, [moviesData, searchTerm])
 
-    return <div style={{ marginLeft: '30px', marginRight: '10px' }}>
-        <CardList list={filteredMovies}/>
-    </div>
+    return (
+        <div style={{marginLeft: "8.5%" }}>
+            <CardList list={filteredMovies}/>
+        </div>
+    )
 }
 
 export default MovieBody

@@ -1,49 +1,31 @@
-import {
-  Container,
-  Typography,
-  Grid,
-  Button,
-  TextField,
-  Divider,
-  Link,
-  Box,
-} from "@mui/material";
-import { useState, useEffect } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogActions from "@mui/material/DialogActions";
-import PageLayout from "../components/PageLayout";
-import Alert from "@mui/material/Alert";
-import { useLocation } from "react-router-dom";
+import { Container, Typography, Grid, Button, TextField, Divider, Link,Box, Card, CardContent, CardMedia, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Alert} from "@mui/material"
+import { useState } from "react"
+import LocationOnIcon from "@mui/icons-material/LocationOn"
+import PageLayout from "../components/PageLayout"
+import { useLocation } from "react-router-dom"
 
 const ReservaPage = () => {
 
-  const user = sessionStorage.getItem("user");
-  const userJSON = JSON.parse(user);
+  const user = sessionStorage.getItem("user")
+  const userJSON = JSON.parse(user)
 
-  const [nombre, setNombre] = useState(userJSON ? userJSON.nombre : "");
-  const [apellido, setApellido] = useState(userJSON ? userJSON.apellido : "");
-  const [codigo, setCodigo] = useState(userJSON ? userJSON.correo : "");
-  const [cantidad, setCantidad] = useState("");
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
+  const [nombre, setNombre] = useState(userJSON ? userJSON.nombre : "")
+  const [apellido, setApellido] = useState(userJSON ? userJSON.apellido : "")
+  const [codigo, setCodigo] = useState(userJSON ? userJSON.correo : "")
+  const [cantidad, setCantidad] = useState("")
+  const [open, setOpen] = useState(false)
+  const [error, setError] = useState(false)
 
-  const location= useLocation();
-  const datos=location.state.datos;
+  const location= useLocation()
+  const datos=location.state.datos
 
   const handleOpen = () => {
     setOpen(true);
-  };
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const handleReservar = () => {
     const email = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
@@ -61,14 +43,22 @@ const ReservaPage = () => {
     } else {
       setError(true);
     }
-  };
+  }
 
   return (
     <>
       <PageLayout>
         <Container>
-          <Typography variant="h4">Reserva</Typography>
-          <Divider sx={{borderBottomWidth: 2, borderColor: "gray"}}/>
+        <Typography 
+          variant="h4" 
+          sx={{
+            borderBottom: '1px solid #0000001F',
+            marginBottom: '5%',
+            marginTop: "25px",
+            fontSize: '34px',
+            fontWeight: 400,
+            letterSpacing: 0.25
+        }}>Salas Disponibles</Typography>
           <Container>
             <Container sx={{mt: 5}}>
               <Typography variant="h4">{datos.pelicula.title}</Typography>
@@ -84,7 +74,7 @@ const ReservaPage = () => {
               </Typography>
             </Container>
             <Grid container spacing={2}>
-              <Grid item xs={6}>
+              <Grid item xs={7}>
                 <Card variant="outlined">
                   <CardContent>
                     <Typography variant="h6">Información de reserva</Typography>
@@ -175,7 +165,7 @@ const ReservaPage = () => {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={5}>
                 <Card variant="outlined">
                   <CardMedia
                       component="img"
@@ -216,7 +206,7 @@ const ReservaPage = () => {
         </DialogActions>
       </Dialog>
     </>
-  );
-};
+  )
+}
 
-export default ReservaPage;
+export default ReservaPage
