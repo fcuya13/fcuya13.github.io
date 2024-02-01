@@ -7,12 +7,10 @@ import ReservaPage from "./pages/ReservaPage"
 import PeliculaItemPage from "./pages/PeliculaItemPage";
 import SalasPage from "./pages/SalasPage";
 import SalaItemPage from "./pages/SalaItemPage";
-import {AppProvider} from "./context";
 import RecuperaPage from "./pages/RecuperaPage";
 
 const App = () => {
     return (
-        <AppProvider>
           <Routes>
             <Route
                 path="*"
@@ -28,7 +26,6 @@ const App = () => {
             <Route path="/salas/:path" element={<SalaItemPage />} />
             <Route path="/recupera" element={<RecuperaPage />} />
           </Routes>
-        </AppProvider>
     );
 };
 

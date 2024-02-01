@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check"
-import {useAppContext} from "../context";
 
 const LoginPage = () => {
   const [correo, setCorreo] = useState("");
@@ -11,7 +10,6 @@ const LoginPage = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-  const {setUser} = useAppContext();
 
   const obtenerUsuarios = async () => {
       const response = await fetch ("/users.json");
@@ -20,6 +18,10 @@ const LoginPage = () => {
   }
 
     useEffect(() => {
+        const user = localStorage.getItem("user");
+        if (user){
+          navigate("/home");
+        }
         obtenerUsuarios()
     }, []);
   const validateUserPassword = () => {
@@ -30,8 +32,9 @@ const LoginPage = () => {
 
       if (listaFiltrada.length > 0){
           const us = listaFiltrada[0]
-          setUser(us);
+          const data = JSON.stringify(us);
           navigate("/home")
+          localStorage.setItem("user", data);
       }
       else{
           setError(true)

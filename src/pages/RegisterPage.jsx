@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
-import {useAppContext} from "../context";
 
 const RegisterPage = () => {
   const [nombre, setNombre] = useState("");
@@ -16,7 +15,6 @@ const RegisterPage = () => {
   const [existingUserError, setExistingUserError] = useState(false);
   const [passNotSame, setPassNotSame] = useState(false);
   const navigate = useNavigate();
-  const {setUser} = useAppContext();
 
     const obtenerUsuarios = async () => {
         const response = await fetch ("/users.json");
@@ -25,6 +23,10 @@ const RegisterPage = () => {
     }
 
     useEffect(() => {
+      const user = localStorage.getItem("user");
+        if (user){
+          navigate("/home");
+        }
         obtenerUsuarios()
     }, []);
 
@@ -59,7 +61,9 @@ const RegisterPage = () => {
           const usuarioAgregar = {
               nombre, apellido, correo, password
           }
-          setUser(usuarioAgregar);
+
+          const data = JSON.stringify(usuarioAgregar);
+          localStorage.setItem("user", data)
           navigate("/home")
       }
   }

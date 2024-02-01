@@ -20,14 +20,16 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import PageLayout from "../components/PageLayout";
 import Alert from "@mui/material/Alert";
-import {useAppContext} from "../context";
 import { useLocation } from "react-router-dom";
 
 const ReservaPage = () => {
-  const {user} = useAppContext();
-  const [nombre, setNombre] = useState(user ? user.nombre : "");
-  const [apellido, setApellido] = useState(user ? user.apellido : "");
-  const [codigo, setCodigo] = useState(user ? user.correo : "");
+
+  const user = localStorage.getItem("user");
+  const userJSON = JSON.parse(user);
+
+  const [nombre, setNombre] = useState(userJSON ? userJSON.nombre : "");
+  const [apellido, setApellido] = useState(userJSON ? userJSON.apellido : "");
+  const [codigo, setCodigo] = useState(userJSON ? userJSON.correo : "");
   const [cantidad, setCantidad] = useState("");
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);

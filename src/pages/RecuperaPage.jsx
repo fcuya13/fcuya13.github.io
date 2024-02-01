@@ -19,6 +19,10 @@ const RecuperaPage = () => {
     }
 
     useEffect(() => {
+        const user = localStorage.getItem("user");
+        if (user){
+          navigate("/home");
+        }
         obtenerUsuarios()
     }, []);
     const validateUserPasswordOld = async () => {
@@ -57,9 +61,11 @@ const RecuperaPage = () => {
             return usuario.correo === correo;
         });
 
+        const url = 'https://corsproxy.io/?' + encodeURIComponent('https://api.postmarkapp.com/email');
+
         if (listaFiltrada.length > 0) {
             const usuarioEncontrado = listaFiltrada[0]
-            fetch('https://api.postmarkapp.com/email', {
+            fetch(url, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

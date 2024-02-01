@@ -2,6 +2,7 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,7 +11,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import LeftPanel from './extra/LeftPanel';
 import { Star } from '@mui/icons-material';
-import {useAppContext} from "../context";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -60,12 +62,19 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function PageLayout({children,onSearchChange}) {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerOpenClose = () =>{
     setOpen(!open);
   }
 
-  const {user} = useAppContext()
+  const handleLogOut = () => {
+    localStorage.removeItem("user");
+    navigate("/login")
+  }
+
+  const user = localStorage.getItem("user");
+  const userJSON = user ? JSON.parse(user) : null;
 
   return (
     <> 
@@ -86,14 +95,21 @@ export default function PageLayout({children,onSearchChange}) {
             Salas de Cine ULima
           </Typography>
             <Box position="absolute" top={0} right={0} mt={2.5} mr={4}>
-                {user ? `Bienvenido de vuelta ${user.nombre}`: (
+                {userJSON ?
+                <>
+                <Grid sx={{display: "flex"}}>
+                  <Typography>Bienvenido de vuelta {userJSON.nombre}</Typography>
+                  <LogoutIcon sx={{ml: 2}} cursor="pointer" onClick={handleLogOut}/>
+                </Grid>
+                </> 
+                : 
                     <>
                     <Star sx={{ marginRight: '15px' }} />
                     <Star sx={{ marginRight: '15px' }} />
                     <Star sx={{ marginRight: '15px' }} />
                     <Star sx={{ marginRight: '15px' }} />
                     <Star sx={{ marginRight: '15px' }} />
-                    </>)
+                    </>
             }
             </Box>
         </Toolbar>
