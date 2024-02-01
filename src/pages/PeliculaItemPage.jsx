@@ -3,32 +3,39 @@ import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardHeader } from "react-bootstrap";
 import ListaDisponibles from "../components/ListaDisponibles";
-import { useLocation } from "react-router-dom";
+import {useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const PeliculaItemPage=()=>{
-    const [salasData, setSalasData] = useState([])
-    const location= useLocation()
-    const pelicula=location.state.pelicula
+    const [salasData, setSalasData] = useState([]);
+    const [peliculasData, setPeliculasData] = useState([]);
+    const { path } = useParams();
+    const [pelicula, setPelicula] = useState(null);
 
-    const obtenerSalas = async () => {
-        const response = await fetch("/salas.json")
-        const data = await response.json()
-        setSalasData(data)
-    }
+    const cargarData = async () => {
+        try {
+            const responseSalas = await fetch('/salas.json');
+            const dataSalas = await responseSalas.json();
+            const responsePelis = await fetch('/peliculas.json');
+            const dataPelis = await responsePelis.json();
+            setSalasData(dataSalas);
+            setPeliculasData(dataPelis);
+        } catch (error) {
+            console.error('Error loading data:', error);
+        }
+    };
+
 
     useEffect(() => {
-        obtenerSalas()
-    }, [])
+        cargarData();
+    }, []); 
 
-    const filtrarSalas = (nombres, salas) => {
-        return salas.filter(sala => nombres.includes(sala.name));
-    }
+    useEffect(() => {
+        const peliLoaded = peliculasData.find((p) => p.path === path);
+        setPelicula(peliLoaded);
+    }, [path, peliculasData]);
 
-    const listaSalas=filtrarSalas(pelicula.salas, salasData)
-
-    console.log(listaSalas)
-
+    console.log(pelicula)
     return (
     <PageLayout>
     <Grid
@@ -43,6 +50,7 @@ const PeliculaItemPage=()=>{
           fontWeight: 400,
           letterSpacing: 0.25
         }}>Películas</h2>
+        { pelicula && <>
             <Container sx={{ mt: 5 }}>
                             <Typography variant="h4" sx={{mb:2}}>
                                 {pelicula.title}
@@ -102,7 +110,7 @@ const PeliculaItemPage=()=>{
                 </Card>
             </Grid>
         </Grid>
-        <Grid item xs = {12} sx={{mt:4, mb:5}}>
+        {/*<Grid item xs = {12} sx={{mt:4, mb:5}}>
             <Typography variant="h4" sx={{ mt: 2}}>
                     Salas disponibles
             </Typography>
@@ -111,11 +119,15 @@ const PeliculaItemPage=()=>{
                     listaDisponibles={listaSalas}
                     pelicula={pelicula}>
                 </ListaDisponibles>
+                
             </Container>
-        </Grid>
+                    </Grid>*/}
+        </>
+        }
       </Container> 
     </Grid>
     </PageLayout>
+    
   )
 }
 
