@@ -91,10 +91,15 @@ const LoginPage = () => {
             variant="outlined"
             fullWidth
             type="password"
-            sx={{ marginBottom: 3 }}
+            sx={{ marginBottom: 1 }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <Typography component={Link} to="/recupera" color="#FA7525" 
+          sx={{ 
+                fontSize : '15px'}}>
+            Olvide mi contraseña
+          </Typography>
           <Button
             variant="contained"
             color="warning"

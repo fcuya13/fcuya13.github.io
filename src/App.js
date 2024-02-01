@@ -8,7 +8,7 @@ import PeliculaItemPage from "./pages/PeliculaItemPage";
 import SalasPage from "./pages/SalasPage";
 import SalaItemPage from "./pages/SalaItemPage";
 import {AppProvider} from "./context";
-
+import RecuperaPage from "./pages/RecuperaPage";
 
 const App = () => {
     return (
@@ -26,6 +26,7 @@ const App = () => {
             <Route path="/peliculas/:path" element={<PeliculaItemPage />} />
             <Route path="/salas" element={<SalasPage />} />
             <Route path="/salas/:path" element={<SalaItemPage />} />
+            <Route path="/recupera" element={<RecuperaPage />} />
           </Routes>
         </AppProvider>
     );
