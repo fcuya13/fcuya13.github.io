@@ -8,7 +8,7 @@ import {
   Link,
   Box,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -21,6 +21,7 @@ import DialogActions from "@mui/material/DialogActions";
 import PageLayout from "../components/PageLayout";
 import Alert from "@mui/material/Alert";
 import {useAppContext} from "../context";
+import { useLocation } from "react-router-dom";
 
 const ReservaPage = () => {
   const {user} = useAppContext();
@@ -30,6 +31,9 @@ const ReservaPage = () => {
   const [cantidad, setCantidad] = useState("");
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
+
+  const location= useLocation();
+  const datos=location.state.datos;
 
   const handleOpen = () => {
     setOpen(true);
@@ -65,7 +69,7 @@ const ReservaPage = () => {
           <Divider sx={{borderBottomWidth: 2, borderColor: "gray"}}/>
           <Container>
             <Container sx={{mt: 5}}>
-              <Typography variant="h4">Titulo de Pelicula</Typography>
+              <Typography variant="h4">{datos.pelicula.title}</Typography>
               <Typography variant="subtitle1" color="gray" sx={{mb: 2}}>
                 <LocationOnIcon sx={{mr: 2}}/>
                 <Link href="#" underline="none">
@@ -73,7 +77,7 @@ const ReservaPage = () => {
                 </Link>
                 <LocationOnIcon sx={{mx: 2}}/>
                 <Link href="#" underline="none">
-                  Sala N
+                  {datos.sala}
                 </Link>
               </Typography>
             </Container>
@@ -83,7 +87,7 @@ const ReservaPage = () => {
                   <CardContent>
                     <Typography variant="h6">Información de reserva</Typography>
                     <Typography variant="subtitle1">
-                      Lunes 08 - 15:00 hrs
+                      {datos.horario}
                     </Typography>
                     <Divider
                         sx={{borderBottomWidth: 2, borderColor: "gray"}}
@@ -175,7 +179,7 @@ const ReservaPage = () => {
                 <Card variant="outlined">
                   <CardMedia
                       component="img"
-                      image="https://placehold.co/600x400"
+                      image={datos.pelicula.thumbnail}
                   />
                 </Card>
               </Grid>

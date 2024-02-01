@@ -4,13 +4,30 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardHeader } from "react-bootstrap";
 import ListaDisponibles from "../components/ListaDisponibles";
 import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const SalaItemPage=()=>{
-
+    /*const [peliculasData, setPeliculasData] = useState([])*/
     const location= useLocation()
     const sala=location.state.sala
 
-    const listaSalas=[
+    /*const obtenerPeliculas = async () => {
+        const response = await fetch("/peliculas.json")
+        const data = await response.json()
+        setPeliculasData(data)
+    }
+
+    useEffect(() => {
+        obtenerPeliculas()
+    }, [])
+
+    const filtrarPeliculas = (nombres,peliculas) => {
+        return peliculas.filter(pelicula => nombres.includes(pelicula.name))
+    }
+
+    const listaPeliculas= filtrarPeliculas(sala.peliculas, peliculasData)*/
+
+    const listaPeliculas=[
         {
             siglas: "BS",
             name: "Beekeper Sentencia de Muerte",
@@ -86,7 +103,7 @@ const SalaItemPage=()=>{
             </Typography>
             <Container sx={{mt: 4}}>
                 <ListaDisponibles
-                    listaDisponibles={listaSalas}>
+                    listaDisponibles={listaPeliculas}>
                 </ListaDisponibles>
             </Container>
         </Grid>

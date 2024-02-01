@@ -108,7 +108,8 @@ const PeliculaItemPage=()=>{
             </Typography>
             <Container sx={{mt: 4}}>
                 <ListaDisponibles
-                    listaDisponibles={listaSalas}>
+                    listaDisponibles={listaSalas}
+                    pelicula={pelicula}>
                 </ListaDisponibles>
             </Container>
         </Grid>

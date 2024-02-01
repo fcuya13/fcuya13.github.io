@@ -1,5 +1,5 @@
 import {Box, Avatar, Typography, Button } from "@mui/material"
-import {Link} from "react-router-dom"
+import {Link,useNavigate} from "react-router-dom"
 
 const Disponibles = (props) => {
     const estiloBoton ={
@@ -10,6 +10,19 @@ const Disponibles = (props) => {
         width: '80px',
         height: '28px'
     }
+
+    const navigate = useNavigate();
+
+    const handleReservaClick = (label) => {
+        
+        const datosReserva = {
+          pelicula: props.pelicula,
+          horario: label,
+          sala: props.name
+        };
+    
+        navigate("/reserva", { state: {datos:datosReserva}});
+    };
 
     return <Box item xs = {6} width="50%" minWidth="25em" sx={{mt:8}}>
         <Box>
@@ -27,7 +40,7 @@ const Disponibles = (props) => {
             {props.available_times.map(label => {
                 return <Button 
                     style={estiloBoton} 
-                    component={Link} to={"/reserva"} sx={{mr:1, mb:1}}>
+                    onClick={() => handleReservaClick(label)} sx={{mr:1, mb:1}}>
                     {label}
                 </Button>
             })}
