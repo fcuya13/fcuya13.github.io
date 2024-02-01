@@ -9,7 +9,6 @@ const RecuperaPage = () => {
     const [usuarios, setUsuarios] = useState([])
     const [error, setError] = useState(false);
     const [notFound, setNotFound] = useState(false);
-    const [sent, setSent] = useState(false);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
@@ -131,14 +130,6 @@ const RecuperaPage = () => {
                 severity="error"
                 sx={ { mt : 2 } }>
                 Cuenta no existe. Ingrese una cuenta válida
-            </Alert>
-        )}
-        {sent && (
-            <Alert
-                icon={<CheckIcon fontSize="inherit" />}
-                severity="success"
-                sx={ { mt : 2 } }>
-                Credenciales incorrectas. Inténtelo nuevamente
             </Alert>
         )}
 
