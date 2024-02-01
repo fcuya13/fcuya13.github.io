@@ -14,7 +14,7 @@ const LoginPage = () => {
   const {setUser} = useAppContext();
 
   const obtenerUsuarios = async () => {
-      const response = await fetch ("http://localhost:3000/users.json");
+      const response = await fetch ("/users.json");
       const data = await response.json()
       setUsuarios(data)
   }
@@ -91,10 +91,15 @@ const LoginPage = () => {
             variant="outlined"
             fullWidth
             type="password"
-            sx={{ marginBottom: 3 }}
+            sx={{ marginBottom: 1 }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <Typography component={Link} to="/recupera" color="#FA7525" 
+          sx={{ 
+                fontSize : '15px'}}>
+            Olvide mi contraseña
+          </Typography>
           <Button
             variant="contained"
             color="warning"

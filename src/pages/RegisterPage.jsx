@@ -180,7 +180,7 @@ const RegisterPage = () => {
                   onClose={() => {
                       setError(false);
                   }}>
-                  Complete apropiadamente los campos
+                  Complete apropiadamente los campos. (Contraseña mínimo 8 caracteres)
               </Alert>
           )}
 
