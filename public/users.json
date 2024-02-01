@@ -4,5 +4,11 @@
     "apellido": "Cuya Alva",
     "correo": "francocuya13@gmail.com",
     "password": "admin123"
+  },
+  {
+    "nombre": "Bryan",
+    "apellido": "Ugas",
+    "correo": "bryanugaslecaros@gmail.com",
+    "password": "admin123"
   }
 ]

@@ -17,21 +17,34 @@ const RecuperaPage = () => {
     useEffect(() => {
         obtenerUsuarios()
     }, []);
-    const validateUserPassword = () => {
-
-      const listaFiltrada = usuarios.filter((usuario) => {
+    const validateUserPassword = async () => {
+        const listaFiltrada = usuarios.filter((usuario) => {
           return usuario.correo === correo;
-      })
-
-      if (listaFiltrada.length > 0){
-          navigate("/login")
-      }
-      else{
-          setError(true)
-      }
-  }
-
-
+        });
+      
+        if (listaFiltrada.length > 0) {
+            const usuarioEncontrado = listaFiltrada[0]
+            console.log(usuarioEncontrado)
+            try {
+                const response = await fetch("http://localhost:5000/send-email", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(usuarioEncontrado),
+                });
+          
+                if (response.ok) {
+                  console.log("Email sent");
+                } else {
+                  console.log("Error sending email");
+                }
+              } catch (error) {
+                console.log("Error sending email", error);
+              }
+          navigate("/login");
+        } else {
+          setError(true);
+        }
+      };
 
   return (
     <Container maxWidth={false}
