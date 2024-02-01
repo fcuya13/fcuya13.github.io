@@ -11,21 +11,23 @@ const PeliculaItemPage=()=>{
     const [peliculasData, setPeliculasData] = useState([]);
     const { path } = useParams();
     const [pelicula, setPelicula] = useState(null);
+    var listasFilt;
+
 
     const cargarData = async () => {
-        try {
-            const responseSalas = await fetch('/salas.json');
-            const dataSalas = await responseSalas.json();
-            const responsePelis = await fetch('/peliculas.json');
-            const dataPelis = await responsePelis.json();
-            setSalasData(dataSalas);
-            setPeliculasData(dataPelis);
-        } catch (error) {
-            console.error('Error loading data:', error);
-        }
+        const responseSalas = await fetch('/salas.json');
+        const dataSalas = await responseSalas.json();
+        const responsePelis = await fetch('/peliculas.json');
+        const dataPelis = await responsePelis.json();
+        setSalasData(dataSalas);
+        setPeliculasData(dataPelis);
     };
 
 
+    const filtrarSalas = (nombres, salas) => {
+        return salas.filter((sala) => nombres.includes(sala.name));
+    };
+    
     useEffect(() => {
         cargarData();
     }, []); 
@@ -34,8 +36,12 @@ const PeliculaItemPage=()=>{
         const peliLoaded = peliculasData.find((p) => p.path === path);
         setPelicula(peliLoaded);
     }, [path, peliculasData]);
+    
 
-    console.log(pelicula)
+    if (pelicula){
+         listasFilt = filtrarSalas(pelicula.salas, salasData)
+    }
+
     return (
     <PageLayout>
     <Grid
@@ -110,18 +116,18 @@ const PeliculaItemPage=()=>{
                 </Card>
             </Grid>
         </Grid>
-        {/*<Grid item xs = {12} sx={{mt:4, mb:5}}>
+        {listasFilt && <Grid item xs = {12} sx={{mt:4, mb:5}}>
             <Typography variant="h4" sx={{ mt: 2}}>
                     Salas disponibles
             </Typography>
             <Container sx={{mt: 4}}>
                 <ListaDisponibles
-                    listaDisponibles={listaSalas}
+                    listaDisponibles={listasFilt}
                     pelicula={pelicula}>
                 </ListaDisponibles>
                 
             </Container>
-                    </Grid>*/}
+                    </Grid> }
         </>
         }
       </Container> 
