@@ -71,7 +71,7 @@ const PeliculaItemPage=()=>{
                                     flexWrap: 'wrap',
                                     alignItems: 'center'}}>
                                     <Typography variant='subtitle1' color="gray" sx={{ display:'inline-flex'}}>
-                                        <LocationOnIcon sx={{ mr: 2 }}/>
+                                        <LocationOnIcon/>
                                     </Typography>
                                     {pelicula.cast.map(label => {
                                         return <Typography 
@@ -84,15 +84,15 @@ const PeliculaItemPage=()=>{
                                 </Box>
                             </box>
             </Container>
-        <Grid container spacing={2} sx={{mt:2}}>
-            <Grid item sm = {5} sx={{height: "100%"}}>
-                <Card variant="outlined">
-                    <CardMedia
-                        component="img"
-                        image={pelicula.thumbnail}
-                    />
-                </Card>
-            </Grid> 
+            <Grid container spacing={2} sx={{mt:2, width:'100%'}}>
+                <Grid item xs={12} sm={5} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "100%" }}>
+                    <Card variant="outlined" sx={{width:'100%'}}>
+                        <CardMedia
+                            component="img"
+                            image={pelicula.thumbnail}
+                        />
+                    </Card>
+                </Grid> 
             <Grid item sm = {7} minWidth="10rem">
                 <Card variant="outlined" sx={{height: "100%"}}>
                     <CardHeader>

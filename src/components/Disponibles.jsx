@@ -24,7 +24,7 @@ const Disponibles = (props) => {
         navigate("/reserva", { state: {datos:datosReserva}});
     };
 
-    return <Box item xs = {6} width="50%" minWidth="25em" sx={{mt:8}}>
+    return <Box item xs = {6} width="50%" minWidth="15em" sx={{mt:8}}>
         <Box>
             <Avatar variant="rounded" sx={{ mb: 2,  display:'inline-flex'}}>
                 {props.siglas}
