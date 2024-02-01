@@ -2,6 +2,7 @@
     {
         "id": 1,
         "title": "The Grudge",
+        "siglas": "TG",
         "year": 2020,
         "cast": [
             "Andrea Riseborough",
@@ -24,11 +25,20 @@
         "salas": [
             "Skytower Plaza",
             "Tech Hub Center"
-        ]
+        ],
+        "available_times": [
+            "03:00pm",
+            "05:00pm",
+            "06:00pm",
+            "08:00pm",
+            "09:00pm",
+            "11:00pm"
+          ]
     },
     {
         "id": 2,
         "title": "Underwater",
+        "siglas": "U",
         "year": 2020,
         "cast": [
             "Kristen Stewart",
@@ -53,11 +63,18 @@
             "Green Gardens Tower",
             "Harbor View Complex",
             "Urban Heights Tower"
+        ],
+        "available_times": [
+            "03:00pm",
+            "05:00pm",
+            "08:00pm",
+            "10:00pm"
         ]
     },
     {
         "id": 3,
         "title": "Like a Boss",
+        "siglas": "LB",
         "year": 2020,
         "cast": [
             "Tiffany Haddish",
@@ -78,11 +95,20 @@
         "salas": [
             "Downtown Plaza",
             "Tech Hub Center"
+        ],
+        "available_times": [
+            "02:00pm",
+            "05:00pm",
+            "06:00pm",
+            "07:00pm",
+            "10:00pm",
+            "11:00pm"
         ]
     },
     {
         "id": 4,
         "title": "Three Christs",
+        "siglas": "TC",
         "year": 2020,
         "cast": [
             "Richard Gere",
@@ -102,11 +128,20 @@
         "salas": [
             "Skytower Plaza",
             "Tech Hub Center"
+        ],
+        "available_times": [
+            "02:00pm",
+            "05:00pm",
+            "06:00pm",
+            "07:00pm",
+            "10:00pm",
+            "11:00pm"
         ]
     },
     {
         "id": 5,
         "title": "Inherit the Viper",
+        "siglas": "IV",
         "year": 2020,
         "cast": [
             "Josh Hartnett",
@@ -128,11 +163,20 @@
         "salas": [
             "Skytower Plaza",
             "Tech Hub Center"
+        ],
+        "available_times": [
+            "03:00pm",
+            "05:00pm",
+            "06:00pm",
+            "08:00pm",
+            "09:00pm",
+            "11:00pm"
         ]
     },
     {
         "id": 6,
         "title": "The Sonata",
+        "siglas": "TS",
         "year": 2020,
         "cast": [
             "Freya Tingley",
@@ -154,11 +198,17 @@
             "Skytower Plaza",
             "Downtown Plaza",
             "Tech Hub Center"
+        ],
+        "available_times": [
+            "08:00pm",
+            "09:00pm",
+            "11:00pm"
         ]
     },
     {
         "id": 7,
         "title": "The Murder of Nicole Brown Simpson",
+        "siglas": "TM",
         "year": 2020,
         "cast": [
             "Mena Suvari",
@@ -178,11 +228,20 @@
         "salas": [
             "Skytower Plaza",
             "Tech Hub Center"
+        ],
+        "available_times": [
+            "02:00pm",
+            "05:00pm",
+            "06:00pm",
+            "07:00pm",
+            "10:00pm",
+            "11:00pm"
         ]
     },
     {
         "id": 8,
         "title": "Bad Boys for Life",
+        "siglas": "BB",
         "year": 2020,
         "cast": [
             "Will Smith",
@@ -209,11 +268,19 @@
             "Green Gardens Tower",
             "Skytower Plaza",
             "Urban Heights Tower"
+        ],
+        "available_times": [
+            "01:00pm",
+            "05:00pm",
+            "07:00pm",
+            "09:00pm",
+            "11:00pm"
         ]
     },
     {
         "id": 9,
         "title": "Dolittle",
+        "siglas": "D",
         "year": 2020,
         "cast": [
             "Robert Downey Jr.",
@@ -243,11 +310,17 @@
         "salas": [
             "Urban Heights Tower",
             "Tech Hub Center"
+        ],
+        "available_times": [
+            "01:00pm",
+            "08:00pm",
+            "09:00pm"
         ]
     },
     {
         "id": 10,
         "title": "A Fall from Grace",
+        "siglas": "AF",
         "year": 2020,
         "cast": [
             "Crystal R. Fox",
@@ -270,6 +343,11 @@
             "Skytower Plaza",
             "Tech Hub Center",
             "Urban Heights Tower"
-        ]
+        ],
+        "available_times": [
+            "01:00pm",
+            "08:00pm",
+            "09:00pm"
+          ]
     }
 ]

@@ -3,50 +3,45 @@ import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardHeader } from "react-bootstrap";
 import ListaDisponibles from "../components/ListaDisponibles";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ListaDisponibles2 from "../components/ListaDisponibles2";
 
 const SalaItemPage=()=>{
-    /*const [peliculasData, setPeliculasData] = useState([])*/
-    const location= useLocation()
-    const sala=location.state.sala
+    const [peliculasData, setPeliculasData] = useState([]);
+    const [salasData, setSalasData] = useState([]);
+    const { path } = useParams();
+    const [sala, setSala] = useState(null);
+    var listasFilt;
 
-    /*const obtenerPeliculas = async () => {
-        const response = await fetch("/peliculas.json")
-        const data = await response.json()
-        setPeliculasData(data)
-    }
+
+    const cargarData = async () => {
+        const responseSalas = await fetch('/salas.json');
+        const dataSalas = await responseSalas.json();
+        const responsePelis = await fetch('/peliculas.json');
+        const dataPelis = await responsePelis.json();
+        setSalasData(dataSalas);
+        setPeliculasData(dataPelis);
+    };
+
+
+    const filtrarPeliculas = (nombres, peliculas) => {
+        return peliculas.filter((pelicula) => nombres.includes(pelicula.id));
+    };
 
     useEffect(() => {
-        obtenerPeliculas()
-    }, [])
+        cargarData();
+    }, []); 
 
-    const filtrarPeliculas = (nombres,peliculas) => {
-        return peliculas.filter(pelicula => nombres.includes(pelicula.name))
-    }
+    useEffect(() => {
+        const salaLoaded = salasData.find((s) => s.path === path);
+        setSala(salaLoaded);
+    }, [path, salasData]);
 
-    const listaPeliculas= filtrarPeliculas(sala.peliculas, peliculasData)*/
 
-    const listaPeliculas=[
-        {
-            siglas: "BS",
-            name: "Beekeper Sentencia de Muerte",
-            descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            available_times: ["15:00","17:00"]
-        },
-        {
-            siglas: "NG",
-            name: "El Niño y la Garza",
-            descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            available_times: ["16:00","18:00"]
-        },
-        {
-            siglas: "JC",
-            name: "Jack en la Caja Maldita 3",
-            descripcionDisponible: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            available_times: ["20:00","22:00"]
-        }
-    ]
+    if (sala){
+        listasFilt = filtrarPeliculas(sala.peliculas, peliculasData)
+   }
 
     return (
     <PageLayout>
@@ -62,6 +57,7 @@ const SalaItemPage=()=>{
           fontWeight: 400,
           letterSpacing: 0.25
         }}>Salas</h2>
+        {sala && <>
             <Container sx={{ mt: 5 }}>
                             <Typography variant="h4">
                                 {sala.name}
@@ -83,7 +79,7 @@ const SalaItemPage=()=>{
                 </Card>
             </Grid> 
             <Grid item sm = {4} minWidth="10rem">
-                <Card sx={{height: "100%"}}>
+                <Card variant="outlined" sx={{height: "100%"}}>
                     <CardHeader>
                         <Typography variant="h5" sx={{ padding: 2, pb:{xs:'0rem'}}}>
                             Historia
@@ -97,16 +93,20 @@ const SalaItemPage=()=>{
                 </Card>
             </Grid>
         </Grid>
-        <Grid item xs = {12} sx={{mt:4, mb:5}}>
+        {listasFilt && <Grid item xs = {12} sx={{mt:4, mb:5}}>
             <Typography variant="h4" sx={{ mt: 2}}>
                     Películas disponibles
             </Typography>
             <Container sx={{mt: 4}}>
-                <ListaDisponibles
-                    listaDisponibles={listaPeliculas}>
-                </ListaDisponibles>
+                <ListaDisponibles2
+                    listaDisponibles={listasFilt}
+                    sala={sala}
+                    >
+                </ListaDisponibles2>
             </Container>
-        </Grid>
+        </Grid>}
+        </>
+        }
       </Container> 
     </Grid>
     </PageLayout>
