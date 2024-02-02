@@ -10,5 +10,11 @@
     "apellido": "Ugas",
     "correo": "bryanugaslecaros@gmail.com",
     "password": "admin123"
+  },
+  {
+    "nombre": "Aldana",
+    "apellido": "Eguiluz",
+    "correo": "aldanaeguiluz@gmail.com",
+    "password": "rayito5060"
   }
 ]
