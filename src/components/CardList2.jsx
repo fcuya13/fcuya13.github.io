@@ -5,8 +5,8 @@ const CardList2 = (props) => {
   return (
     <Grid 
       container 
-      style={{
-        marginBottom: '25px'}}>
+      sx={{
+        marginBottom: '25px', justifyContent: {xs:"center"}}}>
       {
         props.list.map((e) => {
             return (

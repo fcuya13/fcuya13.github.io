@@ -24,7 +24,7 @@ const MovieBody = ({ searchTerm }) => {
     }, [moviesData, searchTerm])
 
     return (
-        <Box sx={{marginLeft: {sm:"8.5%" }}}>
+        <Box>
             <CardList list={filteredMovies}/>
         </Box>
     )

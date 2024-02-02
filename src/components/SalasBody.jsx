@@ -23,7 +23,7 @@ const SalasBody = ({ searchTerm }) => {
     }, [salasData, searchTerm])
 
     return (
-        <div style={{ marginLeft: '9%' }}>
+        <div>
             <CardList2 list={filteredSalas} />
         </div>
     )

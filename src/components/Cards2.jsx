@@ -7,7 +7,7 @@ const Cards2 = (props) => {
         navigate(props.path)
     }
 
-    return <Card item xs={6} sx={{ marginRight: "30px", marginBottom: "30px", width: "450px", height: "100%" }}>
+    return <Card item xs={6} sx={{ marginRight: "30px", marginBottom: "30px", maxWidth: "450px", height: "100%" }}>
         <CardActionArea>
             <CardMedia
                 sx={{
