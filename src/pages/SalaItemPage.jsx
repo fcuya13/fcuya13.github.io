@@ -59,7 +59,7 @@ const SalaItemPage=()=>{
         }}>Salas</h2>
         {sala && <>
             <Container sx={{ mt: 5 }}>
-                            <Typography variant="h4">
+                            <Typography variant="h4" sx={{mb:2}}>
                                 {sala.name}
                             </Typography>
                             <box>

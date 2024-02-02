@@ -11,7 +11,6 @@ const CardList2 = (props) => {
         props.list.map((e) => {
             return (
                 <Cards2
-                sala={e}
                 name={e.name}
                 address={e.address}
                 image={e.image}

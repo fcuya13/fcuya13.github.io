@@ -63,16 +63,18 @@ const ReservaPage = () => {
         }}>Reserva</Typography>
           <Container>
             <Container sx={{mt: 5}}>
-              <Typography variant="h4">{datos.pelicula.title}</Typography>
-              <Typography variant="subtitle1" color="gray" sx={{mb: 2}}>
+              <Typography variant="h4" sx={{mb:2}}>
+                {datos.pelicula.title}
+              </Typography>
+              <Typography variant="subtitle1" color="gray" sx={{mb: 2, display:'inline-flex'}}>
                 <AccessTimeIcon sx={{mr: 1}}/>
-                <Link href="#" underline="none">
+                <Typography color="#009CD2">
                   {datos.horario}
-                </Link>
+                </Typography>
                 <LocationOnIcon sx={{mx: 1}}/>
-                <Link href="#" underline="none">
+                <Typography color="#009CD2">
                   {datos.sala}
-                </Link>
+                </Typography>
               </Typography>
             </Container>
             <Grid container spacing={2} sx={{justifyContent:{xs:"center", sm:"left"}}}>

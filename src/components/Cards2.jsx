@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const Cards2 = (props) => {
     const navigate = useNavigate()
     const cardOnClick = () => {
-        navigate(props.path, { state: { sala: props.sala } })
+        navigate(props.path)
     }
 
     return <Card item xs={6} sx={{ marginRight: "30px", marginBottom: "30px", width: "450px", height: "100%" }}>
