@@ -10,7 +10,6 @@ const CardList = (props) => {
         props.list.map((e) => {
             return (
                 <Cards 
-                    pelicula={e}
                     id={e.id}
                     title={e.title}
                     year={e.year}

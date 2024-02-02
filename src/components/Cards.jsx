@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const Cards = (props) => {
     const navigate = useNavigate()
     const cardOnClick = () => {
-        navigate(props.path, { state: { pelicula: props.pelicula } })
+        navigate(props.path)
     }
 
     return <Card item xs={4} sx={{ marginRight: "30px", marginBottom: "30px", maxWidth: "300px", height: "100%" }}>
