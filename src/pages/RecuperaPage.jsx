@@ -6,89 +6,37 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const RecuperaPage = () => {
     const [correo, setCorreo] = useState("")
-    const [usuarios, setUsuarios] = useState([])
     const [error, setError] = useState(false);
-    const [notFound, setNotFound] = useState(false);
+    const [errormsg, setErrormsg] = useState("")
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
-
-    const obtenerUsuarios = async () => {
-        const response = await fetch ("/users.json");
-        const data = await response.json()
-        setUsuarios(data)
-    }
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
         if (user){
           navigate("/home");
         }
-        obtenerUsuarios()
     }, [navigate]);
-    const validateUserPasswordOld = async () => {
-        const listaFiltrada = usuarios.filter((usuario) => {
-          return usuario.correo === correo;
-        });
-      
-        if (listaFiltrada.length > 0) {
-            const usuarioEncontrado = listaFiltrada[0]
-            console.log(usuarioEncontrado)
-            try {
-                const response = await fetch("http://localhost:5000/send-email", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(usuarioEncontrado),
-                });
-          
-                if (response.ok) {
-                  console.log("Email sent");
-                } else {
-                  console.log("Error sending email");
-                  setError(true);
-                }
-              } catch (error) {
-                console.log("Error sending email", error);
-                setError(true)
-              }
-          setOpen(true);
-        } else {
-          setNotFound(true);
-        }
-      };
 
     const validateUserPassword = async () => {
-        const listaFiltrada = usuarios.filter((usuario) => {
-            return usuario.correo === correo;
-        });
 
-        const url = 'https://corsproxy.io/?' + encodeURIComponent('https://api.postmarkapp.com/email');
+        const dataUser = {
+            correo: correo,
+        }
 
-        if (listaFiltrada.length > 0) {
-            const usuarioEncontrado = listaFiltrada[0]
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-Postmark-Server-Token': '03e0b67c-4d69-41f6-b1c6-de4811ecf021'
-                },
-                body: JSON.stringify({
-                    "From": "20210773@aloe.ulima.edu.pe",
-                    "To": usuarioEncontrado.correo,
-                    "Subject": "¿Olvidó su contraseña?",
-                    "TextBody": `Su contraseña es ${usuarioEncontrado.password}`,
-                    "MessageStream": "broadcast"
-                })
-            })
-                .then(response => {
-                    if (response.ok){
-                        setOpen(true);
-                    }
-                })
-                .then(data => console.log(data))
-                .catch(error => setError(true));
-        } else {
-            setNotFound(true);
+        const response = await fetch("http://localhost:8000/cineulima/recovery", {
+            method: "POST",
+            body: JSON.stringify(dataUser)
+        })
+
+        const data = await response.json()
+
+        if (response.status === 200){
+            setOpen(true)
+        }
+        else{
+            setErrormsg(data.msg)
+            setError(true)
         }
     };
 
@@ -177,20 +125,7 @@ const RecuperaPage = () => {
                 onClose={() => {
                     setError(false);
                 }}>
-                Ha ocurrido un error. Inténtelo nuevamente
-
-            </Alert>
-        )}
-        {notFound && (
-            <Alert
-                icon={<ErrorOutlineIcon fontSize="inherit" />}
-                severity="error"
-                sx={ { mt : 2 } }
-                onClose={() => {
-                    setNotFound(false);
-                }}>
-                Cuenta no existe. Ingrese una cuenta válida
-
+                {errormsg}
             </Alert>
         )}
 

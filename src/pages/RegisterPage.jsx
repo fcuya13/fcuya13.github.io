@@ -12,22 +12,14 @@ const RegisterPage = () => {
   const [passConf, setPassConf] = useState("");
   const [usuarios, setUsuarios] = useState([]);
   const [error, setError] = useState(false);
-  const [existingUserError, setExistingUserError] = useState(false);
-  const [passNotSame, setPassNotSame] = useState(false);
+  const [errormsg, setErrormsg] = useState("")
   const navigate = useNavigate();
-
-    const obtenerUsuarios = async () => {
-        const response = await fetch ("/users.json");
-        const data = await response.json()
-        setUsuarios(data)
-    }
 
     useEffect(() => {
       const user = sessionStorage.getItem("user");
         if (user){
           navigate("/home");
         }
-        obtenerUsuarios()
     }, [navigate]);
 
     const validarInputs = () => {
@@ -42,29 +34,38 @@ const RegisterPage = () => {
 
       if (!validarInputs()){
           setError(true);
+          setErrormsg("Complete apropiadamente los campos. (Contraseña mínimo 8 caracteres)")
           return;
       }
 
       if (password !== passConf){
-          setPassNotSame(true);
+          setError(true);
+          setErrormsg("Las contraseñas no son iguales")
           return;
       }
 
-      const existingUser = usuarios.filter((user) => {
-          return user.correo === correo;
+      const dataUser = {
+          nombre: nombre,
+          apellidos: apellido,
+          correo: correo,
+          password: password
+      }
+
+      const response = await fetch("http://localhost:8000/cineulima/createuser", {
+          method: "POST",
+          body: JSON.stringify(dataUser)
       })
 
-      if (existingUser.length > 0){
-          setExistingUserError(true)
-      }
-      else{
-          const usuarioAgregar = {
-              nombre, apellido, correo
-          }
+      const data = await response.json()
 
-          const data = JSON.stringify(usuarioAgregar);
-          sessionStorage.setItem("user", data)
+      if (response.status === 200) {
+          const storageData = JSON.stringify(data);
           navigate("/home")
+          sessionStorage.setItem("user", storageData);
+      } else {
+          const errData = data.msg
+          setError(true)
+          setErrormsg(errData)
       }
   }
 
@@ -190,32 +191,11 @@ const RegisterPage = () => {
                   onClose={() => {
                       setError(false);
                   }}>
-                  Complete apropiadamente los campos. (Contraseña mínimo 8 caracteres)
+                  {errormsg}
               </Alert>
           )}
 
-          {passNotSame && (
-              <Alert
-                  icon={<ErrorOutlineIcon fontSize="inherit" />}
-                  severity="error"
-                  sx={ { mt : 2 } }
-                  onClose={() => {
-                      setPassNotSame(false);
-                  }}>
-                  Las contraseñas no coinciden.
-              </Alert>
-          )}
-          {existingUserError && (
-              <Alert
-                  icon={<ErrorOutlineIcon fontSize="inherit" />}
-                  severity="error"
-                  sx={ { mt : 2 } }
-                  onClose={() => {
-                      setExistingUserError(false);
-                  }}>
-                  Usuario ya existente
-              </Alert>
-          )}
+
       </Container>
 
     </Container>

@@ -7,44 +7,40 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 const LoginPage = () => {
   const [correo, setCorreo] = useState("");
   const [password, setPassword] = useState("");
-  const [usuarios, setUsuarios] = useState([]);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-
-  const obtenerUsuarios = async () => {
-      const response = await fetch ("/users.json");
-      const data = await response.json()
-      setUsuarios(data)
-  }
+  const [errormsg, setErrormsg] = useState("")
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
         if (user){
           navigate("/home");
         }
-        obtenerUsuarios()
     }, [navigate]);
-  const validateUserPassword = () => {
+  const validateUserPassword = async () => {
 
-      const listaFiltrada = usuarios.filter((usuario) => {
-          return usuario.correo === correo && usuario.password === password;
+      const dataUser = {
+          correo: correo,
+          password: password
+      }
+
+      const response = await fetch("http://localhost:8000/cineulima/users", {
+          method: "POST",
+          body: JSON.stringify(dataUser)
       })
 
-      if (listaFiltrada.length > 0){
-          const us = {
-            "nombre": listaFiltrada[0].nombre,
-            "apellido": listaFiltrada[0].apellido,
-            "correo": listaFiltrada[0].correo,
-          }
-          const data = JSON.stringify(us);
+      const data = await response.json()
+
+      if (response.status === 200) {
+          const storageData = JSON.stringify(data);
           navigate("/home")
-          sessionStorage.setItem("user", data);
-      }
-      else{
+          sessionStorage.setItem("user", storageData);
+      } else {
+          const errData = data.msg
           setError(true)
+          setErrormsg(errData)
       }
   }
-
 
   return (
     <Container maxWidth={false}
@@ -144,7 +140,7 @@ const LoginPage = () => {
                   onClose={() => {
                       setError(false);
                   }}>
-                  Credenciales incorrectas. Inténtelo nuevamente
+                  {errormsg}
               </Alert>
           )}
       </Container>
