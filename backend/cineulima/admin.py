@@ -24,9 +24,13 @@ class SalaAdmin(admin.ModelAdmin):
     list_display = ["nombre", "direccion"]
 
 
+class RecoPeliculaAdmin(admin.ModelAdmin):
+    list_display = ["id_pelicula", "activo"]
+
+
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(Pelicula, PeliculaAdmin)
 admin.site.register(PeliculaActor, PeliculaActorAdmin)
 admin.site.register(PeliculaGenero, PeliculaGeneroAdmin)
 admin.site.register(Sala, SalaAdmin)
-admin.site.register(RecomendacionPelicula)
+admin.site.register(RecomendacionPelicula, RecoPeliculaAdmin)

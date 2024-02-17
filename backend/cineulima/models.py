@@ -8,12 +8,6 @@ class Usuario(models.Model):
     password = models.CharField(max_length=20)
 
 
-class RecomendacionPelicula(models.Model):
-    nombre = models.CharField(max_length=100)
-    imgUrl = models.URLField(max_length=200)
-    path = models.CharField(max_length=100, null=True)
-
-
 class Pelicula(models.Model):
     titulo = models.CharField(max_length=100)
     siglas = models.CharField(max_length=10)
@@ -48,3 +42,9 @@ class PeliculaActor(models.Model):
 class PeliculaGenero(models.Model):
     genero = models.CharField(max_length=50)
     pelicula_id = models.ForeignKey(Pelicula, on_delete=models.SET_NULL, null=True)
+
+
+class RecomendacionPelicula(models.Model):
+    activo_choices = [('A', 'Activo'), ('I', 'Inactivo')]
+    id_pelicula = models.ForeignKey(Pelicula, on_delete=models.SET_NULL, null=True)
+    activo = models.CharField(max_length=10, choices=activo_choices)
