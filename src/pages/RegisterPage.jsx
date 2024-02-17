@@ -50,21 +50,26 @@ const RegisterPage = () => {
             password: password
         }
 
-        const response = await fetch("http://localhost:8000/cineulima/createuser", {
-            method: "POST",
-            body: JSON.stringify(dataUser)
-        })
+        try{
+            const response = await fetch("http://localhost:8000/cineulima/createuser", {
+                method: "POST",
+                body: JSON.stringify(dataUser)
+            })
 
-        const data = await response.json()
+            const data = await response.json()
 
-        if (response.status === 200) {
-            const storageData = JSON.stringify(data);
-            navigate("/home")
-            sessionStorage.setItem("user", storageData);
-        } else {
-            const errData = data.msg
+            if (response.status === 200) {
+                const storageData = JSON.stringify(data);
+                navigate("/home")
+                sessionStorage.setItem("user", storageData);
+            } else {
+                const errData = data.msg
+                setError(true)
+                setErrormsg(errData)
+            }
+        }catch (error) {
             setError(true)
-            setErrormsg(errData)
+        setErrormsg("Ha ocurrido un error. Por favor inténtelo más tarde")
         }
     }
 

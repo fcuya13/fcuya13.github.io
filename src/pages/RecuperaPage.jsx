@@ -18,26 +18,45 @@ const RecuperaPage = () => {
         }
     }, [navigate]);
 
+    const validarInputs = () => {
+        const email = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+        return correo.trim().length !== 0 &&
+            email.test(correo.trim())
+    };
+
     const validateUserPassword = async () => {
+
+        if (!validarInputs()) {
+            setError(true);
+            setErrormsg("Ingrese un correo válido")
+             return;
+        }
 
         const dataUser = {
             correo: correo,
         }
 
-        const response = await fetch("http://localhost:8000/cineulima/recovery", {
-            method: "POST",
-            body: JSON.stringify(dataUser)
-        })
+        try{
+            const response = await fetch("http://localhost:8000/cineulima/recovery", {
+                method: "POST",
+                body: JSON.stringify(dataUser)
+            })
 
-        const data = await response.json()
+            const data = await response.json()
 
-        if (response.status === 200){
-            setOpen(true)
-        }
-        else{
-            setErrormsg(data.msg)
+            if (response.status === 200){
+                setOpen(true)
+            }
+            else{
+                setErrormsg(data.msg)
+                    setError(true)
+            }
+        }catch (error) {
             setError(true)
+            setErrormsg("Ha ocurrido un error. Por favor inténtelo más tarde")
         }
+
+
     };
 
   return (
