@@ -20,7 +20,7 @@ def usuariosEndpoint(request):
         password = user_data['password']
 
         try:
-            usuario_login = Usuario.objects.get(correo=correo)
+            usuario_login = UsuarioSistema.objects.get(correo=correo)
             if usuario_login.password != password:
                 errorMsg = {
                     "msg": "Contraseña incorrecta"
@@ -33,7 +33,7 @@ def usuariosEndpoint(request):
                 "correo": usuario_login.correo
             }
             return HttpResponse(json.dumps(dataResponse), status=200)
-        except Usuario.DoesNotExist:
+        except UsuarioSistema.DoesNotExist:
             errorMsg = {
                 "msg": "Usuario no encontrado"
             }
@@ -51,7 +51,7 @@ def createUsersEndpoint(request):
         password = user_data['password']
 
         try:
-            new_user = Usuario(nombre=nombre, apellidos=apellidos, correo=correo, password=password)
+            new_user = UsuarioSistema(nombre=nombre, apellidos=apellidos, correo=correo, password=password)
             new_user.save()
         except IntegrityError:
             errorMsg = {
@@ -75,10 +75,10 @@ def passwordRecoveryEndpoint(request):
         user_data = json.loads(data)
         correo = user_data['correo']
         try:
-            user_recovery = Usuario.objects.get(correo=correo)
+            user_recovery = UsuarioSistema.objects.get(correo=correo)
             postmark.send_email(user_recovery.correo, "¿Olvidó su contraseña?", f"Su contraseña es {user_recovery.password}")
             return HttpResponse(status=200)
-        except Usuario.DoesNotExist:
+        except UsuarioSistema.DoesNotExist:
             errorMsg = {
                 "msg": "Usuario no encontrado"
             }

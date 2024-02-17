@@ -8,4 +8,4 @@ class UsuarioAdmin(admin.ModelAdmin):
     list_display = ["nombre", "apellidos", "correo"]
 
 
-admin.site.register(Usuario, UsuarioAdmin)
+admin.site.register(UsuarioSistema, UsuarioAdmin)
