@@ -1,0 +1,68 @@
+[
+    {
+        "model": "cineulima.sala",
+        "pk": 1,
+        "fields": {
+            "siglas": "SP",
+            "nombre": "Skytower Plaza",
+            "direccion": "123 Main Street, Cityville, USA",
+            "imagen": "https://skytower.com.tr/wp-content/uploads/2023/04/IMG-20230417-WA0048.jpg",
+            "path": "skytower-plaza"
+        }
+    },
+    {
+        "model": "cineulima.sala",
+        "pk": 2,
+        "fields": {
+            "siglas": "TH",
+            "nombre": "Tech Hub Center",
+            "direccion": "456 Tech Avenue, Tech City, USA",
+            "imagen": "https://images.adsttc.com/media/images/5cb9/fc6c/284d/d198/f600/027f/newsletter/1.jpg?1555692647",
+            "path": "tech-hub-center"
+        }
+    },
+    {
+        "model": "cineulima.sala",
+        "pk": 3,
+        "fields": {
+            "siglas": "GG",
+            "nombre": "Green Gardens Tower",
+            "direccion": "789 Park Lane, Greenvale, USA",
+            "imagen": "https://static.dezeen.com/uploads/2013/04/Dezeen_Agora-Garden-by-Vincent-Callebaut-Architectures_ss_2.jpg",
+            "path": "green-gardens-tower"
+        }
+    },
+    {
+        "model": "cineulima.sala",
+        "pk": 4,
+        "fields": {
+            "siglas": "HV",
+            "nombre": "Harbor View Complex",
+            "direccion": "101 Waterfront Road, Harbor City, USA",
+            "imagen": "https://harborviewmadison.com/wp-content/uploads/2023/03/Use-4.jpg",
+            "path": "harbor-view-complex"
+        }
+    },
+    {
+        "model": "cineulima.sala",
+        "pk": 5,
+        "fields": {
+            "siglas": "UH",
+            "nombre": "Urban Heights Tower",
+            "direccion": "555 High Street, Urbanville, USA",
+            "imagen": "https://media.wired.co.uk/photos/619facd0424af1246ccd296a/master/w_1600%2Cc_limit/WW2022-WIRED-26.jpg",
+            "path": "urban-heights-tower"
+        }
+    },
+    {
+        "model": "cineulima.sala",
+        "pk": 6,
+        "fields": {
+            "siglas": "DP",
+            "nombre": "Downtown Plaza",
+            "direccion": "777 Central Avenue, Downtown, USA",
+            "imagen": "https://gawcapital.s3.ap-southeast-1.amazonaws.com/media/wp-content/uploads/2021/04/1fd4537eb078b99a2961574a9a1d58dc.jpeg",
+            "path": "downtown-plaza"
+        }
+    }
+]

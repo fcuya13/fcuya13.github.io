@@ -1,0 +1,146 @@
+[
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 1,
+        "fields": {
+            "pelicula_id": 1,
+            "genero": "Horror"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 2,
+        "fields": {
+            "pelicula_id": 1,
+            "genero": "Supernatural"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 3,
+        "fields": {
+            "pelicula_id": 2,
+            "genero": "Action"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 4,
+        "fields": {
+            "pelicula_id": 2,
+            "genero": "Horror"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 5,
+        "fields": {
+            "pelicula_id": 2,
+            "genero": "Science Fiction"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 6,
+        "fields": {
+            "pelicula_id": 3,
+            "genero": "Comedy"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 7,
+        "fields": {
+            "pelicula_id": 4,
+            "genero": "Drama"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 8,
+        "fields": {
+            "pelicula_id": 5,
+            "genero": "Crime"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 9,
+        "fields": {
+            "pelicula_id": 5,
+            "genero": "Drama"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 10,
+        "fields": {
+            "pelicula_id": 6,
+            "genero": "Mystery"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 11,
+        "fields": {
+            "pelicula_id": 6,
+            "genero": "Thriller"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 12,
+        "fields": {
+            "pelicula_id": 7,
+            "genero": "Crime"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 13,
+        "fields": {
+            "pelicula_id": 7,
+            "genero": "Horror"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 14,
+        "fields": {
+            "pelicula_id": 8,
+            "genero": "Action"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 15,
+        "fields": {
+            "pelicula_id": 8,
+            "genero": "Comedy"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 16,
+        "fields": {
+            "pelicula_id": 9,
+            "genero": "Adventure"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 17,
+        "fields": {
+            "pelicula_id": 9,
+            "genero": "Fantasy"
+        }
+    },
+    {
+        "model": "cineulima.peliculagenero",
+        "pk": 18,
+        "fields": {
+            "pelicula_id": 10,
+            "genero": "Thriller"
+        }
+    }
+]

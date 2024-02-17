@@ -1,0 +1,22 @@
+[
+    {
+        "model": "cineulima.usuario",
+        "pk": 1,
+        "fields": {
+            "nombre": "Franco",
+            "apellidos": "Cuya",
+            "correo": "20210773@aloe.ulima.edu.pe",
+            "password": "admin123"
+        }
+    },
+    {
+        "model": "cineulima.usuario",
+        "pk": 2,
+        "fields": {
+            "nombre": "Usuario",
+            "apellidos": "Registrado",
+            "correo": "reguser@gmail.com",
+            "password": "useruser"
+        }
+    }
+]

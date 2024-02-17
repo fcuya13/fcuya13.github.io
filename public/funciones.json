@@ -1,0 +1,602 @@
+[
+    {
+        "id": 1,
+        "movie_id": 7,
+        "sala_id": 6,
+        "window_id": 30
+    },
+    {
+        "id": 2,
+        "movie_id": 2,
+        "sala_id": 3,
+        "window_id": 13
+    },
+    {
+        "id": 3,
+        "movie_id": 9,
+        "sala_id": 2,
+        "window_id": 31
+    },
+    {
+        "id": 4,
+        "movie_id": 3,
+        "sala_id": 5,
+        "window_id": 7
+    },
+    {
+        "id": 5,
+        "movie_id": 6,
+        "sala_id": 5,
+        "window_id": 20
+    },
+    {
+        "id": 6,
+        "movie_id": 8,
+        "sala_id": 2,
+        "window_id": 22
+    },
+    {
+        "id": 7,
+        "movie_id": 6,
+        "sala_id": 5,
+        "window_id": 4
+    },
+    {
+        "id": 8,
+        "movie_id": 5,
+        "sala_id": 4,
+        "window_id": 27
+    },
+    {
+        "id": 9,
+        "movie_id": 2,
+        "sala_id": 3,
+        "window_id": 25
+    },
+    {
+        "id": 10,
+        "movie_id": 10,
+        "sala_id": 1,
+        "window_id": 21
+    },
+    {
+        "id": 11,
+        "movie_id": 1,
+        "sala_id": 6,
+        "window_id": 16
+    },
+    {
+        "id": 12,
+        "movie_id": 4,
+        "sala_id": 4,
+        "window_id": 5
+    },
+    {
+        "id": 13,
+        "movie_id": 4,
+        "sala_id": 4,
+        "window_id": 10
+    },
+    {
+        "id": 14,
+        "movie_id": 7,
+        "sala_id": 3,
+        "window_id": 3
+    },
+    {
+        "id": 15,
+        "movie_id": 3,
+        "sala_id": 2,
+        "window_id": 1
+    },
+    {
+        "id": 16,
+        "movie_id": 9,
+        "sala_id": 1,
+        "window_id": 12
+    },
+    {
+        "id": 17,
+        "movie_id": 8,
+        "sala_id": 5,
+        "window_id": 17
+    },
+    {
+        "id": 18,
+        "movie_id": 5,
+        "sala_id": 2,
+        "window_id": 29
+    },
+    {
+        "id": 19,
+        "movie_id": 10,
+        "sala_id": 3,
+        "window_id": 28
+    },
+    {
+        "id": 20,
+        "movie_id": 1,
+        "sala_id": 5,
+        "window_id": 8
+    },
+    {
+        "id": 21,
+        "movie_id": 6,
+        "sala_id": 5,
+        "window_id": 14
+    },
+    {
+        "id": 22,
+        "movie_id": 2,
+        "sala_id": 1,
+        "window_id": 33
+    },
+    {
+        "id": 23,
+        "movie_id": 3,
+        "sala_id": 4,
+        "window_id": 23
+    },
+    {
+        "id": 24,
+        "movie_id": 9,
+        "sala_id": 3,
+        "window_id": 15
+    },
+    {
+        "id": 25,
+        "movie_id": 8,
+        "sala_id": 5,
+        "window_id": 19
+    },
+    {
+        "id": 26,
+        "movie_id": 7,
+        "sala_id": 2,
+        "window_id": 11
+    },
+    {
+        "id": 27,
+        "movie_id": 4,
+        "sala_id": 6,
+        "window_id": 6
+    },
+    {
+        "id": 28,
+        "movie_id": 1,
+        "sala_id": 4,
+        "window_id": 32
+    },
+    {
+        "id": 29,
+        "movie_id": 5,
+        "sala_id": 2,
+        "window_id": 9
+    },
+    {
+        "id": 30,
+        "movie_id": 10,
+        "sala_id": 1,
+        "window_id": 24
+    },
+    {
+        "id": 31,
+        "movie_id": 6,
+        "sala_id": 6,
+        "window_id": 26
+    },
+    {
+        "id": 32,
+        "movie_id": 3,
+        "sala_id": 5,
+        "window_id": 2
+    },
+    {
+        "id": 33,
+        "movie_id": 8,
+        "sala_id": 3,
+        "window_id": 18
+    },
+    {
+        "id": 34,
+        "movie_id": 10,
+        "sala_id": 4,
+        "window_id": 9
+    },
+    {
+        "id": 35,
+        "movie_id": 5,
+        "sala_id": 1,
+        "window_id": 10
+    },
+    {
+        "id": 36,
+        "movie_id": 7,
+        "sala_id": 3,
+        "window_id": 11
+    },
+    {
+        "id": 37,
+        "movie_id": 4,
+        "sala_id": 5,
+        "window_id": 12
+    },
+    {
+        "id": 38,
+        "movie_id": 6,
+        "sala_id": 2,
+        "window_id": 13
+    },
+    {
+        "id": 39,
+        "movie_id": 3,
+        "sala_id": 6,
+        "window_id": 14
+    },
+    {
+        "id": 40,
+        "movie_id": 8,
+        "sala_id": 4,
+        "window_id": 15
+    },
+    {
+        "id": 41,
+        "movie_id": 2,
+        "sala_id": 1,
+        "window_id": 16
+    },
+    {
+        "id": 42,
+        "movie_id": 9,
+        "sala_id": 3,
+        "window_id": 17
+    },
+    {
+        "id": 43,
+        "movie_id": 1,
+        "sala_id": 5,
+        "window_id": 18
+    },
+    {
+        "id": 44,
+        "movie_id": 7,
+        "sala_id": 2,
+        "window_id": 19
+    },
+    {
+        "id": 45,
+        "movie_id": 5,
+        "sala_id": 6,
+        "window_id": 20
+    },
+    {
+        "id": 46,
+        "movie_id": 3,
+        "sala_id": 4,
+        "window_id": 21
+    },
+    {
+        "id": 47,
+        "movie_id": 8,
+        "sala_id": 1,
+        "window_id": 22
+    },
+    {
+        "id": 48,
+        "movie_id": 2,
+        "sala_id": 3,
+        "window_id": 23
+    },
+    {
+        "id": 49,
+        "movie_id": 10,
+        "sala_id": 5,
+        "window_id": 24
+    },
+    {
+        "id": 50,
+        "movie_id": 4,
+        "sala_id": 2,
+        "window_id": 25
+    },
+    {
+        "id": 51,
+        "movie_id": 6,
+        "sala_id": 6,
+        "window_id": 26
+    },
+    {
+        "id": 52,
+        "movie_id": 9,
+        "sala_id": 4,
+        "window_id": 27
+    },
+    {
+        "id": 53,
+        "movie_id": 1,
+        "sala_id": 1,
+        "window_id": 28
+    },
+    {
+        "id": 54,
+        "movie_id": 7,
+        "sala_id": 3,
+        "window_id": 29
+    },
+    {
+        "id": 55,
+        "movie_id": 5,
+        "sala_id": 5,
+        "window_id": 30
+    },
+    {
+        "id": 56,
+        "movie_id": 3,
+        "sala_id": 2,
+        "window_id": 31
+    },
+    {
+        "id": 57,
+        "movie_id": 8,
+        "sala_id": 6,
+        "window_id": 32
+    },
+    {
+        "id": 58,
+        "movie_id": 2,
+        "sala_id": 4,
+        "window_id": 33
+    },
+    {
+        "id": 59,
+        "movie_id": 10,
+        "sala_id": 1,
+        "window_id": 1
+    },
+    {
+        "id": 60,
+        "movie_id": 4,
+        "sala_id": 3,
+        "window_id": 2
+    },
+    {
+        "id": 61,
+        "movie_id": 6,
+        "sala_id": 5,
+        "window_id": 3
+    },
+    {
+        "id": 62,
+        "movie_id": 9,
+        "sala_id": 2,
+        "window_id": 4
+    },
+    {
+        "id": 63,
+        "movie_id": 1,
+        "sala_id": 6,
+        "window_id": 5
+    },
+    {
+        "id": 64,
+        "movie_id": 7,
+        "sala_id": 4,
+        "window_id": 6
+    },
+    {
+        "id": 65,
+        "movie_id": 5,
+        "sala_id": 1,
+        "window_id": 7
+    },
+    {
+        "id": 66,
+        "movie_id": 3,
+        "sala_id": 3,
+        "window_id": 8
+    },
+    {
+        "id": 67,
+        "movie_id": 8,
+        "sala_id": 5,
+        "window_id": 9
+    },
+    {
+        "id": 68,
+        "movie_id": 2,
+        "sala_id": 2,
+        "window_id": 10
+    },
+    {
+        "id": 69,
+        "movie_id": 10,
+        "sala_id": 6,
+        "window_id": 11
+    },
+    {
+        "id": 70,
+        "movie_id": 4,
+        "sala_id": 4,
+        "window_id": 12
+    },
+    {
+        "id": 71,
+        "movie_id": 6,
+        "sala_id": 1,
+        "window_id": 13
+    },
+    {
+        "id": 72,
+        "movie_id": 9,
+        "sala_id": 3,
+        "window_id": 14
+    },
+    {
+        "id": 73,
+        "movie_id": 1,
+        "sala_id": 5,
+        "window_id": 15
+    },
+    {
+        "id": 74,
+        "movie_id": 7,
+        "sala_id": 2,
+        "window_id": 16
+    },
+    {
+        "id": 75,
+        "movie_id": 5,
+        "sala_id": 6,
+        "window_id": 17
+    },
+    {
+        "id": 76,
+        "movie_id": 3,
+        "sala_id": 4,
+        "window_id": 18
+    },
+    {
+        "id": 77,
+        "movie_id": 8,
+        "sala_id": 1,
+        "window_id": 19
+    },
+    {
+        "id": 78,
+        "movie_id": 2,
+        "sala_id": 3,
+        "window_id": 20
+    },
+    {
+        "id": 79,
+        "movie_id": 10,
+        "sala_id": 5,
+        "window_id": 21
+    },
+    {
+        "id": 80,
+        "movie_id": 4,
+        "sala_id": 2,
+        "window_id": 22
+    },
+    {
+        "id": 81,
+        "movie_id": 6,
+        "sala_id": 6,
+        "window_id": 23
+    },
+    {
+        "id": 82,
+        "movie_id": 9,
+        "sala_id": 4,
+        "window_id": 24
+    },
+    {
+        "id": 83,
+        "movie_id": 1,
+        "sala_id": 1,
+        "window_id": 25
+    },
+    {
+        "id": 84,
+        "movie_id": 7,
+        "sala_id": 3,
+        "window_id": 26
+    },
+    {
+        "id": 85,
+        "movie_id": 5,
+        "sala_id": 5,
+        "window_id": 27
+    },
+    {
+        "id": 86,
+        "movie_id": 3,
+        "sala_id": 2,
+        "window_id": 28
+    },
+    {
+        "id": 87,
+        "movie_id": 8,
+        "sala_id": 6,
+        "window_id": 29
+    },
+    {
+        "id": 88,
+        "movie_id": 2,
+        "sala_id": 4,
+        "window_id": 30
+    },
+    {
+        "id": 89,
+        "movie_id": 10,
+        "sala_id": 1,
+        "window_id": 31
+    },
+    {
+        "id": 90,
+        "movie_id": 4,
+        "sala_id": 3,
+        "window_id": 32
+    },
+    {
+        "id": 91,
+        "movie_id": 6,
+        "sala_id": 5,
+        "window_id": 33
+    },
+    {
+        "id": 92,
+        "movie_id": 9,
+        "sala_id": 2,
+        "window_id": 1
+    },
+    {
+        "id": 93,
+        "movie_id": 1,
+        "sala_id": 6,
+        "window_id": 2
+    },
+    {
+        "id": 94,
+        "movie_id": 7,
+        "sala_id": 4,
+        "window_id": 3
+    },
+    {
+        "id": 95,
+        "movie_id": 5,
+        "sala_id": 1,
+        "window_id": 4
+    },
+    {
+        "id": 96,
+        "movie_id": 3,
+        "sala_id": 3,
+        "window_id": 5
+    },
+    {
+        "id": 97,
+        "movie_id": 8,
+        "sala_id": 5,
+        "window_id": 6
+    },
+    {
+        "id": 98,
+        "movie_id": 2,
+        "sala_id": 2,
+        "window_id": 7
+    },
+    {
+        "id": 99,
+        "movie_id": 10,
+        "sala_id": 6,
+        "window_id": 8
+    },
+    {
+        "id": 100,
+        "movie_id": 4,
+        "sala_id": 4,
+        "window_id": 9
+    }
+]
