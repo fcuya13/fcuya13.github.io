@@ -88,3 +88,82 @@ def passwordRecoveryEndpoint(request):
                 "msg": e.message
             }
             return HttpResponse(json.dumps(errorMsg), status=400)
+
+def verRecomendacionesEndPoint(request):
+    recomendaciones = RecomendacionPelicula.objects.all()
+
+    lista_peliculas = []
+
+    for pelicula in recomendaciones:
+        pelicula_info = {
+            'nombre': pelicula.nombre,
+            'img': pelicula.imgUrl,
+            'path': pelicula.path
+        }
+        lista_peliculas.append(pelicula_info)
+
+    return HttpResponse(json.dumps(lista_peliculas))
+
+#Si el msg: "" no se encontraron resultados o no ingreso nada en el textfield
+
+""" 
+def buscarContenidoEndPoint(request,filtro):
+    if request.method == "GET":
+        buscar = filtro
+
+        if buscar == "":
+            respuesta = {
+                'msg': ""
+            }
+            return HttpResponse(json.dumps(respuesta))
+        else:
+            listaPeliculasFiltrado = Pelicula.objects.filter(nombre__contains=buscar)
+
+            dataResponse = []
+
+            if len(listaPeliculasFiltrado)>0:
+                for pelicula in listaPeliculasFiltrado:
+                    dataResponse.append({
+                        "id": pelicula.pk,
+                        "title": pelicula.title,
+                        "year": pelicula.year,
+                        "genres": pelicula.genres,
+                        "extract": pelicula.extract,
+                        "thumbnail": pelicula.thumbnail,
+                        "path": pelicula.path,
+                        "salas": pelicula.salas,
+                        "available_times": pelicula.available_times
+                    })
+                return HttpResponse(json.dumps(dataResponse))
+            
+            listaSalasFiltrado = Sala.objects.filter(nombre__contains=buscar)
+
+            dataResponse = []
+
+            if len(listaSalasFiltrado)>0:
+                for sala in listaSalasFiltrado:
+                    dataResponse.append({
+                        "id": sala.pk,
+                        "name": sala.name,
+                        "address": sala.address,
+                        "image": sala.image,
+                        "available_times": sala.available_times,
+                        "path": sala.path,
+                        "path": sala.path,
+                        "peliculas": pelicula.peliculas,
+                    })
+                return HttpResponse(json.dumps(dataResponse))
+            
+            respuesta = {
+                "msg": ""
+            }
+
+            return HttpResponse(json.dumps(respuesta)) 
+"""
+                
+
+
+
+
+
+    

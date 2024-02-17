@@ -9,3 +9,4 @@ class UsuarioAdmin(admin.ModelAdmin):
 
 
 admin.site.register(UsuarioSistema, UsuarioAdmin)
+admin.site.register(RecomendacionPelicula)
