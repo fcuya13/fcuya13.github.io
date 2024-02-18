@@ -55,7 +55,7 @@ class Ventana(models.Model):
     hora = models.TimeField()
 
     def __str__(self):
-        return f'{str(self.fecha)} | {str(self.hora)}'
+            return f'{str(self.fecha)} | {str(self.hora)}'
 
 
 class Funcion(models.Model):

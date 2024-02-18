@@ -274,7 +274,7 @@
         "pk": 31,
         "fields": {
             "pelicula_id": 6,
-            "sala_id": 6,
+            "sala_id": 2,
             "ventana_id": 26
         }
     },
@@ -940,7 +940,7 @@
         "pk": 105,
         "fields": {
             "pelicula_id": 5,
-            "sala_id": 1,
+            "sala_id": 6,
             "ventana_id": 7
         }
     },
@@ -1228,7 +1228,7 @@
         "pk": 137,
         "fields": {
             "pelicula_id": 9,
-            "sala_id": 6,
+            "sala_id": 1,
             "ventana_id": 15
         }
     },
@@ -1336,7 +1336,7 @@
         "pk": 149,
         "fields": {
             "pelicula_id": 10,
-            "sala_id": 3,
+            "sala_id": 5,
             "ventana_id": 33
         }
     },
@@ -1462,7 +1462,7 @@
         "pk": 163,
         "fields": {
             "pelicula_id": 1,
-            "sala_id": 6,
+            "sala_id": 4,
             "ventana_id": 2
         }
     },
@@ -1570,7 +1570,7 @@
         "pk": 175,
         "fields": {
             "pelicula_id": 5,
-            "sala_id": 1,
+            "sala_id": 5,
             "ventana_id": 29
         }
     },
@@ -1618,6 +1618,905 @@
             "sala_id": 2,
             "ventana_id": 25
         }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 181,
+        "fields": {
+            "pelicula_id": 8,
+            "sala_id": 6,
+            "ventana_id": 14
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 182,
+        "fields": {
+            "pelicula_id": 4,
+            "sala_id": 5,
+            "ventana_id": 27
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 183,
+        "fields": {
+            "pelicula_id": 7,
+            "sala_id": 2,
+            "ventana_id": 21
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 184,
+        "fields": {
+            "pelicula_id": 2,
+            "sala_id": 4,
+            "ventana_id": 9
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 185,
+        "fields": {
+            "pelicula_id": 5,
+            "sala_id": 1,
+            "ventana_id": 17
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 186,
+        "fields": {
+            "pelicula_id": 9,
+            "sala_id": 3,
+            "ventana_id": 4
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 187,
+        "fields": {
+            "pelicula_id": 6,
+            "sala_id": 6,
+            "ventana_id": 31
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 188,
+        "fields": {
+            "pelicula_id": 3,
+            "sala_id": 2,
+            "ventana_id": 8
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 189,
+        "fields": {
+            "pelicula_id": 10,
+            "sala_id": 5,
+            "ventana_id": 25
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 190,
+        "fields": {
+            "pelicula_id": 1,
+            "sala_id": 1,
+            "ventana_id": 19
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 191,
+        "fields": {
+            "pelicula_id": 8,
+            "sala_id": 4,
+            "ventana_id": 33
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 192,
+        "fields": {
+            "pelicula_id": 4,
+            "sala_id": 3,
+            "ventana_id": 14
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 193,
+        "fields": {
+            "pelicula_id": 7,
+            "sala_id": 6,
+            "ventana_id": 7
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 194,
+        "fields": {
+            "pelicula_id": 2,
+            "sala_id": 5,
+            "ventana_id": 30
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 195,
+        "fields": {
+            "pelicula_id": 5,
+            "sala_id": 2,
+            "ventana_id": 22
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 196,
+        "fields": {
+            "pelicula_id": 9,
+            "sala_id": 1,
+            "ventana_id": 11
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 197,
+        "fields": {
+            "pelicula_id": 6,
+            "sala_id": 4,
+            "ventana_id": 2
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 198,
+        "fields": {
+            "pelicula_id": 3,
+            "sala_id": 3,
+            "ventana_id": 18
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 199,
+        "fields": {
+            "pelicula_id": 10,
+            "sala_id": 6,
+            "ventana_id": 6
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 200,
+        "fields": {
+            "pelicula_id": 1,
+            "sala_id": 5,
+            "ventana_id": 12
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 201,
+        "fields": {
+            "pelicula_id": 8,
+            "sala_id": 2,
+            "ventana_id": 20
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 202,
+        "fields": {
+            "pelicula_id": 4,
+            "sala_id": 1,
+            "ventana_id": 32
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 203,
+        "fields": {
+            "pelicula_id": 7,
+            "sala_id": 3,
+            "ventana_id": 24
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 204,
+        "fields": {
+            "pelicula_id": 2,
+            "sala_id": 6,
+            "ventana_id": 16
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 205,
+        "fields": {
+            "pelicula_id": 5,
+            "sala_id": 4,
+            "ventana_id": 13
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 206,
+        "fields": {
+            "pelicula_id": 9,
+            "sala_id": 2,
+            "ventana_id": 29
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 207,
+        "fields": {
+            "pelicula_id": 6,
+            "sala_id": 5,
+            "ventana_id": 1
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 208,
+        "fields": {
+            "pelicula_id": 3,
+            "sala_id": 1,
+            "ventana_id": 23
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 209,
+        "fields": {
+            "pelicula_id": 10,
+            "sala_id": 4,
+            "ventana_id": 15
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 210,
+        "fields": {
+            "pelicula_id": 1,
+            "sala_id": 3,
+            "ventana_id": 10
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 211,
+        "fields": {
+            "pelicula_id": 8,
+            "sala_id": 1,
+            "ventana_id": 26
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 212,
+        "fields": {
+            "pelicula_id": 4,
+            "sala_id": 6,
+            "ventana_id": 5
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 213,
+        "fields": {
+            "pelicula_id": 7,
+            "sala_id": 5,
+            "ventana_id": 28
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 214,
+        "fields": {
+            "pelicula_id": 2,
+            "sala_id": 2,
+            "ventana_id": 2
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 215,
+        "fields": {
+            "pelicula_id": 5,
+            "sala_id": 3,
+            "ventana_id": 19
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 216,
+        "fields": {
+            "pelicula_id": 9,
+            "sala_id": 4,
+            "ventana_id": 7
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 217,
+        "fields": {
+            "pelicula_id": 6,
+            "sala_id": 1,
+            "ventana_id": 30
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 218,
+        "fields": {
+            "pelicula_id": 3,
+            "sala_id": 6,
+            "ventana_id": 9
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 219,
+        "fields": {
+            "pelicula_id": 10,
+            "sala_id": 3,
+            "ventana_id": 33
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 220,
+        "fields": {
+            "pelicula_id": 1,
+            "sala_id": 2,
+            "ventana_id": 16
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 221,
+        "fields": {
+            "pelicula_id": 8,
+            "sala_id": 5,
+            "ventana_id": 11
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 222,
+        "fields": {
+            "pelicula_id": 4,
+            "sala_id": 2,
+            "ventana_id": 24
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 223,
+        "fields": {
+            "pelicula_id": 7,
+            "sala_id": 1,
+            "ventana_id": 15
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 224,
+        "fields": {
+            "pelicula_id": 2,
+            "sala_id": 4,
+            "ventana_id": 31
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 225,
+        "fields": {
+            "pelicula_id": 5,
+            "sala_id": 2,
+            "ventana_id": 20
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 226,
+        "fields": {
+            "pelicula_id": 9,
+            "sala_id": 4,
+            "ventana_id": 1
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 227,
+        "fields": {
+            "pelicula_id": 6,
+            "sala_id": 5,
+            "ventana_id": 23
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 228,
+        "fields": {
+            "pelicula_id": 3,
+            "sala_id": 3,
+            "ventana_id": 12
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 229,
+        "fields": {
+            "pelicula_id": 10,
+            "sala_id": 1,
+            "ventana_id": 25
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 230,
+        "fields": {
+            "pelicula_id": 1,
+            "sala_id": 4,
+            "ventana_id": 8
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 231,
+        "fields": {
+            "pelicula_id": 7,
+            "sala_id": 6,
+            "ventana_id": 27
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 232,
+        "fields": {
+            "pelicula_id": 3,
+            "sala_id": 1,
+            "ventana_id": 16
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 233,
+        "fields": {
+            "pelicula_id": 9,
+            "sala_id": 5,
+            "ventana_id": 32
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 234,
+        "fields": {
+            "pelicula_id": 2,
+            "sala_id": 2,
+            "ventana_id": 14
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 235,
+        "fields": {
+            "pelicula_id": 8,
+            "sala_id": 3,
+            "ventana_id": 21
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 236,
+        "fields": {
+            "pelicula_id": 4,
+            "sala_id": 6,
+            "ventana_id": 33
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 237,
+        "fields": {
+            "pelicula_id": 10,
+            "sala_id": 4,
+            "ventana_id": 2
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 238,
+        "fields": {
+            "pelicula_id": 6,
+            "sala_id": 1,
+            "ventana_id": 18
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 239,
+        "fields": {
+            "pelicula_id": 5,
+            "sala_id": 3,
+            "ventana_id": 9
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 240,
+        "fields": {
+            "pelicula_id": 1,
+            "sala_id": 5,
+            "ventana_id": 26
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 241,
+        "fields": {
+            "pelicula_id": 7,
+            "sala_id": 6,
+            "ventana_id": 22
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 242,
+        "fields": {
+            "pelicula_id": 3,
+            "sala_id": 1,
+            "ventana_id": 7
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 243,
+        "fields": {
+            "pelicula_id": 9,
+            "sala_id": 5,
+            "ventana_id": 28
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 244,
+        "fields": {
+            "pelicula_id": 2,
+            "sala_id": 2,
+            "ventana_id": 5
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 245,
+        "fields": {
+            "pelicula_id": 8,
+            "sala_id": 3,
+            "ventana_id": 23
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 246,
+        "fields": {
+            "pelicula_id": 4,
+            "sala_id": 6,
+            "ventana_id": 32
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 247,
+        "fields": {
+            "pelicula_id": 10,
+            "sala_id": 4,
+            "ventana_id": 1
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 248,
+        "fields": {
+            "pelicula_id": 6,
+            "sala_id": 1,
+            "ventana_id": 15
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 249,
+        "fields": {
+            "pelicula_id": 5,
+            "sala_id": 3,
+            "ventana_id": 28
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 250,
+        "fields": {
+            "pelicula_id": 1,
+            "sala_id": 5,
+            "ventana_id": 23
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 251,
+        "fields": {
+            "pelicula_id": 7,
+            "sala_id": 6,
+            "ventana_id": 19
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 252,
+        "fields": {
+            "pelicula_id": 3,
+            "sala_id": 1,
+            "ventana_id": 14
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 253,
+        "fields": {
+            "pelicula_id": 9,
+            "sala_id": 5,
+            "ventana_id": 31
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 254,
+        "fields": {
+            "pelicula_id": 2,
+            "sala_id": 2,
+            "ventana_id": 6
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 255,
+        "fields": {
+            "pelicula_id": 8,
+            "sala_id": 3,
+            "ventana_id": 24
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 256,
+        "fields": {
+            "pelicula_id": 4,
+            "sala_id": 6,
+            "ventana_id": 31
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 257,
+        "fields": {
+            "pelicula_id": 10,
+            "sala_id": 4,
+            "ventana_id": 3
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 258,
+        "fields": {
+            "pelicula_id": 6,
+            "sala_id": 1,
+            "ventana_id": 19
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 259,
+        "fields": {
+            "pelicula_id": 5,
+            "sala_id": 3,
+            "ventana_id": 27
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 260,
+        "fields": {
+            "pelicula_id": 1,
+            "sala_id": 5,
+            "ventana_id": 21
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 261,
+        "fields": {
+            "pelicula_id": 7,
+            "sala_id": 6,
+            "ventana_id": 20
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 262,
+        "fields": {
+            "pelicula_id": 3,
+            "sala_id": 1,
+            "ventana_id": 15
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 263,
+        "fields": {
+            "pelicula_id": 9,
+            "sala_id": 5,
+            "ventana_id": 30
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 264,
+        "fields": {
+            "pelicula_id": 2,
+            "sala_id": 4,
+            "ventana_id": 7
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 265,
+        "fields": {
+            "pelicula_id": 8,
+            "sala_id": 3,
+            "ventana_id": 25
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 266,
+        "fields": {
+            "pelicula_id": 4,
+            "sala_id": 6,
+            "ventana_id": 30
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 267,
+        "fields": {
+            "pelicula_id": 10,
+            "sala_id": 4,
+            "ventana_id": 4
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 268,
+        "fields": {
+            "pelicula_id": 6,
+            "sala_id": 1,
+            "ventana_id": 21
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 269,
+        "fields": {
+            "pelicula_id": 5,
+            "sala_id": 3,
+            "ventana_id": 26
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 270,
+        "fields": {
+            "pelicula_id": 1,
+            "sala_id": 5,
+            "ventana_id": 19
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 271,
+        "fields": {
+            "pelicula_id": 7,
+            "sala_id": 6,
+            "ventana_id": 18
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 272,
+        "fields": {
+            "pelicula_id": 3,
+            "sala_id": 3,
+            "ventana_id": 16
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 273,
+        "fields": {
+            "pelicula_id": 9,
+            "sala_id": 5,
+            "ventana_id": 29
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 274,
+        "fields": {
+            "pelicula_id": 2,
+            "sala_id": 2,
+            "ventana_id": 8
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 275,
+        "fields": {
+            "pelicula_id": 8,
+            "sala_id": 3,
+            "ventana_id": 26
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 276,
+        "fields": {
+            "pelicula_id": 4,
+            "sala_id": 6,
+            "ventana_id": 29
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 277,
+        "fields": {
+            "pelicula_id": 10,
+            "sala_id": 4,
+            "ventana_id": 5
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 278,
+        "fields": {
+            "pelicula_id": 6,
+            "sala_id": 1,
+            "ventana_id": 22
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 279,
+        "fields": {
+            "pelicula_id": 5,
+            "sala_id": 3,
+            "ventana_id": 25
+        }
+    },
+    {
+        "model": "cineulima.funcion",
+        "pk": 280,
+        "fields": {
+            "pelicula_id": 1,
+            "sala_id": 5,
+            "ventana_id": 20
+        }
     }
-
 ]

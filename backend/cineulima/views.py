@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.db.utils import IntegrityError
+from datetime import datetime
 
 from .models import *
 
@@ -76,7 +77,8 @@ def passwordRecoveryEndpoint(request):
         correo = user_data['correo']
         try:
             user_recovery = Usuario.objects.get(correo=correo)
-            postmark.send_email(user_recovery.correo, "¿Olvidó su contraseña?", f"Su contraseña es {user_recovery.password}")
+            postmark.send_email(user_recovery.correo, "¿Olvidó su contraseña?",
+                                f"Su contraseña es {user_recovery.password}")
             return HttpResponse(status=200)
         except Usuario.DoesNotExist:
             errorMsg = {
@@ -88,6 +90,7 @@ def passwordRecoveryEndpoint(request):
                 "msg": e.message
             }
             return HttpResponse(json.dumps(errorMsg), status=400)
+
 
 def verRecomendacionesEndPoint(request):
     recomendaciones = RecomendacionPelicula.objects.all()
@@ -104,7 +107,8 @@ def verRecomendacionesEndPoint(request):
 
     return HttpResponse(json.dumps(lista_peliculas))
 
-#Si el msg: "" no se encontraron resultados o no ingreso nada en el textfield
+
+# Si el msg: "" no se encontraron resultados o no ingreso nada en el textfield
 
 """ 
 def buscarContenidoEndPoint(request,filtro):
@@ -160,10 +164,46 @@ def buscarContenidoEndPoint(request,filtro):
 
             return HttpResponse(json.dumps(respuesta)) 
 """
-                
 
 
+def getFechasEndpoint(request):
+    if request.method == "GET":
+        ventanas = Ventana.objects.all()
+
+        fechas = list(set(ventana.fecha for ventana in ventanas))
+        fechas_sorted = sorted(fechas)
+        fechas_formatted = [fecha.strftime("%d/%m/%Y") for fecha in fechas_sorted]
+
+        return HttpResponse(json.dumps(fechas_formatted, default=str))
 
 
+def peliculaInfoEndpoint(request):
+    if request.method == "GET":
+        fecha = request.GET.get("fecha")
+        peliculaid = request.GET.get("movieid")
+        dataResponse = []
 
-    
+        for sala in Sala.objects.all():
+            funciones = Funcion.objects.filter(sala_id=sala.pk, pelicula_id=peliculaid)
+
+            ventanas_list = []
+
+            for funcion in funciones:
+                ventanas = Ventana.objects.filter(fecha=fecha, pk=funcion.ventana_id.pk)
+
+                for ventana in ventanas:
+                    ventana_info = {
+                        "ventana_id": ventana.pk,
+                        "hora": str(ventana.hora.strftime("%H:%M"))
+                    }
+                    ventanas_list.append(ventana_info)
+
+            if ventanas_list:
+                dataResponse.append({
+                    "sala_id": sala.pk,
+                    "nombre": sala.nombre,
+                    "direccion": sala.direccion,
+                    "ventanas": ventanas_list
+                })
+
+        return HttpResponse(json.dumps(dataResponse))
