@@ -28,9 +28,15 @@ class RecoPeliculaAdmin(admin.ModelAdmin):
     list_display = ["id_pelicula", "activo"]
 
 
+class FuncionAdmin(admin.ModelAdmin):
+    list_display = ["pelicula_id", "sala_id", "ventana_id"]
+
+
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(Pelicula, PeliculaAdmin)
 admin.site.register(PeliculaActor, PeliculaActorAdmin)
 admin.site.register(PeliculaGenero, PeliculaGeneroAdmin)
 admin.site.register(Sala, SalaAdmin)
 admin.site.register(RecomendacionPelicula, RecoPeliculaAdmin)
+admin.site.register(Ventana)
+admin.site.register(Funcion, FuncionAdmin)

@@ -48,3 +48,17 @@ class RecomendacionPelicula(models.Model):
     activo_choices = [('A', 'Activo'), ('I', 'Inactivo')]
     id_pelicula = models.ForeignKey(Pelicula, on_delete=models.SET_NULL, null=True)
     activo = models.CharField(max_length=10, choices=activo_choices)
+
+
+class Ventana(models.Model):
+    fecha = models.DateField()
+    hora = models.TimeField()
+
+    def __str__(self):
+        return f'{str(self.fecha)} | {str(self.hora)}'
+
+
+class Funcion(models.Model):
+    pelicula_id = models.ForeignKey(Pelicula, on_delete=models.SET_NULL, null=True)
+    sala_id = models.ForeignKey(Sala, on_delete=models.SET_NULL, null=True)
+    ventana_id = models.ForeignKey(Ventana, on_delete=models.SET_NULL, null=True)

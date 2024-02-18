@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 
 def convertir_peliculas(pelicula_string):
@@ -83,8 +84,52 @@ def convertir_salas(salas_string):
         salas_model_file.write(json_salas)
 
 
+def convertir_ventanas(ventana_string):
+    ventanas_list = []
+    ventana_counter = 1
+    for ventana in ventana_string:
+        fecha_original = ventana['date']
+        fecha_objeto = datetime.strptime(fecha_original, '%d-%m-%Y')
+        fecha_convertida = fecha_objeto.strftime('%Y-%m-%d')
+        ventana_dict = {
+            'model': 'cineulima.ventana',
+            'pk': ventana_counter,
+            'fields': {
+                'fecha': fecha_convertida,
+                'hora': ventana['hour'] + ":00"
+            }
+        }
+        ventanas_list.append(ventana_dict)
+        ventana_counter += 1
+
+    json_ventanas = json.dumps(ventanas_list)
+    with open("../seeders/0006_ventanas.json", "w") as ventanas_model_file:
+        ventanas_model_file.write(json_ventanas)
+
+
+def convertir_funciones(funciones_string):
+    funciones_list = []
+    funciones_counter = 1
+    for funcion in funciones_string:
+        funcion_dict = {
+            'model': 'cineulima.funcion',
+            'pk': funciones_counter,
+            'fields': {
+                'pelicula_id': funcion['movie_id'],
+                'sala_id': funcion['sala_id'],
+                'ventana_id': funcion['window_id']
+            }
+        }
+        funciones_list.append(funcion_dict)
+        funciones_counter += 1
+
+    json_funciones = json.dumps(funciones_list)
+    with open("../seeders/0008_funciones.json", "w") as funciones_model_file:
+        funciones_model_file.write(json_funciones)
+
 JSON_FILE_LOCATION = "../../public"
 
+"""
 with open(f'{JSON_FILE_LOCATION}/peliculas.json', "r") as peliculas_file:
     lines = peliculas_file.read()
     peliculas = json.loads(lines)
@@ -94,3 +139,15 @@ with open(f'{JSON_FILE_LOCATION}/salas.json', "r") as salas_file:
     lines = salas_file.read()
     salas = json.loads(lines)
     convertir_salas(salas)
+
+
+with open(f'{JSON_FILE_LOCATION}/ventanas.json', "r") as ventanas_file:
+    lines = ventanas_file.read()
+    ventanas = json.loads(lines)
+    convertir_ventanas(ventanas)
+"""
+
+with open(f'{JSON_FILE_LOCATION}/funciones.json', "r") as funciones_file:
+    lines = funciones_file.read()
+    funciones = json.loads(lines)
+    convertir_funciones(funciones)
