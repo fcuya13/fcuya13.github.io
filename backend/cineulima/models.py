@@ -15,6 +15,7 @@ class Pelicula(models.Model):
     href = models.CharField(max_length=100)
     extract = models.TextField()
     thumbnail = models.TextField()
+    banner = models.TextField(null=True)
     thumbnail_width = models.FloatField()
     thumbnail_height = models.FloatField()
     path = models.CharField(max_length=50)
