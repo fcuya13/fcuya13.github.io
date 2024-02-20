@@ -8,6 +8,6 @@ urlpatterns = [
     path('recovery', passwordRecoveryEndpoint),
     #path('recomendaciones', verRecomendacionesEndPoint)
     # path('busqueda',buscarContenidoEndPoint)
-    path('fecha', peliculaInfoEndpoint),
+    path('peliculainfofecha', peliculaInfoEndpoint),
     path('fechas', getFechasEndpoint)
 ]

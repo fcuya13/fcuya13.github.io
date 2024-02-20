@@ -68,6 +68,8 @@ def createUsersEndpoint(request):
         return HttpResponse(json.dumps(dataResponse), status=200)
 
 
+
+
 @csrf_exempt
 def passwordRecoveryEndpoint(request):
     if request.method == 'POST':
@@ -177,6 +179,21 @@ def getFechasEndpoint(request):
         return HttpResponse(json.dumps(fechas_formatted, default=str))
 
 
+
+""" 
+url = /cineulima/peliculainfofecha?fecha=2024-03-01&movieid=1    -> GET
+fecha en formato YYYY-MM-DD
+Response = [{
+            "sala_id": 1,
+            "nombre": "Cineplanet",
+            "direccion": "ulima",
+            "ventanas": [{
+                "ventana_id": 2,
+                "hora": "17:00"
+            }]
+        }] 
+no carga la info de la pelicula, solo la parte de abajo pelicula x sala
+"""
 def peliculaInfoEndpoint(request):
     if request.method == "GET":
         fecha = request.GET.get("fecha")
