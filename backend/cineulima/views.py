@@ -200,16 +200,18 @@ def reservaEndpoint(request):
     if request.method == 'POST':
         data = request.body
         user_data = json.loads(data)
+        print(data)
         correo = user_data['correo']
         cantidad = user_data['cantidad']
         funcion = user_data['funcionid']
-
+        
         try:
             usuario_login = Usuario.objects.get(correo=correo)
-            funcion_obj = Funcion.objects.get(id=funcion)
+            funcion_obj = Funcion.objects.get(pk=funcion)
+            
             reserva = Reserva(
-                usuario_id = usuario_login,
-                funcion_id = funcion_obj,
+                usuario = usuario_login,
+                funcion = funcion_obj,
                 cantidad = cantidad
             )
             reserva.save()
