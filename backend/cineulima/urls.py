@@ -9,5 +9,6 @@ urlpatterns = [
     #path('recomendaciones', verRecomendacionesEndPoint)
     # path('busqueda',buscarContenidoEndPoint)
     path('peliculainfofecha', peliculaInfoEndpoint),
-    path('fechas', getFechasEndpoint)
+    path('fechas', getFechasEndpoint),
+    path('reserva', reservaEndpoint)
 ]

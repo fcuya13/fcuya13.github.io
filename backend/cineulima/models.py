@@ -65,6 +65,6 @@ class Funcion(models.Model):
     ventana_id = models.ForeignKey(Ventana, on_delete=models.SET_NULL, null=True)
 
 class Reserva(models.Model):
-    funcion_id = models.ForeignKey(Funcion, on_delete=models.SET_NULL, null=True)
-    usuario_id = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
+    funcion = models.ForeignKey(Funcion, on_delete=models.SET_NULL, null=True)
+    usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
     cantidad = models.IntegerField()

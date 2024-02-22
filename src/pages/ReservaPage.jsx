@@ -46,7 +46,7 @@ const ReservaPage = () => {
         setOpen(false)
     }
 
-    const handleReservar = () => {
+    const handleReservar = async () => {
         const email = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         if (
             nombre.trim().length !== 0 &&
@@ -57,11 +57,29 @@ const ReservaPage = () => {
             parseInt(cantidad) > 0 &&
             email.test(codigo.trim())
         ) {
-            handleOpen();
-            setError(false);
-        } else {
-            setError(true);
-        }
+            try {
+                const response = await fetch('http://localhost:8000/cineulima/reserva', {
+                  method: 'POST',
+                  body: JSON.stringify({
+                    correo: codigo,
+                    funcionid: 3,
+                    cantidad: cantidad
+                  })
+                });
+                if (response.ok) {
+                    handleOpen();
+                    setError(false);
+                }else{
+                    throw new Error('Error al crear la reserva');
+                }
+            }
+            catch (error) {
+                  console.error(error);
+                  setError(true);
+            }
+            } else {
+                setError(true);
+            }
     }
 
     return (

@@ -31,6 +31,8 @@ class RecoPeliculaAdmin(admin.ModelAdmin):
 class FuncionAdmin(admin.ModelAdmin):
     list_display = ["pelicula_id", "sala_id", "ventana_id"]
 
+class ReservaAdmin(admin.ModelAdmin):
+    list_display = ["usuario_id", "funcion_id", "cantidad"]
 
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(Pelicula, PeliculaAdmin)
@@ -40,3 +42,4 @@ admin.site.register(Sala, SalaAdmin)
 admin.site.register(RecomendacionPelicula, RecoPeliculaAdmin)
 admin.site.register(Ventana)
 admin.site.register(Funcion, FuncionAdmin)
+admin.site.register(Reserva, ReservaAdmin)
