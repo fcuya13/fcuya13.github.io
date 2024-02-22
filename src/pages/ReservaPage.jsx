@@ -66,7 +66,8 @@ const ReservaPage = () => {
                     cantidad: cantidad
                   })
                 });
-                if (response.ok) {
+                const data = await response.json()
+                if (data.msg === "") {
                     handleOpen();
                     setError(false);
                 }else{
@@ -77,9 +78,9 @@ const ReservaPage = () => {
                   console.error(error);
                   setError(true);
             }
-            } else {
-                setError(true);
-            }
+        }else{
+            setError(true);
+        }
     }
 
     return (

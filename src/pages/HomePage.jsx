@@ -9,7 +9,6 @@ const HomePage = () => {
     const obtenerRecomendaciones = async () => {
         const response = await fetch("http://localhost:8000/cineulima/recomendaciones")
         const data = await response.json()
-
         setRecomendaciones(data)
     }
 
