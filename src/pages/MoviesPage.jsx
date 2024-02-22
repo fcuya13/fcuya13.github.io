@@ -6,10 +6,10 @@ import { useLocation } from "react-router-dom"
 
 const MoviesPage = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  //const location = useLocation()
-  //const {state} = location
+  const location = useLocation()
+  const {state} = location
 
-  //const movies = state ? state.movies : []
+  const movies = state ? state.filtro : []
 
   return(
     <PageLayout onSearchChange={setSearchTerm}>
@@ -26,7 +26,7 @@ const MoviesPage = () => {
           fontWeight: 400,
           letterSpacing: 0.25
         }}>Películas</Typography>
-        <MovieBody searchTerm={searchTerm}/>
+        <MovieBody searchTerm={searchTerm} movies = { movies }/>
       </Container>
     </Grid>
     </PageLayout>)

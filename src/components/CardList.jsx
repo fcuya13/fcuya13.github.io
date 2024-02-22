@@ -12,10 +12,8 @@ const CardList = (props) => {
                 <Cards 
                     id={e.id}
                     title={e.title}
-                    year={e.year}
                     cast={e.cast}
                     genres={e.genres}
-                    extract={e.extract}
                     thumbnail={e.thumbnail}
                     path={e.path}
                     />

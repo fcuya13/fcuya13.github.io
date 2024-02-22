@@ -14,11 +14,11 @@ const MainNavbar = () => {
 
       if (data.peliculas.length > 0) {
         setFiltro(data.peliculas)
-        navigate('/peliculas', { state: { filtro: filtro }})
+        navigate('/peliculas', { state: { filtro: data.peliculas }})
       }
       else if(data.salas.length > 0){
         setFiltro(data.salas)
-        navigate('/salas', { state: { filtro: filtro }})
+        navigate('/salas', { state: { filtro: data.salas }})
       }
       else {
         setNoEncontrado(true)

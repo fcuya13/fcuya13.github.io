@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CardList2 from "./CardList2";
 
-const SalasBody = ({ searchTerm }) => {
+const SalasBody = ({ searchTerm, salas }) => {
     const [salasData, setSalasData] = useState([])
     const [filteredSalas, setFilteredSalas] = useState([])
 
@@ -14,13 +14,15 @@ const SalasBody = ({ searchTerm }) => {
     useEffect(() =>{
         obtenerSalas();
     }, [])
+    
 
+    //si buscas por un termino y se borra deberia aparecer todas las peliculas
     useEffect(() => {
-        const filtered = salasData.filter((sala) =>
-            sala.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        setFilteredSalas(filtered)
-    }, [salasData, searchTerm])
+        if (!searchTerm) {
+            setFilteredSalas(salasData)
+        }
+    }, [searchTerm])
+
 
     return (
         <div>

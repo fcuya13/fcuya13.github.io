@@ -130,7 +130,15 @@ def buscarContenidoEndPoint(request, filtro):
             'salas': []
         }
         for pelicula in peliculas_resultados:
-            dataResponse['peliculas'].append(pelicula.titulo)
+            dataResponse['peliculas'].append({
+                'id': pelicula.pk,
+                'title': pelicula.titulo,
+                'thumbnail': pelicula.thumbnail,
+                'path': pelicula.path,
+                #flat=true para que no devuelva tuplas sino como lista plana
+                'genres': list(pelicula.peliculagenero_set.values_list('genero', flat=True)),
+                'cast': list(pelicula.peliculaactor_set.values_list('actor', flat=True))
+            })
         
         for sala in sala_resultados:
             dataResponse['salas'].append(sala.nombre)
