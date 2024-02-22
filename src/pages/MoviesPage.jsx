@@ -2,9 +2,15 @@ import { Container, Grid, Typography } from "@mui/material"
 import MovieBody from "../components/MovieBody"
 import PageLayout from "../components/PageLayout"
 import { useState } from "react"
+import { useLocation } from "react-router-dom"
 
 const MoviesPage = () => {
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState('')
+  //const location = useLocation()
+  //const {state} = location
+
+  //const movies = state ? state.movies : []
+
   return(
     <PageLayout onSearchChange={setSearchTerm}>
     <Grid
@@ -27,3 +33,4 @@ const MoviesPage = () => {
 }
 
 export default MoviesPage
+

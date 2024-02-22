@@ -11,10 +11,10 @@ const CarouselPage = (props) => {
                 <Carousel.Item key={index}>
                     <img
                         className='d-block w-100 img-carousel'
-                        src={movie.img}
-                        alt={movie.nombre}
+                        src={movie.banner}
+                        alt={movie.titulo}
                     />
-                    <h3 className='movie-name-r'>{movie.nombre}</h3>
+                    <h3 className='movie-name-r'>{movie.titulo}</h3>
                     <Link className="btn btn-outline-light button-buy-tickets" to={`/peliculas/${movie.path}`}>
                         COMPRAR TICKETS
                     </Link>
@@ -24,4 +24,4 @@ const CarouselPage = (props) => {
     )
 }
 
-export default CarouselPage;
+export default CarouselPage

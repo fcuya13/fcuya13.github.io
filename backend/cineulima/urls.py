@@ -6,8 +6,8 @@ urlpatterns = [
     path('users', usuariosEndpoint),
     path('createuser', createUsersEndpoint),
     path('recovery', passwordRecoveryEndpoint),
-    #path('recomendaciones', verRecomendacionesEndPoint)
-    # path('busqueda',buscarContenidoEndPoint)
+    path('recomendaciones', verRecomendacionesPeliculasEndPoint),
+    path('busqueda/<str:filtro>',buscarContenidoEndPoint),
     path('peliculainfofecha', peliculaInfoEndpoint),
     path('fechas', getFechasEndpoint)
 ]
