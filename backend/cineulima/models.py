@@ -63,3 +63,8 @@ class Funcion(models.Model):
     pelicula_id = models.ForeignKey(Pelicula, on_delete=models.SET_NULL, null=True)
     sala_id = models.ForeignKey(Sala, on_delete=models.SET_NULL, null=True)
     ventana_id = models.ForeignKey(Ventana, on_delete=models.SET_NULL, null=True)
+
+class Reserva(models.Model):
+    funcion_id = models.ForeignKey(Funcion, on_delete=models.SET_NULL, null=True)
+    usuario_id = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
+    cantidad = models.IntegerField()

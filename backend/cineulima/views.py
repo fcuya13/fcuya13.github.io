@@ -224,3 +224,31 @@ def peliculaInfoEndpoint(request):
                 })
 
         return HttpResponse(json.dumps(dataResponse))
+
+@csrf_exempt
+def reservaEndpoint(request):
+    if request.method == 'POST':
+        data = request.body
+        user_data = json.loads(data)
+        correo = user_data['correo']
+        cantidad = user_data['cantidad']
+        funcion = user_data['funcionid']
+
+        try:
+            usuario_login = Usuario.objects.get(correo=correo)
+            funcion_obj = Funcion.objects.get(id=funcion)
+            reserva = Reserva(
+                usuario_id = usuario_login,
+                funcion_id = funcion_obj,
+                cantidad = cantidad
+            )
+            reserva.save()
+            dataResponse = {
+                "msg": ""
+            }
+            return HttpResponse(json.dumps(dataResponse), status=200)
+        except Usuario.DoesNotExist or Funcion.DoesNotExist:
+            errorMsg = {
+                "msg": "Correo no registrado"
+            }
+            return HttpResponse(json.dumps(errorMsg), status=400)
