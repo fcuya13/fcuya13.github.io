@@ -3,44 +3,50 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const MainNavbar = () => {
-  const [filtro, setFiltro] = useState('');
-  //const [noEncontrado, setNoEncontrado] = useState(false)
-  //const navigate = useNavigate();
+  const [filtro, setFiltro] = useState([]);
+  const [noEncontrado, setNoEncontrado] = useState(false)
+  const navigate = useNavigate();
 
-  /*
-  const filtrarCotenido = async () => {
-    const response = await fetch(`http://localhost:8000/cineulima/busqueda/${filtro}`)
-    const data = await response.json()
-    setFiltro(data)
+  const filtrarContenido = async (e) => {
+    if (e.key === 'Enter') {
+      const response = await fetch(`http://localhost:8000/cineulima/busqueda/${filtro}`)
+      const data = await response.json()
 
-    if(data.msg === ""){
-      navigate(data.path)
-    }
-    else{
-      setNoEncontrado(true)
-    }
-    //se redirige a la pagina de la pelicula misma para ver funciones y otros
-    
-  }
-  
-  const filtrarContenido = (e) => {
-      if (e.key === 'Enter') {
-          navigate('hola');
+      if (data.peliculas.length > 0) {
+        setFiltro(data.peliculas)
+        navigate('/peliculas', { state: { filtro: filtro }})
       }
-  };
-  */
+      else if(data.salas.length > 0){
+        setFiltro(data.salas)
+        navigate('/salas', { state: { filtro: filtro }})
+      }
+      else {
+        setNoEncontrado(true)
+      }
+    }
+  }
 
   return (
     <Container maxWidth="md" sx={{ marginTop: '40px', fontFamily: 'Roboto, sans-serif' }}>
       <p style={{ fontWeight: 'bold', fontSize: '12px', margin: '0' }}>Búsqueda</p>
       <Input
-        placeholder="Buscar por nombre de película o sala"
+        placeholder="Buscar por título, actores, actrices, géneros o cines"
         value={filtro}
         onChange={(e) => setFiltro(e.target.value)}
-        //onKeyPress={filtrarContenido}
+        onKeyPress={filtrarContenido}
         fullWidth
       />
-
+      {
+        (() => {
+          if (noEncontrado) {
+            return <Alert
+              severity="error"
+              sx={{ mt: 2 }}>
+              No se encontraron resultados
+            </Alert>
+          }
+        })()
+      }
       <div style={{ marginTop: '60px' }}>
         <Grid container spacing={2}>
           <Grid item xs={6} md={6} display="flex" justifyContent="center">
@@ -78,23 +84,9 @@ const MainNavbar = () => {
             </Button>
           </Grid>
         </Grid>
-        {
-          /*
-          (() => {
-              if (noEncontrado) {
-                  return <Alert 
-                      severity="error"
-                      sx={ { mt : 2 } }>
-                      No se encontraron resultados
-                  </Alert>
-              }
-          })()
-          */
-        }
       </div>
     </Container>
-  );
-};
+  )
+}
 
-export default MainNavbar;
-
+export default MainNavbar

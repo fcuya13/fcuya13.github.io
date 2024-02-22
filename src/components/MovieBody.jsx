@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import CardList from "./CardList"
 import {Box} from "@mui/material";
+import e from "cors";
 
 const MovieBody = ({ searchTerm }) => {
     const [moviesData, setMoviesData] = useState([])
@@ -17,10 +18,18 @@ const MovieBody = ({ searchTerm }) => {
     }, [])
 
     useEffect(() => {
-        const filtered = moviesData.filter((movie) =>
+        if(searchTerm){
+            const filtered = moviesData.filter((movie) =>
             movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        setFilteredMovies(filtered)
+            )
+            setFilteredMovies(filtered)
+        }
+        /*else if(movies){
+            setFilteredMovies(movies)
+        }*/
+        else{
+            setFilteredMovies(moviesData)
+        }
     }, [moviesData, searchTerm])
 
     return (
