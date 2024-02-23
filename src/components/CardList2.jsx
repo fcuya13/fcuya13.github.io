@@ -11,6 +11,7 @@ const CardList2 = (props) => {
         props.list.map((e) => {
             return (
                 <Cards2
+                id = {e.id}
                 name={e.name}
                 address={e.address}
                 image={e.image}

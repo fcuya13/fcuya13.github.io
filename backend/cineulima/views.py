@@ -141,9 +141,31 @@ def buscarContenidoEndPoint(request, filtro):
             })
         
         for sala in sala_resultados:
-            dataResponse['salas'].append(sala.nombre)
+            dataResponse['salas'].append({
+                'id': sala.id,
+                'name': sala.nombre,
+                'address': sala.direccion,
+                'image': sala.imagen,
+                'path': sala.path,
+                'available_times': obtener_horas_disponibles(sala)
+            })
 
         return HttpResponse(json.dumps(dataResponse))
+
+
+def obtener_horas_disponibles(sala):
+    horarios = set()
+    funciones = Funcion.objects.filter(sala_id=sala.pk)
+
+    for funcion in funciones:
+        ventanas = Ventana.objects.filter(pk=funcion.ventana_id.pk)
+
+        for ventana in ventanas:
+            horarios.add(str(ventana.hora.strftime("%H:%M")))
+    
+    lista_horarios = sorted(list(horarios))
+
+    return lista_horarios
 
 
 def getFechasEndpoint(request):

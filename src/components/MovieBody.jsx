@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import CardList from "./CardList"
-import {Box} from "@mui/material";
+import {Box} from "@mui/material"
 
 const MovieBody = ({ searchTerm, movies }) => {
     const [moviesData, setMoviesData] = useState([])
