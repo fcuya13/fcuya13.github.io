@@ -63,7 +63,7 @@ def createUsersEndpoint(request):
             return HttpResponse(json.dumps(errorMsg), status=400)
 
         dataResponse = {
-            "id": usuario_login.pk,
+            "id": new_user.pk,
             "nombre": new_user.nombre,
             "apellidos": new_user.apellidos,
             "correo": new_user.correo
