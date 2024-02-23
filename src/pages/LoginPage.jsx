@@ -1,4 +1,4 @@
-import {Container, TextField, Button, Typography, alpha} from "@mui/material";
+import {Container, TextField, Button, Typography, alpha, CircularProgress, Backdrop } from "@mui/material";
 import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Alert from "@mui/material/Alert";
@@ -10,6 +10,7 @@ const LoginPage = () => {
     const [error, setError] = useState(false);
     const navigate = useNavigate();
     const [errormsg, setErrormsg] = useState("")
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const user = sessionStorage.getItem("user");
@@ -32,13 +33,14 @@ const LoginPage = () => {
             setErrormsg("Complete apropiadamente los campos.")
             return;
         }
-        
+
         const dataUser = {
             correo: correo,
             password: password
         }
 
         try {
+            setLoading(true)
             const response = await fetch("http://localhost:8000/cineulima/users", {
                 method: "POST",
                 body: JSON.stringify(dataUser)
@@ -54,10 +56,12 @@ const LoginPage = () => {
                 const errData = data.msg
                 setError(true)
                 setErrormsg(errData)
+                setLoading(false)
             }
         } catch (error) {
             setError(true)
             setErrormsg("Ha ocurrido un error. Por favor inténtelo más tarde")
+            setLoading(false)
         }
 
     }
@@ -168,8 +172,15 @@ const LoginPage = () => {
                 )}
             </Container>
 
-
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={loading}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
         </Container>
+
+
     );
 };
 

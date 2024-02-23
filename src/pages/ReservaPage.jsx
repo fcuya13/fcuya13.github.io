@@ -29,7 +29,7 @@ const ReservaPage = () => {
     const userJSON = JSON.parse(user)
 
     const [nombre, setNombre] = useState(userJSON ? userJSON.nombre : "")
-    const [apellido, setApellido] = useState(userJSON ? userJSON.apellido : "")
+    const [apellido, setApellido] = useState(userJSON ? userJSON.apellidos : "")
     const [codigo, setCodigo] = useState(userJSON ? userJSON.correo : "")
     const [cantidad, setCantidad] = useState("")
     const [open, setOpen] = useState(false)
@@ -59,26 +59,25 @@ const ReservaPage = () => {
         ) {
             try {
                 const response = await fetch('http://localhost:8000/cineulima/reserva', {
-                  method: 'POST',
-                  body: JSON.stringify({
-                    correo: codigo,
-                    funcionid: 3,
-                    cantidad: cantidad
-                  })
+                    method: 'POST',
+                    body: JSON.stringify({
+                        correo: codigo,
+                        funcionid: 3,
+                        cantidad: cantidad
+                    })
                 });
                 const data = await response.json()
                 if (data.msg === "") {
                     handleOpen();
                     setError(false);
-                }else{
+                } else {
                     throw new Error('Error al crear la reserva');
                 }
+            } catch (error) {
+                console.error(error);
+                setError(true);
             }
-            catch (error) {
-                  console.error(error);
-                  setError(true);
-            }
-        }else{
+        } else {
             setError(true);
         }
     }

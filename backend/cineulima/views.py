@@ -30,6 +30,7 @@ def usuariosEndpoint(request):
                 return HttpResponse(json.dumps(errorMsg), status=400)
 
             dataResponse = {
+                "id": usuario_login.pk,
                 "nombre": usuario_login.nombre,
                 "apellidos": usuario_login.apellidos,
                 "correo": usuario_login.correo
@@ -62,13 +63,12 @@ def createUsersEndpoint(request):
             return HttpResponse(json.dumps(errorMsg), status=400)
 
         dataResponse = {
+            "id": usuario_login.pk,
             "nombre": new_user.nombre,
             "apellidos": new_user.apellidos,
             "correo": new_user.correo
         }
         return HttpResponse(json.dumps(dataResponse), status=200)
-
-
 
 
 @csrf_exempt
@@ -89,6 +89,7 @@ def passwordRecoveryEndpoint(request):
             }
             return HttpResponse(json.dumps(errorMsg), status=400)
         except Exception as e:
+            print(e)
             errorMsg = {
                 "msg": e.message
             }
@@ -96,7 +97,7 @@ def passwordRecoveryEndpoint(request):
 
 
 def verRecomendacionesPeliculasEndPoint(request):
-    #Solo filtra a las recomendaciones que estan activas
+    # Solo filtra a las recomendaciones que estan activas
     recomendaciones = RecomendacionPelicula.objects.filter(activo='A')
     dataResponse = []
 
@@ -109,7 +110,7 @@ def verRecomendacionesPeliculasEndPoint(request):
                 'path': pelicula.path
             }
             dataResponse.append(pelicula_info)
-    
+
     return HttpResponse(json.dumps(dataResponse))
 
 
@@ -135,11 +136,11 @@ def buscarContenidoEndPoint(request, filtro):
                 'title': pelicula.titulo,
                 'thumbnail': pelicula.thumbnail,
                 'path': pelicula.path,
-                #flat=true para que no devuelva tuplas sino como lista plana
+                # flat=true para que no devuelva tuplas sino como lista plana
                 'genres': list(pelicula.peliculagenero_set.values_list('genero', flat=True)),
                 'cast': list(pelicula.peliculaactor_set.values_list('actor', flat=True))
             })
-        
+
         for sala in sala_resultados:
             dataResponse['salas'].append({
                 'id': sala.id,
@@ -179,7 +180,6 @@ def getFechasEndpoint(request):
         return HttpResponse(json.dumps(fechas_formatted, default=str))
 
 
-
 """ 
 url = /cineulima/peliculainfofecha?fecha=2024-03-01&movieid=1    -> GET
 fecha en formato YYYY-MM-DD
@@ -194,6 +194,8 @@ Response = [{
         }] 
 no carga la info de la pelicula, solo la parte de abajo pelicula x sala
 """
+
+
 def peliculaInfoEndpoint(request):
     if request.method == "GET":
         fecha = request.GET.get("fecha")
@@ -225,6 +227,7 @@ def peliculaInfoEndpoint(request):
 
         return HttpResponse(json.dumps(dataResponse))
 
+
 @csrf_exempt
 def reservaEndpoint(request):
     if request.method == 'POST':
@@ -234,15 +237,15 @@ def reservaEndpoint(request):
         correo = user_data['correo']
         cantidad = user_data['cantidad']
         funcion = user_data['funcionid']
-        
+
         try:
             usuario_login = Usuario.objects.get(correo=correo)
             funcion_obj = Funcion.objects.get(pk=funcion)
-            
+
             reserva = Reserva(
-                usuario = usuario_login,
-                funcion = funcion_obj,
-                cantidad = cantidad
+                usuario=usuario_login,
+                funcion=funcion_obj,
+                cantidad=cantidad
             )
             reserva.save()
             dataResponse = {
@@ -254,3 +257,26 @@ def reservaEndpoint(request):
                 "msg": "Correo no registrado"
             }
             return HttpResponse(json.dumps(errorMsg), status=400)
+
+
+def misReservasEndpoint(request):
+    if request.method == "GET":
+        user_id = request.GET.get("user_id")
+        try:
+            usuario = Usuario.objects.get(pk=user_id)
+            reservas = Reserva.objects.filter(usuario=usuario.pk)
+
+            dataResponse = []
+            for reserva in reservas:
+                dataResponse.append({
+                    "thumbnail": reserva.funcion.pelicula_id.thumbnail,
+                    "titulo": reserva.funcion.pelicula_id.titulo,
+                    "fecha": str(reserva.funcion.ventana_id.fecha.strftime("%d-%m-%Y")),
+                    "hora": str(reserva.funcion.ventana_id.hora.strftime("%H:%M")),
+                    "sala": reserva.funcion.sala_id.nombre,
+                    "entradas": reserva.cantidad
+                })
+
+            return HttpResponse(json.dumps(dataResponse), status=200)
+        except Usuario.DoesNotExist:
+            return HttpResponse(status=400)

@@ -1,4 +1,4 @@
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
@@ -9,14 +9,16 @@ import SalasPage from "./pages/SalasPage";
 import SalaItemPage from "./pages/SalaItemPage";
 import RecuperaPage from "./pages/RecuperaPage";
 import MisReservasPage from "./pages/MisReservasPage"
+import ErrorPage from "./pages/ErrorPage"
 
 const App = () => {
     return (
         <Routes>
             <Route
                 path="*"
-                element={<Navigate to="/login" replace={true}/>}
+                element={<ErrorPage/>}
             />
+            <Route path="" element={<LoginPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/registro" element={<RegisterPage/>}/>
             <Route path="/home" element={<HomePage/>}/>

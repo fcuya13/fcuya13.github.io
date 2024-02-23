@@ -12,7 +12,10 @@ import LeftPanel from './extra/LeftPanel';
 import {Star} from '@mui/icons-material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {useNavigate} from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Tooltip from '@mui/material/Tooltip';
 import {useEffect} from 'react'
+import LocalActivityOutlinedIcon from '@mui/icons-material/LocalActivityOutlined';
 
 const drawerWidth = 240;
 
@@ -80,6 +83,10 @@ export default function PageLayout({children, onSearchChange}) {
         navigate("/login")
     }
 
+    const handleTicket = () => {
+        navigate("/misreservas")
+    }
+
     useEffect(() => {
         checkLoggedIn()
     });
@@ -101,15 +108,28 @@ export default function PageLayout({children, onSearchChange}) {
                         >
                             <MenuIcon/>
                         </IconButton>
-                        <Typography sx={{display: {xs: "none", sm: "block"}}} variant="h6" noWrap component="div">
+                        <Typography sx={{display: {xs: "none", sm: "block", cursor: "pointer"}}} variant="h6" noWrap
+                                    component="div"
+                                    onClick={() => {
+                                        navigate("/")
+                                    }}>
                             Salas de Cine ULima
                         </Typography>
                         <Box sx={{flexGrow: 1}}/>
                         {userJSON ? (
                             <Box sx={{display: 'flex', alignItems: 'center'}}>
-                                <Typography sx={{display: {xs: "none", sm: "block"}}}>Bienvenido de
-                                    vuelta {userJSON.nombre}</Typography>
-                                <LogoutIcon sx={{ml: 2, cursor: 'pointer'}} onClick={handleLogOut}/>
+                                <Typography sx={{display: {xs: "none", sm: "block"}}}>{userJSON.nombre}</Typography>
+                                <Tooltip title="Mis reservas">
+                                    <IconButton color="inherit">
+                                        <LocalActivityOutlinedIcon sx={{ml: 2, cursor: 'pointer'}}
+                                                                   onClick={handleTicket}/>
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Logout">
+                                    <IconButton color="inherit">
+                                        <LogoutIcon sx={{ml: 2, cursor: 'pointer'}} onClick={handleLogOut}/>
+                                    </IconButton>
+                                </Tooltip>
                             </Box>
                         ) : (
                             <>
