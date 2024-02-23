@@ -169,7 +169,7 @@ const RecuperaPage = () => {
                     borderRadius: 2,
                     p: 4,
                 }}>
-                    <Typography variant="h6" component="h2" textAlign="center">
+                    <Typography variant="h6" component="h2" textAlign="c ">
                         Correo enviado. Por favor revise su bandeja de entrada
                     </Typography>
                     <Button

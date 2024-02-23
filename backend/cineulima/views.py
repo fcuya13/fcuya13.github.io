@@ -248,6 +248,9 @@ def reservaEndpoint(request):
                 cantidad=cantidad
             )
             reserva.save()
+            postmark = PostmarkService()
+            postmark.send_email(usuario_login.correo, "Su reserva en Salas de Cine ULima",
+                                    f"Pelicula:  {funcion_obj.pelicula_id}\nSala: {funcion_obj.sala_id}\nFecha: {funcion_obj.ventana_id}")
             dataResponse = {
                 "msg": ""
             }
@@ -267,6 +270,7 @@ def misReservasEndpoint(request):
             reservas = Reserva.objects.filter(usuario=usuario.pk)
 
             dataResponse = []
+            reservas = reservas.order_by("-id")
             for reserva in reservas:
                 dataResponse.append({
                     "thumbnail": reserva.funcion.pelicula_id.thumbnail,

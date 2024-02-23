@@ -125,6 +125,11 @@ const RegisterPage = () => {
                         fullWidth
                         value={nombre}
                         onChange={(e) => setNombre(e.target.value)}
+                        onKeyDown={(e)=> {
+                            if (e.key === "Enter"){
+                                validateRegisterForm()
+                            }
+                        }}
                     />
                     <TextField
                         label="Apellidos"
@@ -133,6 +138,11 @@ const RegisterPage = () => {
                         fullWidth
                         value={apellido}
                         onChange={(e) => setApellido(e.target.value)}
+                        onKeyDown={(e)=> {
+                            if (e.key === "Enter"){
+                                validateRegisterForm()
+                            }
+                        }}
                     />
 
                     <TextField
@@ -143,6 +153,11 @@ const RegisterPage = () => {
                         type="email"
                         value={correo}
                         onChange={(e) => setCorreo(e.target.value)}
+                        onKeyDown={(e)=> {
+                            if (e.key === "Enter"){
+                                validateRegisterForm()
+                            }
+                        }}
                     />
                     <TextField
                         label="Contraseña"
@@ -152,6 +167,11 @@ const RegisterPage = () => {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        onKeyDown={(e)=> {
+                            if (e.key === "Enter"){
+                                validateRegisterForm()
+                            }
+                        }}
                     />
                     <TextField
                         label="Confirmar Contraseña"
@@ -161,6 +181,11 @@ const RegisterPage = () => {
                         type="password"
                         value={passConf}
                         onChange={(e) => setPassConf(e.target.value)}
+                        onKeyDown={(e)=> {
+                            if (e.key === "Enter"){
+                                validateRegisterForm()
+                            }
+                        }}
                     />
                     <Button
                         variant="contained"

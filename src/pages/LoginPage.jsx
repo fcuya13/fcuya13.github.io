@@ -26,6 +26,7 @@ const LoginPage = () => {
             password.trim().length !== 0;
     };
 
+    
     const validateUserPassword = async () => {
 
         if (!validarInputs()) {
@@ -66,6 +67,8 @@ const LoginPage = () => {
 
     }
 
+    
+
     return (
         <Container maxWidth={false}
                    sx={{
@@ -103,6 +106,7 @@ const LoginPage = () => {
                         background: "white",
                         borderRadius: 1,
                     }}
+                    
                 >
                     <TextField
                         label="Usuario"
@@ -111,6 +115,11 @@ const LoginPage = () => {
                         sx={{marginBottom: 2}}
                         value={correo}
                         onChange={(e) => setCorreo(e.target.value)}
+                        onKeyDown={(e)=> {
+                            if (e.key === "Enter"){
+                                validateUserPassword()
+                            }
+                        }}
                     />
                     <TextField
                         label="Contraseña"
@@ -120,6 +129,11 @@ const LoginPage = () => {
                         sx={{marginBottom: 1}}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        onKeyDown={(e)=> {
+                            if (e.key === "Enter"){
+                                validateUserPassword()
+                            }
+                        }}
                     />
                     <Typography component={Link} to="/recupera" color="#FA7525"
                                 sx={{

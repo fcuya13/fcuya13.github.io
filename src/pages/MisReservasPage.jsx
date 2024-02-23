@@ -12,9 +12,6 @@ import CardList3 from "../components/CardList3";
 const MisReservasPage = () => {
 
     const [reservas, setReservas] = useState([])
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     const [loading, setLoading] = useState(false)
     const cargarReservas = async (user_id) => {
         try {
