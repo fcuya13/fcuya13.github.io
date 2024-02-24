@@ -1,6 +1,7 @@
-import { Container, Input, Button, Grid, Alert } from '@mui/material';
+import { Container, Input, Button, Grid, Alert, InputAdornment, IconButton, Tooltip } from '@mui/material';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
+import SearchIcon from '@mui/icons-material/Search'
 
 const MainNavbar = () => {
   const [filtro, setFiltro] = useState([]);
@@ -8,22 +9,30 @@ const MainNavbar = () => {
   const navigate = useNavigate();
 
   const filtrarContenido = async (e) => {
-    if (e.key === 'Enter') {
-      const response = await fetch(`http://localhost:8000/cineulima/busqueda/${filtro}`)
-      const data = await response.json()
+    const response = await fetch(`http://localhost:8000/cineulima/busqueda/${filtro}`)
+    const data = await response.json()
 
-      if (data.peliculas.length > 0) {
-        setFiltro(data.peliculas)
-        navigate('/peliculas', { state: { filtro: data.peliculas }})
-      }
-      else if(data.salas.length > 0){
-        setFiltro(data.salas)
-        navigate('/salas', { state: { filtro: data.salas }})
-      }
-      else {
-        setNoEncontrado(true)
-      }
+    if (data.peliculas.length > 0) {
+      setFiltro(data.peliculas)
+      navigate('/peliculas', { state: { filtro: data.peliculas } })
     }
+    else if (data.salas.length > 0) {
+      setFiltro(data.salas)
+      navigate('/salas', { state: { filtro: data.salas } })
+    }
+    else {
+      setNoEncontrado(true)
+    }
+  }
+
+  const onEnterClick = (e) => {
+    if (e.key === 'Enter') {
+      filtrarContenido()
+    }
+  }
+
+  const OnClickButton = () => {
+    filtrarContenido()
   }
 
   return (
@@ -33,8 +42,17 @@ const MainNavbar = () => {
         placeholder="Buscar por título, actores, actrices, géneros o cines"
         value={filtro}
         onChange={(e) => setFiltro(e.target.value)}
-        onKeyPress={filtrarContenido}
+        onKeyPress={onEnterClick}
         fullWidth
+        endAdornment={
+          <InputAdornment position='end'>
+            <Tooltip title="Buscar" placement="bottom">
+              <IconButton onClick={OnClickButton} edge='end'>
+                <SearchIcon />
+              </IconButton>
+            </Tooltip>
+          </InputAdornment>
+        }
       />
       {
         (() => {
