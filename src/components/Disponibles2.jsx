@@ -13,11 +13,11 @@ const Disponibles2 = (props) => {
 
     const navigate = useNavigate();
 
-    const handleReservaClick = (label) => {
+    const handleReservaClick = ({ventanaid, hora}) => {
         
         const datosReserva = {
           pelicula: props.pelicula,
-          horario: label,
+          horario: hora,
           sala: props.sala.name
         };
     
@@ -40,8 +40,8 @@ const Disponibles2 = (props) => {
             {props.available_times.map(label => {
                 return <Button 
                     style={estiloBoton} 
-                    onClick={() => handleReservaClick(label)} sx={{mr:1, mb:1}}>
-                    {label}
+                    onClick={() => handleReservaClick(label.hora)} sx={{mr:1, mb:1}}>
+                    {label.hora}
                 </Button>
             })}
         </Box>

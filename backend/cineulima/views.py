@@ -284,3 +284,81 @@ def misReservasEndpoint(request):
             return HttpResponse(json.dumps(dataResponse), status=200)
         except Usuario.DoesNotExist:
             return HttpResponse(status=400)
+
+
+def cargarSalas(request):
+    if request.method == "GET":
+        filtro = request.GET.get("filtro")
+        salas = None
+        if filtro == "":
+            salas = Sala.objects.all()
+        else:
+            salas = Sala.objects.filter(nombre__icontains = filtro)
+        dataResponse = []
+        for sala in salas:
+                funciones = Funcion.objects.filter(sala_id=sala.pk)
+                horarios = []
+                for funcion in funciones:
+                    hora = str(funcion.ventana_id.hora.strftime("%H:%M"))
+                    if hora not in horarios:
+                        horarios.append(hora)
+                horarios = [datetime.strptime(h, '%H:%M') for h in horarios]
+                sorted_horarios = sorted(horarios)
+                sorted_horarios_list = [str(hora.strftime("%H:%M")) for hora in sorted_horarios]
+                        
+                dataResponse.append({
+                    "id": sala.pk,
+                    "siglas": sala.siglas,
+                    "nombre": sala.nombre,
+                    "direccion": sala.direccion,
+                    "imagen": sala.imagen,
+                    "path": sala.path,
+                    "horarios": sorted_horarios_list
+                })
+        return HttpResponse(json.dumps(dataResponse), status=200)
+
+
+def salaInfoEndpoint(request):
+    if request.method == "GET":
+        fecha = request.GET.get("fecha")
+        salaid = request.GET.get("salaid")
+        dataResponse = []
+
+        for pelicula in Pelicula.objects.all():
+            funciones = Funcion.objects.filter(sala_id=salaid, pelicula_id=pelicula.pk)
+
+            ventanas_list = []
+
+            for funcion in funciones:
+                ventanas = Ventana.objects.filter(fecha=fecha, pk=funcion.ventana_id.pk)
+
+                for ventana in ventanas:
+                    ventana_info = {
+                        "ventana_id": ventana.pk,
+                        "hora": str(ventana.hora.strftime("%H:%M"))
+                    }
+                    ventanas_list.append(ventana_info)
+
+            if ventanas_list:
+                dataResponse.append({
+                    "pelicula_id": pelicula.pk,
+                    "nombre": pelicula.titulo,
+                    "descripcion": pelicula.extract,
+                    "ventanas": ventanas_list,
+                    "siglas" : pelicula.siglas
+                })
+
+        return HttpResponse(json.dumps(dataResponse))
+    
+def cargarSala(request, filtro):
+    if request.method == "GET":
+        sala = Sala.objects.get(path=filtro)
+        dataResponse = {
+            "id": sala.pk,
+            "siglas": sala.siglas,
+            "nombre": sala.nombre,
+            "direccion": sala.direccion,
+            "imagen": sala.imagen,
+        }
+
+        return HttpResponse(json.dumps(dataResponse))

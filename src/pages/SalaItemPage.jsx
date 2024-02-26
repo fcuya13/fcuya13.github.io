@@ -8,39 +8,32 @@ import ListaDisponibles2 from "../components/ListaDisponibles2";
 
 const SalaItemPage = () => {
     const [peliculasData, setPeliculasData] = useState([]);
-    const [salasData, setSalasData] = useState([]);
     const {path} = useParams();
     const [sala, setSala] = useState(null);
-    var listasFilt;
 
 
     const cargarData = async () => {
-        const responseSalas = await fetch('/salas.json');
-        const dataSalas = await responseSalas.json();
-        const responsePelis = await fetch('/peliculas.json');
-        const dataPelis = await responsePelis.json();
-        setSalasData(dataSalas);
-        setPeliculasData(dataPelis);
-    };
-
-
-    const filtrarPeliculas = (nombres, peliculas) => {
-        return peliculas.filter((pelicula) => nombres.includes(pelicula.id));
+        const responseSala = await fetch(`http://localhost:8000/cineulima/sala/${path}`);
+        const dataSala = await responseSala.json();
+        setSala(dataSala);
     };
 
     useEffect(() => {
         cargarData();
+        console.log(sala)
     }, []);
 
+    const cargarDataPelicula = async () => {
+        const responsePelicula = await fetch(`http://localhost:8000/cineulima/salainfofecha?fecha=2024-03-01&salaid=${sala.id}`);
+        const dataPeliculas = await responsePelicula.json();
+        setPeliculasData(dataPeliculas)
+    };
+
     useEffect(() => {
-        const salaLoaded = salasData.find((s) => s.path === path);
-        setSala(salaLoaded);
-    }, [path, salasData]);
-
-
-    if (sala) {
-        listasFilt = filtrarPeliculas(sala.peliculas, peliculasData)
-    }
+        if(sala){
+            cargarDataPelicula();
+        }
+    }, [sala]);
 
     return (
         <PageLayout>
@@ -59,12 +52,12 @@ const SalaItemPage = () => {
                     {sala && <>
                         <Container sx={{mt: 5}}>
                             <Typography variant="h4" sx={{mb: 2}}>
-                                {sala.name}
+                                {sala.nombre}
                             </Typography>
                             <box>
                                 <Typography variant='subtitle1' color="gray" sx={{mb: 2, display: 'inline-flex'}}>
                                     <LocationOnIcon sx={{mr: 2}}/>
-                                    <Typography color="#009CD2">{sala.address}</Typography>
+                                    <Typography color="#009CD2">{sala.direccion}</Typography>
                                 </Typography>
                             </box>
                         </Container>
@@ -73,7 +66,7 @@ const SalaItemPage = () => {
                                 <Card variant="outlined">
                                     <CardMedia
                                         component="img"
-                                        image={sala.image}
+                                        image={sala.imagen}
                                     />
                                 </Card>
                             </Grid>
@@ -101,18 +94,18 @@ const SalaItemPage = () => {
                                 </Card>
                             </Grid>
                         </Grid>
-                        {listasFilt && <Grid item xs={12} sx={{mt: 4, mb: 5}}>
+                        {peliculasData && <Grid item xs={12} sx={{mt: 4, mb: 5}}>
                             <Typography variant="h4" sx={{mt: 2}}>
                                 Películas disponibles
                             </Typography>
                             <Container sx={{mt: 4}}>
                                 <ListaDisponibles2
-                                    listaDisponibles={listasFilt}
+                                    listaDisponibles={peliculasData}
                                     sala={sala}
                                 >
                                 </ListaDisponibles2>
                             </Container>
-                        </Grid>}
+                    </Grid>}
                     </>
                     }
                 </Container>

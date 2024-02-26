@@ -12,10 +12,10 @@ const CardList2 = (props) => {
             return (
                 <Cards2
                 id = {e.id}
-                name={e.name}
-                address={e.address}
-                image={e.image}
-                available_times={e.available_times}
+                name={e.nombre}
+                address={e.direccion}
+                image={e.imagen}
+                available_times={e.horarios}
                 path={e.path}
             />
             )

@@ -7,11 +7,11 @@ const ListaDisponibles2 = (props) => {
             props.listaDisponibles.map((elem) => {
                 return <Disponibles2
                     siglas= {elem.siglas}
-                    name= {elem.title}
-                    descripcionDisponible= {elem.extract}
-                    available_times={elem.available_times}
+                    name= {elem.nombre}
+                    descripcionDisponible= {elem.descripcion}
+                    available_times={elem.ventanas}
                     sala={props.sala}
-                    pelicula={elem}
+                    pelicula={elem.pelicula_id}
                 />
             })
         }

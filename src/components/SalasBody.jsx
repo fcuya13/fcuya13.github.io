@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import CardList2 from "./CardList2"
 import {Box} from "@mui/material"
 
-const SalasBody = ({ searchTerm, salas }) => {
+const SalasBody = ({ searchTerm , salas }) => {
     const [salasData, setSalasData] = useState([])
-    const [filteredSalas, setFilteredSalas] = useState([])
+    //const [filteredSalas, setFilteredSalas] = useState([])
 
     const obtenerSalas = async () => {
-        const response = await fetch("/salas.json")
+        const response = await fetch(`http://localhost:8000/cineulima/salas?filtro=${searchTerm}`)
         const data = await response.json();
         setSalasData(data)
-        console.log(salas)
+        console.log(salasData)
     }
 
     useEffect(() => {
         obtenerSalas()
-    }, [])
-
+    }, [salasData])
+/*
     useEffect(() => {
         // Si se busca por un término
         if (searchTerm) {
@@ -41,10 +41,10 @@ const SalasBody = ({ searchTerm, salas }) => {
             setFilteredSalas(salasData)
         }
     }, [searchTerm])
-
+*/
     return (
         <Box>
-            <CardList2 list={filteredSalas} />
+            <CardList2 list={salasData} />
         </Box>
     )
 }
