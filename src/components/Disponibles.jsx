@@ -13,11 +13,12 @@ const Disponibles = (props) => {
 
     const navigate = useNavigate();
 
-    const handleReservaClick = (label) => {
+    const handleReservaClick = (fecha,horario) => {
         
-        const datosReserva = {
+        const datosReserva ={
           pelicula: props.pelicula,
-          horario: label,
+          horario: horario,
+          fecha: fecha,
           sala: props.name
         };
     
@@ -37,13 +38,22 @@ const Disponibles = (props) => {
                 {props.descripcionDisponible}
         </Typography>
         <Box>
-            {props.available_times.map(label => {
-                return <Button 
-                    style={estiloBoton} 
-                    onClick={() => handleReservaClick(label)} sx={{mr:1, mb:1}}>
-                    {label}
-                </Button>
-            })}
+            {props.ventanas.map((ventana) => (
+                <Box key={ventana.fecha}>
+                    <Typography variant="subtitle1" sx={{ mt: 2 }}>
+                        {ventana.fecha}
+                    </Typography>
+                    {ventana.horarios.map((horario) => (
+                    <Button
+                        key={horario}
+                        style={estiloBoton}
+                        onClick={() => handleReservaClick(ventana.fecha, horario)}
+                        sx={{ mr: 1, mb: 1 }}> 
+                        {horario}
+                    </Button>
+            ))}
+          </Box>
+        ))}
         </Box>
     </Box>
 }

@@ -11,42 +11,32 @@ const PeliculaItemPage=()=>{
     const [peliculasData, setPeliculasData] = useState([]);
     const { path } = useParams();
     const [pelicula, setPelicula] = useState(null);
-    var listasFilt;
 
     const cargarData = async () => {
         const responsePelis = await fetch(`http://localhost:8000/cineulima/peliculas/${path}`);
         const dataPeli = await responsePelis.json();
         setPeliculasData(dataPeli);
-        const responseSalas = await fetch('/salas.json');
-        const dataSalas = await responseSalas.json();
-        setSalasData(dataSalas);
     };
-
+    
     const obtenerInfoSalas=async (idPelicula)=>{
-        const response= await fetch(`http://localhost:8000/cineulima/ventanas-peliculas?id=${idPelicula}`)
-        const data= await response.json()
-        if(data.msg===""){
-            window.location.reload()
-        }
+        const responseSalas= await fetch(`http://localhost:8000/cineulima/ventanas-peliculas?id=${idPelicula}`);
+        const dataSalas= await responseSalas.json();
+        setSalasData(dataSalas);
     }
-
-    const filtrarSalas = (nombres, salas) => {
-        return salas.filter((sala) => nombres.includes(sala.name));
-    };
     
     useEffect(() => {
         cargarData();
-    }, []); 
+    }, []);
 
     useEffect(() => {
-        const peliLoaded = peliculasData.find((p) => p.path === path);
-        setPelicula(peliLoaded);
-    }, [path, peliculasData]);
-    
-
-    if (pelicula){
-         listasFilt = filtrarSalas(pelicula.salas, salasData)
-    }
+        if (peliculasData.length > 0) {
+            const peliLoaded = peliculasData.find(p => p.path === path);
+            setPelicula(peliLoaded);
+            if (peliLoaded && peliLoaded.id) {
+                obtenerInfoSalas(peliLoaded.id);
+            }
+        }
+    }, [peliculasData, path]);
 
     return (
     <PageLayout>
@@ -122,13 +112,13 @@ const PeliculaItemPage=()=>{
                 </Card>
             </Grid>
         </Grid>
-        {listasFilt && <Grid item xs = {12} sx={{mt:4, mb:5}}>
+        {salasData && <Grid item xs = {12} sx={{mt:4, mb:5}}>
             <Typography variant="h4" sx={{ mt: 2}}>
                     Salas disponibles
             </Typography>
             <Container sx={{mt: 4}}>
                 <ListaDisponibles
-                    listaDisponibles={listasFilt}
+                    listaDisponibles={salasData}
                     pelicula={pelicula}>
                 </ListaDisponibles>
                 

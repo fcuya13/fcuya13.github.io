@@ -366,27 +366,22 @@ def cargarSala(request, filtro):
 @csrf_exempt
 def cargarPeliculas(request,filtro=None):
     if request.method == "GET":
-        filtro = request.GET.get("filtro","")
+        filtro = filtro or request.GET.get("filtro", "")
         peliculas = None
         if filtro:
-            peliculas = Pelicula.objects.all()
-        else:
+            filtro = filtro.replace("-", " ")
             peliculas = Pelicula.objects.filter(titulo__icontains = filtro)
+        else:
+            peliculas = Pelicula.objects.all()
         dataResponse = []
         for pelicula in peliculas:
-                funciones = Funcion.objects.filter(pelicula_id=pelicula.pk)
-                horarios = []
-                for funcion in funciones:
-                    hora = str(funcion.ventana_id.hora.strftime("%H:%M"))
-                    if hora not in horarios:
-                        horarios.append(hora)
-                horarios = [datetime.strptime(h, '%H:%M') for h in horarios]
-                sorted_horarios = sorted(horarios)
-                sorted_horarios_list = [str(hora.strftime("%H:%M")) for hora in sorted_horarios]
                 generos_queryset = PeliculaGenero.objects.filter(pelicula_id=pelicula)
                 genres = [genero.genero for genero in generos_queryset]
+                generos_queryset = PeliculaGenero.objects.filter(pelicula_id=pelicula)
+                genres = [genero.genero for genero in generos_queryset]
+                cast_queryset = PeliculaActor.objects.filter(pelicula_id=pelicula)
+                cast = [actor.actor for actor in cast_queryset]
                     
-
                 dataResponse.append({
                     "id": pelicula.pk,
                     "titulo": pelicula.titulo,
@@ -399,8 +394,8 @@ def cargarPeliculas(request,filtro=None):
                     "thumbnail_width": pelicula.thumbnail_width,
                     "thumbnail_heigth": pelicula.thumbnail_height,
                     "path": pelicula.path,
-                    "horarios": sorted_horarios_list,
-                    "genres":genres
+                    "genres":genres,
+                    "cast":cast
                 })
         return HttpResponse(json.dumps(dataResponse), status=200)
 
