@@ -416,7 +416,8 @@ def obtenerVentanasParaPeliculas(request):
         for funcion in funciones:
             nombresala=funcion.sala_id.nombre
             siglassala=funcion.sala_id.siglas
-            fecha = str(funcion.ventana_id.fecha.strftime("%Y-%m-%d"))
+            funcionid=funcion.pk
+            fecha = str(funcion.ventana_id.fecha.strftime("%b %d, %Y"))
             hora = str(funcion.ventana_id.hora.strftime("%H:%M"))
             
             if nombresala not in salas:
@@ -427,13 +428,17 @@ def obtenerVentanasParaPeliculas(request):
             if fecha not in salas[nombresala]["fechas"]:
                 salas[nombresala]["fechas"][fecha]=[]
 
-            if hora not in salas[nombresala]["fechas"][fecha]:
-                salas[nombresala]["fechas"][fecha].append(hora)
+            horariofuncion={
+                "hora":hora,
+                "funcionid":funcionid
+            }
+
+            salas[nombresala]["fechas"][fecha].append(horariofuncion)
 
         for nombresala, info in salas.items():
             fechas=[]
             for fecha,horarios in sorted(info["fechas"].items()):
-                sortedHorarios=sorted(horarios)
+                sortedHorarios=sorted(horarios, key=lambda x: x['hora'])
                 fechasDict={
                     "fecha":fecha,
                     "horarios":sortedHorarios

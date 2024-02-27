@@ -62,7 +62,7 @@ const ReservaPage = () => {
                     method: 'POST',
                     body: JSON.stringify({
                         correo: codigo,
-                        funcionid: 3,
+                        funcionid: datos.funcionid,
                         cantidad: cantidad
                     })
                 });
@@ -99,12 +99,12 @@ const ReservaPage = () => {
                     <Container>
                         <Container sx={{mt: 5}}>
                             <Typography variant="h4" sx={{mb: 2}}>
-                                {datos.pelicula.title}
+                                {datos.pelicula.titulo}
                             </Typography>
                             <Typography variant="subtitle1" color="gray" sx={{mb: 2, display: 'inline-flex'}}>
                                 <AccessTimeIcon sx={{mr: 1}}/>
                                 <Typography color="#009CD2">
-                                    {datos.horario}
+                                    {datos.fecha} - {datos.horario}
                                 </Typography>
                                 <LocationOnIcon sx={{mx: 1}}/>
                                 <Typography color="#009CD2">
