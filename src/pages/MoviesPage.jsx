@@ -13,16 +13,19 @@ const MoviesPage = () => {
   const movies = state ? state.filtro : []
 
   const obtenerPeliculas = async () => {
-    const response = await fetch(`http://localhost:8000/cineulima/peliculas?filtro=${searchTerm}`)
+    const response = await fetch(`http://localhost:8000/cineulima/peliculas`)
     const data = await response.json()
     setMoviesData(data)
   }
+    
 
-
-
-  useEffect(() => {
-    obtenerPeliculas()
-  }, [])
+  useEffect(()=>{
+    if(!movies.length||searchTerm){
+      obtenerPeliculas();
+    }else{
+      setMoviesData(movies);
+    }
+  },[searchTerm]);
 
   return(
     <PageLayout onSearchChange={setSearchTerm}>
@@ -39,11 +42,10 @@ const MoviesPage = () => {
           fontWeight: 400,
           letterSpacing: 0.25
         }}>Películas</Typography>
-        <MovieBody searchTerm={searchTerm} movies = { movies } moviesData={moviesData}/>
+        <MovieBody searchTerm={searchTerm} moviesData={moviesData}/>
       </Container>
     </Grid>
     </PageLayout>)
 }
 
 export default MoviesPage
-

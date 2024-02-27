@@ -133,7 +133,7 @@ def buscarContenidoEndPoint(request, filtro):
         for pelicula in peliculas_resultados:
             dataResponse['peliculas'].append({
                 'id': pelicula.pk,
-                'title': pelicula.titulo,
+                'titulo': pelicula.titulo,
                 'thumbnail': pelicula.thumbnail,
                 'path': pelicula.path,
                 # flat=true para que no devuelva tuplas sino como lista plana
@@ -366,12 +366,8 @@ def cargarSala(request, filtro):
 @csrf_exempt
 def cargarPeliculas(request):
     if request.method == "GET":
-        filtro = request.GET.get("filtro")
         peliculas = None
-        if filtro == "":
-            peliculas = Pelicula.objects.all()
-        else:
-            peliculas = Pelicula.objects.filter(titulo__icontains = filtro)
+        peliculas = Pelicula.objects.all()
         dataResponse = []
         for pelicula in peliculas:
                 funciones = Funcion.objects.filter(pelicula_id=pelicula.pk)

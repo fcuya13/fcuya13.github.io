@@ -8,7 +8,7 @@ const Cards2 = (props) => {
     }
 
     return <Card item xs={6} sx={{ marginRight: "30px", marginBottom: "30px", maxWidth: "450px", height: "100%" }}>
-        <CardActionArea>
+        <CardActionArea onClick={cardOnClick}>
             <CardMedia
                 sx={{
                     width: "450px",
@@ -16,7 +16,7 @@ const Cards2 = (props) => {
                 }}
                 component="img"
                 image={props.image}
-                onClick={cardOnClick}>
+                >
             </CardMedia>
             <CardContent>
                 <Typography
