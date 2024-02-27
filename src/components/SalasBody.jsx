@@ -10,7 +10,6 @@ const SalasBody = ({ searchTerm , salas }) => {
         const response = await fetch(`http://localhost:8000/cineulima/salas?filtro=${searchTerm}`)
         const data = await response.json();
         setSalasData(data)
-        console.log(salasData)
     }
 
     useEffect(() => {

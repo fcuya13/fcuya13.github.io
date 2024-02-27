@@ -11,7 +11,7 @@ const CardList = (props) => {
             return (
                 <Cards 
                     id={e.id}
-                    title={e.title}
+                    titulo={e.titulo}
                     cast={e.cast}
                     genres={e.genres}
                     thumbnail={e.thumbnail}

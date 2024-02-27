@@ -2,19 +2,8 @@ import { useEffect, useState } from "react"
 import CardList from "./CardList"
 import {Box} from "@mui/material"
 
-const MovieBody = ({ searchTerm, movies }) => {
-    const [moviesData, setMoviesData] = useState([])
+const MovieBody = ({ searchTerm, movies, moviesData }) => {
     const [filteredMovies, setFilteredMovies] = useState([])
-
-    const obtenerPeliculas = async () => {
-        const response = await fetch("/peliculas.json")
-        const data = await response.json()
-        setMoviesData(data)
-    }
-    
-    useEffect(() => {
-        obtenerPeliculas()
-    }, [])
 
     useEffect(() => {
         //si se busca por un termino 

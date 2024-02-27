@@ -8,14 +8,14 @@ const Cards = (props) => {
     }
 
     return <Card item xs={4} sx={{ marginRight: "30px", marginBottom: "30px", maxWidth: "300px", height: "100%" }}>
-        <CardActionArea>
+        <CardActionArea onClick={cardOnClick}>
             <CardMedia
                 sx={{
                     width: "300px",
                     height: "390px"
                 }}
-                onClick={cardOnClick}>
-                <img src={props.thumbnail} alt={props.title} style={{ width: '100%', height: "100%" }} />
+                >
+                <img src={props.thumbnail} alt={props.titulo} style={{ width: '100%', height: "100%" }} />
             </CardMedia>
             <CardContent>
                 <Typography
@@ -37,10 +37,11 @@ const Cards = (props) => {
                         fontWeight: 550,
                         lineHeight: "160%",
                         letterSpacing: 0.15
-                    }}>{props.title}</Typography>
+                    }}>{props.titulo}</Typography>
 
-                {props.genres.map(label => {
+                {props.genres.map((label,index) => {
                     return <Chip
+                        key={index}
                         label={label}
                         sx={{ marginRight: "10px", marginBottom: "5px" }} />
                 })}
