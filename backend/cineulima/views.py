@@ -364,10 +364,14 @@ def cargarSala(request, filtro):
         return HttpResponse(json.dumps(dataResponse))
 
 @csrf_exempt
-def cargarPeliculas(request):
+def cargarPeliculas(request,filtro=None):
     if request.method == "GET":
+        filtro = request.GET.get("filtro","")
         peliculas = None
-        peliculas = Pelicula.objects.all()
+        if filtro:
+            peliculas = Pelicula.objects.all()
+        else:
+            peliculas = Pelicula.objects.filter(titulo__icontains = filtro)
         dataResponse = []
         for pelicula in peliculas:
                 funciones = Funcion.objects.filter(pelicula_id=pelicula.pk)
@@ -399,3 +403,52 @@ def cargarPeliculas(request):
                     "genres":genres
                 })
         return HttpResponse(json.dumps(dataResponse), status=200)
+
+@csrf_exempt
+def obtenerVentanasParaPeliculas(request):
+    if request.method=="GET":
+        peliculaid=request.GET.get("id")
+        funciones=None
+        if not peliculaid:
+            errorDict={
+                "msg":"Debe enviar un id"
+            }
+            return HttpResponse(json.dumps(errorDict))
+        
+        dataResponse=[]
+        salas={}
+        funciones = Funcion.objects.filter(pelicula_id=peliculaid)
+        for funcion in funciones:
+            nombresala=funcion.sala_id.nombre
+            siglassala=funcion.sala_id.siglas
+            fecha = str(funcion.ventana_id.fecha.strftime("%Y-%m-%d"))
+            hora = str(funcion.ventana_id.hora.strftime("%H:%M"))
+            
+            if nombresala not in salas:
+                salas[nombresala]={
+                    "siglas":siglassala,
+                    "fechas":{}
+                }
+            if fecha not in salas[nombresala]["fechas"]:
+                salas[nombresala]["fechas"][fecha]=[]
+
+            if hora not in salas[nombresala]["fechas"][fecha]:
+                salas[nombresala]["fechas"][fecha].append(hora)
+
+        for nombresala, info in salas.items():
+            fechas=[]
+            for fecha,horarios in sorted(info["fechas"].items()):
+                sortedHorarios=sorted(horarios)
+                fechasDict={
+                    "fecha":fecha,
+                    "horarios":sortedHorarios
+                }
+                fechas.append(fechasDict)
+            salaDict={
+                "nombresala":nombresala,
+                "siglas":info["siglas"],
+                "fechas": fechas
+            }
+            dataResponse.append(salaDict)
+        return HttpResponse(json.dumps(dataResponse), status=200)
+            

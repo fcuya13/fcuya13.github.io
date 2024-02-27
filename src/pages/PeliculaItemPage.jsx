@@ -13,16 +13,22 @@ const PeliculaItemPage=()=>{
     const [pelicula, setPelicula] = useState(null);
     var listasFilt;
 
-
     const cargarData = async () => {
+        const responsePelis = await fetch(`http://localhost:8000/cineulima/peliculas/${path}`);
+        const dataPeli = await responsePelis.json();
+        setPeliculasData(dataPeli);
         const responseSalas = await fetch('/salas.json');
         const dataSalas = await responseSalas.json();
-        const responsePelis = await fetch('/peliculas.json');
-        const dataPelis = await responsePelis.json();
         setSalasData(dataSalas);
-        setPeliculasData(dataPelis);
     };
 
+    const obtenerInfoSalas=async (idPelicula)=>{
+        const response= await fetch(`http://localhost:8000/cineulima/ventanas-peliculas?id=${idPelicula}`)
+        const data= await response.json()
+        if(data.msg===""){
+            window.location.reload()
+        }
+    }
 
     const filtrarSalas = (nombres, salas) => {
         return salas.filter((sala) => nombres.includes(sala.name));
@@ -59,7 +65,7 @@ const PeliculaItemPage=()=>{
         { pelicula && <>
             <Container sx={{ mt: 5 }}>
                             <Typography variant="h4" sx={{mb:2}}>
-                                {pelicula.title}
+                                {pelicula.titulo}
                             </Typography>
                             <box>
                                 <Typography variant='subtitle1' color="gray" sx={{ mb: 2,  display:'inline-flex'}}>

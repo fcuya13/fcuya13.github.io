@@ -13,7 +13,7 @@ const MoviesPage = () => {
   const movies = state ? state.filtro : []
 
   const obtenerPeliculas = async () => {
-    const response = await fetch(`http://localhost:8000/cineulima/peliculas`)
+    const response = await fetch(`http://localhost:8000/cineulima/peliculas/`)
     const data = await response.json()
     setMoviesData(data)
   }
