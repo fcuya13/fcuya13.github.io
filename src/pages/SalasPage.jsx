@@ -27,7 +27,7 @@ const SalasPage = () => {
         else {
             filtrarSalas('')
         }
-    }, [filtro,salas])
+    }, [filtro])
 
   return <>
       <Helmet>

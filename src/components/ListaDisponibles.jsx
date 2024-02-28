@@ -7,9 +7,9 @@ const ListaDisponibles = (props) => {
             props.listaDisponibles.map((elem) => {
                 return <Disponibles
                     siglas= {elem.siglas}
-                    name= {elem.nombresala}
-                    descripcionDisponible= "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
-                    ventanas={elem.fechas}
+                    name= {elem.nombre}
+                    descripcionDisponible= {elem.direccion}
+                    ventanas={elem.ventanas}
                     pelicula={props.pelicula}
                 />
             })

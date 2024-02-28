@@ -13,15 +13,9 @@ const Disponibles2 = (props) => {
 
     const navigate = useNavigate();
 
-    const handleReservaClick = ({ventanaid, hora}) => {
-        
-        const datosReserva = {
-          pelicula: props.pelicula,
-          horario: hora,
-          sala: props.sala.name
-        };
-    
-        navigate("/reserva", { state: {datos:datosReserva}});
+    const handleReservaClick = (funcionid) => {
+
+        navigate("/reserva", { state: {datos:funcionid}});
     };
 
     return <Box item xs = {6} width="50%" minWidth="15em" sx={{mt:8}}>
@@ -40,7 +34,7 @@ const Disponibles2 = (props) => {
             {props.available_times.map(label => {
                 return <Button 
                     style={estiloBoton} 
-                    onClick={() => handleReservaClick(label.hora)} sx={{mr:1, mb:1}}>
+                    onClick={() => handleReservaClick(label.funcion_id)} sx={{mr:1, mb:1}}>
                     {label.hora}
                 </Button>
             })}

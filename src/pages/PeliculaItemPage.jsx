@@ -18,20 +18,21 @@ const PeliculaItemPage=()=>{
     const { path } = useParams();
     const [pelicula, setPelicula] = useState(null);
     const [fechaFiltro, setFechaFiltro]=useState("");
-    const [horaFiltro, setHoraFiltro]=useState("");
     const [noEncontrado, setNoEncontrado]=useState(false)
 
     const cargarData = async () => {
         const responsePelis = await fetch(`http://localhost:8000/cineulima/peliculas?filtro=${path}`);
         const dataPeli = await responsePelis.json();
+        const fechasResponse = await fetch("http://localhost:8000/cineulima/fechas")
+        const dataFechas = await fechasResponse.json();
         setPeliculasData(dataPeli);
+        setFechasHorariosData(dataFechas);
+        setFechaFiltro(dataFechas[0].value)
     };
     
     const obtenerInfoSalas=async (idPelicula)=>{
         const responseSalas= await fetch(
-            `http://localhost:8000/cineulima/ventanas-peliculas?id=${idPelicula}
-            &fecha=${fechaFiltro}
-            &hora=${horaFiltro}`);
+            `http://localhost:8000/cineulima/peliculainfofecha?fecha=${fechaFiltro}&movieid=${idPelicula}`);
         const dataSalas= await responseSalas.json();
         setSalasData(dataSalas);
         if(dataSalas.length===0){
@@ -40,33 +41,26 @@ const PeliculaItemPage=()=>{
             setNoEncontrado(false);
         }
     }
-
-    const fechasHorarios=async ()=>{
-        const response= await fetch(`http://localhost:8000/cineulima/fechas-horarios`);
-        const data= await response.json();
-        setFechasHorariosData(data);
-    }
     
     useEffect(() => {
         cargarData();
-        fechasHorarios();
     }, []);
 
     useEffect(() => {
         if (peliculasData.length > 0) {
             const peliLoaded = peliculasData.find(p => p.path === path);
             setPelicula(peliLoaded);
-            if (peliLoaded && peliLoaded.id) {
-                obtenerInfoSalas(peliLoaded.id);
+            if (pelicula) {
+                obtenerInfoSalas(pelicula.id);
             }
         }
     }, [peliculasData, path]);
 
     useEffect(() => {
-        if (pelicula && pelicula.id) {
+        if (pelicula) {
           obtenerInfoSalas(pelicula.id);
         }
-      }, [fechaFiltro, horaFiltro, pelicula]);
+      }, [fechaFiltro, pelicula]);
 
     return <>
         <Helmet>
@@ -155,30 +149,10 @@ const PeliculaItemPage=()=>{
                     <Select
                         value={fechaFiltro}
                         onChange={(e) => setFechaFiltro(e.target.value)}
-                        label="Age">
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        {fechasHorariosData.fechas.map((fecha) => {
-                            return <MenuItem value={fecha}>
-                                {fecha}
-                            </MenuItem>
-                        })
-                        }
-                    </Select>
-                </FormControl>
-                <FormControl variant="standard" sx={{ m: 1, mt:4, minWidth: "7em"}}>
-                    <InputLabel>Horario</InputLabel>
-                    <Select
-                        value={horaFiltro}
-                        onChange={(e) => setHoraFiltro(e.target.value)}
-                        label="Age">
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        {fechasHorariosData.horas.map((hora) => {
-                            return <MenuItem value={hora}>
-                                {hora}
+                        label="fecha">
+                        {fechasHorariosData.map((fecha) => {
+                            return <MenuItem value={fecha.value}>
+                                {fecha.display}
                             </MenuItem>
                         })
                         }

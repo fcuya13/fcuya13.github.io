@@ -1,6 +1,5 @@
-import {Box, Avatar, Typography, Button } from "@mui/material"
+import {Button } from "@mui/material"
 import {useNavigate} from "react-router-dom"
-import Divider from '@mui/material/Divider';
 
 
 const Ventana=(props)=>{
@@ -16,34 +15,19 @@ const Ventana=(props)=>{
 
     const navigate = useNavigate();
 
-    const handleReservaClick = (fecha,horario,funcionid) => {
-        
-        const datosReserva ={
-          pelicula: props.pelicula,
-          horario: horario,
-          fecha: fecha,
-          sala: props.name,
-          funcionid:funcionid
-        };
+    const handleReservaClick = (funcionid) => {
     
-        navigate("/reserva", { state: {datos:datosReserva}});
+        navigate("/reserva", { state: {datos:funcionid}});
     };
 
-    return <Box key={props.fecha}>
-        <Typography sx={{ mt: 1, mb:1 }}>
-            {props.fecha}
-        </Typography>
-        {props.horarios.map((horario, index) => (
-            <Button
-                key={horario}
+    return <Button
+                key={props.funcionid}
                 style={estiloBoton}
-                onClick={() => handleReservaClick(props.fecha, horario, props.funcionid[index])}
-                sx={{ mr: 1, mb: 1 }}> 
-                {horario}
+                onClick={() => handleReservaClick(props.funcionid)}
+                sx={{ mr: 1 }}>
+                {props.hora}
             </Button>
-        ))}
-        <Divider variant="middle" sx={{mt:1, backgroundColor:"gray"}} />
-    </Box>
+
 }
 
 export default Ventana

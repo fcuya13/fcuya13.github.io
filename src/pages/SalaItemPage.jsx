@@ -1,4 +1,4 @@
-import {Container, Grid, Typography, Card, CardMedia, CardContent} from "@mui/material"
+import {Container, Grid, Typography, Card, CardMedia, CardContent, Box, Alert} from "@mui/material"
 import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {CardHeader} from "react-bootstrap";
@@ -6,17 +6,27 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import ListaDisponibles2 from "../components/ListaDisponibles2";
 import {Helmet} from "react-helmet";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 const SalaItemPage = () => {
     const [peliculasData, setPeliculasData] = useState([]);
     const {path} = useParams();
     const [sala, setSalas] = useState(null);
-
+    const [fechaFiltro, setFechaFiltro]=useState("");
+    const [fechasHorariosData, setFechasHorariosData]=useState([]);
+    const [noEncontrado, setNoEncontrado]=useState(false)
 
     const cargarData = async () => {
-        const responseSala = await fetch(`http://localhost:8000/cineulima/salas?filtro=${path}`);
+        const responseSala = await fetch(`http://localhost:8000/cineulima/sala?filtro=${path}`);
         const dataSala = await responseSala.json();
         setSalas(dataSala)
+        const fechasResponse = await fetch("http://localhost:8000/cineulima/fechas")
+        const dataFechas = await fechasResponse.json();
+        setFechasHorariosData(dataFechas)
+        setFechaFiltro(dataFechas[0].value)
     };
 
     useEffect(() => {
@@ -24,16 +34,22 @@ const SalaItemPage = () => {
     }, []);
 
     const cargarDataPelicula = async () => {
-        const responsePelicula = await fetch(`http://localhost:8000/cineulima/salainfofecha?fecha=2024-03-01&salaid=${sala.id}`);
+        const responsePelicula = await fetch(`http://localhost:8000/cineulima/salainfofecha?fecha=${fechaFiltro}&salaid=${sala.id}`);
         const dataPeliculas = await responsePelicula.json();
         setPeliculasData(dataPeliculas)
+        if(dataPeliculas.length===0){
+            setNoEncontrado(true);
+        }else{
+            setNoEncontrado(false);
+        }
     };
 
     useEffect(() => {
+
         if(sala){
             cargarDataPelicula();
         }
-    }, [sala]);
+    }, [sala, fechaFiltro]);
 
     return <>
         <Helmet>
@@ -97,6 +113,23 @@ const SalaItemPage = () => {
                                 </Card>
                             </Grid>
                         </Grid>
+                        <Box>
+                            <FormControl variant="standard" sx={{ m: 1, mt:4, minWidth: "9em"}}>
+                                <InputLabel>Fecha</InputLabel>
+                                <Select
+                                    value={fechaFiltro}
+                                    onChange={(e) => setFechaFiltro(e.target.value)}
+                                    label="fecha">
+                                    {fechasHorariosData.map((fecha) => {
+                                        return <MenuItem value={fecha.value}>
+                                            {fecha.display}
+                                        </MenuItem>
+                                    })
+                                    }
+                                </Select>
+                            </FormControl>
+                        </Box>
+
                         {peliculasData && <Grid item xs={12} sx={{mt: 4, mb: 5}}>
                             <Typography variant="h4" sx={{mt: 2}}>
                                 Películas disponibles
@@ -110,6 +143,17 @@ const SalaItemPage = () => {
                             </Container>
                     </Grid>}
                     </>
+                    }
+                    {
+                        (() => {
+                            if (noEncontrado) {
+                                return <Alert
+                                    severity="error"
+                                    sx={{ mt: 2, mb: 4 }}>
+                                    No se encontraron resultados
+                                </Alert>
+                            }
+                        })()
                     }
                 </Container>
             </Grid>

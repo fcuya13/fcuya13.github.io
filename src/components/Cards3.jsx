@@ -1,4 +1,4 @@
-import {Card, CardActionArea, Button, CardMedia, CardContent, Typography} from '@mui/material'
+import {Card, CardActionArea, CardMedia, CardContent, Typography} from '@mui/material'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LocationOnIcon from "@mui/icons-material/LocationOn"
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';

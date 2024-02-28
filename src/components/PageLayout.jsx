@@ -12,7 +12,6 @@ import LeftPanel from './extra/LeftPanel';
 import {Star} from '@mui/icons-material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {useNavigate} from 'react-router-dom';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import {useEffect} from 'react'
 import LocalActivityOutlinedIcon from '@mui/icons-material/LocalActivityOutlined';

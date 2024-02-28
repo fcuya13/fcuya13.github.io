@@ -11,7 +11,6 @@ const ListaDisponibles2 = (props) => {
                     descripcionDisponible= {elem.descripcion}
                     available_times={elem.ventanas}
                     sala={props.sala}
-                    pelicula={elem.pelicula_id}
                 />
             })
         }

@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.utils import IntegrityError
 from datetime import datetime
 from django.db.models import Q
-import datetime
 from .models import *
 
 
@@ -175,7 +174,8 @@ def getFechasEndpoint(request):
 
         fechas = list(set(ventana.fecha for ventana in ventanas))
         fechas_sorted = sorted(fechas)
-        fechas_formatted = [fecha.strftime("%d/%m/%Y") for fecha in fechas_sorted]
+        fechas_formatted = [{"display": fecha.strftime("%b %d, %Y"),
+         "value": fecha.strftime("%Y-%m-%d")} for fecha in fechas_sorted]
 
         return HttpResponse(json.dumps(fechas_formatted, default=str))
 
@@ -194,8 +194,6 @@ Response = [{
         }] 
 no carga la info de la pelicula, solo la parte de abajo pelicula x sala
 """
-
-
 def peliculaInfoEndpoint(request):
     if request.method == "GET":
         fecha = request.GET.get("fecha")
@@ -212,17 +210,22 @@ def peliculaInfoEndpoint(request):
 
                 for ventana in ventanas:
                     ventana_info = {
-                        "ventana_id": ventana.pk,
-                        "hora": str(ventana.hora.strftime("%H:%M"))
+                        "funcion_id": funcion.pk,
+                        "hora": str(ventana.hora.strftime("%H:%M")),
+                        "horaValue": ventana.hora
                     }
                     ventanas_list.append(ventana_info)
 
             if ventanas_list:
+                ventanas_list_ordenadas = sorted(ventanas_list, key=lambda x: x["horaValue"])
+                for v in ventanas_list_ordenadas:
+                    v.pop("horaValue", None)
                 dataResponse.append({
                     "sala_id": sala.pk,
+                    "siglas": sala.siglas,
                     "nombre": sala.nombre,
                     "direccion": sala.direccion,
-                    "ventanas": ventanas_list
+                    "ventanas": ventanas_list_ordenadas
                 })
 
         return HttpResponse(json.dumps(dataResponse))
@@ -250,7 +253,7 @@ def reservaEndpoint(request):
             reserva.save()
             postmark = PostmarkService()
             postmark.send_email(usuario_login.correo, "Su reserva en Salas de Cine ULima",
-                                    f"Pelicula:  {funcion_obj.pelicula_id}\nSala: {funcion_obj.sala_id}\nFecha: {funcion_obj.ventana_id}")
+                                    f"Pelicula:  {funcion_obj.pelicula_id}\nSala: {funcion_obj.sala_id}\nFecha: {funcion_obj.ventana_id}\nEntradas:{cantidad}")
             dataResponse = {
                 "msg": ""
             }
@@ -312,6 +315,36 @@ def cargarSalas(request):
 
         return HttpResponse(json.dumps(dataResponse), status=200)
 
+def cargarSalaInfo(request):
+    if request.method == "GET":
+        filtro = request.GET.get("filtro")
+        salas = None
+        if filtro == "":
+            salas = Sala.objects.all()
+        else:
+            salas = Sala.objects.filter(path__icontains = filtro)
+        dataResponse = None
+        for sala in salas:
+                funciones = Funcion.objects.filter(sala_id=sala.pk)
+                horarios = []
+                for funcion in funciones:
+                    hora = str(funcion.ventana_id.hora.strftime("%H:%M"))
+                    if hora not in horarios:
+                        horarios.append(hora)
+                horarios = [datetime.strptime(h, '%H:%M') for h in horarios]
+                sorted_horarios = sorted(horarios)
+                sorted_horarios_list = [str(hora.strftime("%H:%M")) for hora in sorted_horarios]
+
+                dataResponse = {
+                    "id": sala.pk,
+                    "siglas": sala.siglas,
+                    "nombre": sala.nombre,
+                    "direccion": sala.direccion,
+                    "imagen": sala.imagen,
+                    "path": sala.path,
+                    "horarios": sorted_horarios_list
+                }
+        return HttpResponse(json.dumps(dataResponse), status=200)
 
 def salaInfoEndpoint(request):
     if request.method == "GET":
@@ -329,17 +362,23 @@ def salaInfoEndpoint(request):
 
                 for ventana in ventanas:
                     ventana_info = {
-                        "ventana_id": ventana.pk,
-                        "hora": str(ventana.hora.strftime("%H:%M"))
+                        "funcion_id": funcion.pk,
+                        "hora": str(ventana.hora.strftime("%H:%M")),
+                        "horaValue": ventana.hora
                     }
+
                     ventanas_list.append(ventana_info)
 
+
             if ventanas_list:
+                ventanas_list_ordenadas = sorted(ventanas_list, key=lambda x: x["horaValue"])
+                for v in ventanas_list_ordenadas:
+                    v.pop("horaValue", None)
                 dataResponse.append({
                     "pelicula_id": pelicula.pk,
                     "nombre": pelicula.titulo,
                     "descripcion": pelicula.extract,
-                    "ventanas": ventanas_list,
+                    "ventanas": ventanas_list_ordenadas,
                     "siglas" : pelicula.siglas
                 })
 
@@ -380,12 +419,26 @@ def cargarPeliculas(request):
 
         return HttpResponse(json.dumps(dataResponse), status=200)
 
+def cargarFuncionInfo(request):
+    if request.method == "GET":
+        funcionid = request.GET.get("funcionid")
+        funcion = Funcion.objects.get(pk=funcionid)
 
+        dataResponse = {
+            "titulo_peli": funcion.pelicula_id.titulo,
+            "thumbnail": funcion.pelicula_id.thumbnail,
+            "nombre_sala": funcion.sala_id.nombre,
+            "direccion": funcion.sala_id.direccion,
+            "fecha": str(funcion.ventana_id.fecha.strftime("%d/%m/%Y")),
+            "hora":str(funcion.ventana_id.hora.strftime("%H:%M"))
+        }
+        return HttpResponse(json.dumps(dataResponse), status=200)
+
+"""
 def obtenerVentanasParaPeliculas(request):
     if request.method=="GET":
         peliculaid=request.GET.get("id")
         fechafiltro=request.GET.get("fecha")
-        horafiltro=request.GET.get("hora")
 
         funciones=None
         dataResponse=[]
@@ -394,14 +447,14 @@ def obtenerVentanasParaPeliculas(request):
 
         if fechafiltro:
             try:
-                fechafiltro = str(datetime.datetime.strptime(fechafiltro, "%b %d, %Y").date())
+                fechafiltro = str(datetime.strptime(fechafiltro, "%b %d, %Y").date())
                 funciones = funciones.filter(ventana_id__fecha=fechafiltro)
             except ValueError:
                 pass
 
         if horafiltro:
             try:
-                horafiltro = str(datetime.datetime.strptime(horafiltro, "%H:%M").time())
+                horafiltro = str(datetime.strptime(horafiltro, "%H:%M").time())
                 funciones = funciones.filter(ventana_id__hora=horafiltro)
             except ValueError:
                 pass
@@ -444,29 +497,7 @@ def obtenerVentanasParaPeliculas(request):
             }
             dataResponse.append(salaDict)
         return HttpResponse(json.dumps(dataResponse), status=200)
+"""
 
 
-def obtenerFechasHorarios(request):
-    if request.method=="GET":
-        ventanas = Ventana.objects.all()
-        fechas=[]
-        horas=[]
-        for ventana in ventanas:
-            fecha = str(ventana.fecha.strftime("%b %d, %Y"))
-            hora = str(ventana.hora.strftime("%H:%M"))
-            
-            if fecha not in fechas:
-                fechas.append(fecha)
-            if hora not in horas:
-                horas.append(hora)
-        fechas.sort()
-        horas.sort()
-
-        dataResponse={
-            "fechas":fechas,
-            "horas":horas
-        }
-
-        return HttpResponse(json.dumps(dataResponse), status=200)
-    
             

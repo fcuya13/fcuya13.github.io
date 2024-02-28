@@ -1,4 +1,4 @@
-import {Box, Avatar, Typography, Button } from "@mui/material"
+import {Box, Avatar, Typography } from "@mui/material"
 import Ventana from "./Ventana";
 
 const Disponibles = (props) => {
@@ -17,13 +17,11 @@ const Disponibles = (props) => {
         </Typography>
         <Box>
             <Typography variant="subtitle1" sx={{ mb: 2}}>
-                <b>Fechas y horarios:</b>
             </Typography>
             {props.ventanas.map((ventana) => {
-                return <Ventana 
-                    fecha={ventana.fecha} 
-                    horarios={ventana.horarios.map(horario=>horario.hora)}
-                    funcionid={ventana.horarios.map(horario=>horario.funcionid)}
+                return <Ventana
+                    funcionid={ventana.funcion_id}
+                    hora = {ventana.hora}
                     pelicula={props.pelicula}
                 />
             })

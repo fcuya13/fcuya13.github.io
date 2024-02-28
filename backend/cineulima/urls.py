@@ -13,8 +13,9 @@ urlpatterns = [
     path('reserva', reservaEndpoint),
     path('misreservas', misReservasEndpoint),
     path('salainfofecha', salaInfoEndpoint),
+    path('sala', cargarSalaInfo),
     path('salas',cargarSalas),
     path('peliculas', cargarPeliculas),
-    path('ventanas-peliculas', obtenerVentanasParaPeliculas),
-    path('fechas-horarios', obtenerFechasHorarios)
+    path('funcioninfo', cargarFuncionInfo),
+    #path('ventanas-peliculas', obtenerVentanasParaPeliculas),
 ]

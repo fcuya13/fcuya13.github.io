@@ -21,13 +21,14 @@ const MoviesPage = () => {
   useEffect(() => {
     if (filtro) {
       filtrarPeliculas(filtro)
+
     } else if (movies.length > 0) {
       setMoviesData(movies)
     }
     else {
       filtrarPeliculas('')
     }
-  }, [filtro,movies])
+  }, [filtro])
 
   return <>
       <Helmet>

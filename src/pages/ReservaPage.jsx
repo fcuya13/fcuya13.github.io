@@ -14,12 +14,12 @@ import {
     DialogContent,
     DialogContentText,
     DialogActions,
-    Alert
+    Alert, CircularProgress, Backdrop
 } from "@mui/material"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import LocationOnIcon from "@mui/icons-material/LocationOn"
 import PageLayout from "../components/PageLayout"
-import {useLocation} from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import {Helmet} from "react-helmet";
@@ -35,9 +35,25 @@ const ReservaPage = () => {
     const [cantidad, setCantidad] = useState("")
     const [open, setOpen] = useState(false)
     const [error, setError] = useState(false)
+    const [infoFuncion, setInfoFuncion] = useState(null)
+    const [loading, setLoading] = useState(false)
+
 
     const location = useLocation()
-    const datos = location.state.datos
+    const funcionid = location.state.datos
+    const navigate = useNavigate()
+
+    const getFuncionInfo = async () => {
+        const response = await fetch(`http://localhost:8000/cineulima/funcioninfo?funcionid=${funcionid}`)
+        const data = await response.json()
+        setInfoFuncion(data)
+    }
+
+    useEffect(() => {
+        if(funcionid){
+            getFuncionInfo()
+        }
+    }, [funcionid]);
 
     const handleOpen = () => {
         setOpen(true);
@@ -45,6 +61,7 @@ const ReservaPage = () => {
 
     const handleClose = () => {
         setOpen(false)
+        navigate("/misreservas")
     }
 
     const handleReservar = async () => {
@@ -59,24 +76,28 @@ const ReservaPage = () => {
             email.test(codigo.trim())
         ) {
             try {
+                setLoading(true)
                 const response = await fetch('http://localhost:8000/cineulima/reserva', {
                     method: 'POST',
                     body: JSON.stringify({
                         correo: codigo,
-                        funcionid: datos.funcionid,
+                        funcionid: funcionid,
                         cantidad: cantidad
                     })
                 });
                 const data = await response.json()
                 if (data.msg === "") {
+                    setLoading(false)
                     handleOpen();
                     setError(false);
                 } else {
                     throw new Error('Error al crear la reserva');
+                    setLoading(false)
                 }
             } catch (error) {
                 console.error(error);
                 setError(true);
+                setLoading(false)
             }
         } else {
             setError(true);
@@ -88,6 +109,7 @@ const ReservaPage = () => {
             <title>Reservar entradas | Cine Ulima</title>
         </Helmet>
             <PageLayout>
+                {infoFuncion &&
                 <Container>
                     <Typography
                         variant="h4"
@@ -102,16 +124,16 @@ const ReservaPage = () => {
                     <Container>
                         <Container sx={{mt: 5}}>
                             <Typography variant="h4" sx={{mb: 2}}>
-                                {datos.pelicula.titulo}
+                                {infoFuncion.titulo_peli}
                             </Typography>
                             <Typography variant="subtitle1" color="gray" sx={{mb: 2, display: 'inline-flex'}}>
                                 <AccessTimeIcon sx={{mr: 1}}/>
                                 <Typography color="#009CD2">
-                                    {datos.fecha} - {datos.horario}
+                                    {infoFuncion.fecha} - {infoFuncion.hora}
                                 </Typography>
                                 <LocationOnIcon sx={{mx: 1}}/>
                                 <Typography color="#009CD2">
-                                    {datos.sala}
+                                    {infoFuncion.nombre_sala}
                                 </Typography>
                             </Typography>
                         </Container>
@@ -212,13 +234,14 @@ const ReservaPage = () => {
                                 <Card variant="outlined">
                                     <CardMedia
                                         component="img"
-                                        image={datos.pelicula.thumbnail}
+                                        image={infoFuncion.thumbnail}
                                     />
                                 </Card>
                             </Grid>
                         </Grid>
                     </Container>
                 </Container>
+                }
             </PageLayout>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Reserva confirmada</DialogTitle>
@@ -247,6 +270,12 @@ const ReservaPage = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
+        <Backdrop
+            sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+            open={loading}
+        >
+            <CircularProgress color="inherit"/>
+        </Backdrop>
     </>
 }
 
