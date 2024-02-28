@@ -43,7 +43,7 @@ const LoginPage = () => {
 
         try {
             setLoading(true)
-            const response = await fetch("http://localhost:8000/cineulima/users", {
+            const response = await fetch("https://cineulima.azurewebsites.net/cineulima/users", {
                 method: "POST",
                 body: JSON.stringify(dataUser)
             })

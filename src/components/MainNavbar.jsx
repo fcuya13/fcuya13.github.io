@@ -4,14 +4,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'
 
 
-const MainNavbar = () => {
+const MainNavbar = (props) => {
   const [filtro, setFiltro] = useState([]);
   const [noEncontrado, setNoEncontrado] = useState(false)
   const navigate = useNavigate();
 
   const filtrarContenido = async (e) => {
-    const response = await fetch(`http://localhost:8000/cineulima/busqueda/${filtro}`)
+      props.setLoading(true)
+
+    const response = await fetch(`https://cineulima.azurewebsites.net/cineulima/busqueda/${filtro}`)
     const data = await response.json()
+      props.setLoading(false)
 
     if (data.peliculas.length > 0) {
       setFiltro(data.peliculas)

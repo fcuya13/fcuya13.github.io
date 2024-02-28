@@ -17,7 +17,7 @@ const MisReservasPage = () => {
     const cargarReservas = async (user_id) => {
         try {
             setLoading(true)
-            const response = await fetch(`http://localhost:8000/cineulima/misreservas?user_id=${user_id}`, {
+            const response = await fetch(`https://cineulima.azurewebsites.net/cineulima/misreservas?user_id=${user_id}`, {
                 method: 'GET'
             });
 

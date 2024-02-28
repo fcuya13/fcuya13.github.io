@@ -3,14 +3,18 @@ import MainNavbar from '../components/MainNavbar'
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { Helmet } from 'react-helmet';
+import {Backdrop, CircularProgress} from "@mui/material";
 
 const HomePage = () => {
     const [recomendaciones, setRecomendaciones] = useState([])
+    const [loading, setLoading] = useState(false)
 
     const obtenerRecomendaciones = async () => {
-        const response = await fetch("http://localhost:8000/cineulima/recomendaciones")
+        setLoading(true)
+        const response = await fetch("https://cineulima.azurewebsites.net/cineulima/recomendaciones")
         const data = await response.json()
         setRecomendaciones(data)
+        setLoading(false)
     }
 
     useEffect(() =>{
@@ -34,7 +38,13 @@ const HomePage = () => {
             <title>Inicio | Cine Ulima</title>
         </Helmet>
         <CarouselPage recomendaciones = { recomendaciones }/>
-        <MainNavbar/>
+        <MainNavbar loading={loading} setLoading={setLoading}/>
+        <Backdrop
+            sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+            open={loading}
+        >
+            <CircularProgress color="inherit"/>
+        </Backdrop>
     </>
 }
 

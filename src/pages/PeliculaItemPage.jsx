@@ -1,4 +1,15 @@
-import { Container, Box, Grid, Typography, Chip, Alert, Card, CardMedia, CardContent } from "@mui/material"
+import {
+    Container,
+    Box,
+    Grid,
+    Typography,
+    Chip,
+    Alert,
+    Card,
+    CardMedia,
+    CardContent,
+    CircularProgress, Backdrop
+} from "@mui/material"
 import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardHeader } from "react-bootstrap";
@@ -19,20 +30,25 @@ const PeliculaItemPage=()=>{
     const [pelicula, setPelicula] = useState(null);
     const [fechaFiltro, setFechaFiltro]=useState("");
     const [noEncontrado, setNoEncontrado]=useState(false)
+    const [loading, setLoading] = useState(false)
+    const [loadingSalas, setLoadingSalas] = useState(false)
 
     const cargarData = async () => {
-        const responsePelis = await fetch(`http://localhost:8000/cineulima/peliculas?filtro=${path}`);
+        setLoading(true)
+        const responsePelis = await fetch(`https://cineulima.azurewebsites.net/cineulima/peliculas?filtro=${path}`);
         const dataPeli = await responsePelis.json();
-        const fechasResponse = await fetch("http://localhost:8000/cineulima/fechas")
+        const fechasResponse = await fetch("https://cineulima.azurewebsites.net/cineulima/fechas")
         const dataFechas = await fechasResponse.json();
         setPeliculasData(dataPeli);
         setFechasHorariosData(dataFechas);
         setFechaFiltro(dataFechas[0].value)
+        setLoading(false)
     };
     
     const obtenerInfoSalas=async (idPelicula)=>{
+        setLoadingSalas(true)
         const responseSalas= await fetch(
-            `http://localhost:8000/cineulima/peliculainfofecha?fecha=${fechaFiltro}&movieid=${idPelicula}`);
+            `https://cineulima.azurewebsites.net/cineulima/peliculainfofecha?fecha=${fechaFiltro}&movieid=${idPelicula}`);
         const dataSalas= await responseSalas.json();
         setSalasData(dataSalas);
         if(dataSalas.length===0){
@@ -40,6 +56,7 @@ const PeliculaItemPage=()=>{
         }else{
             setNoEncontrado(false);
         }
+        setLoadingSalas(false)
     }
     
     useEffect(() => {
@@ -161,6 +178,7 @@ const PeliculaItemPage=()=>{
             </Box>
             
             <Container sx={{mt: 4}}>
+                {loadingSalas && <CircularProgress color="inherit"/>}
                 <ListaDisponibles
                     listaDisponibles={salasData}
                     pelicula={pelicula}>
@@ -183,6 +201,12 @@ const PeliculaItemPage=()=>{
         }
       </Container> 
     </Grid>
+        <Backdrop
+            sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+            open={loading}
+        >
+            <CircularProgress color="inherit"/>
+        </Backdrop>
     </PageLayout>
     </>
 }

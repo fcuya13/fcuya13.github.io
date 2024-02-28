@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material"
+import {Backdrop, CircularProgress, Container, Grid, Typography} from "@mui/material"
 import MovieBody from "../components/MovieBody"
 import PageLayout from "../components/PageLayout"
 import { useEffect, useState } from "react"
@@ -11,11 +11,18 @@ const MoviesPage = () => {
   const location = useLocation()
   const {state} = location
   const movies = state ? state.filtro : []
+  const [loading, setLoading] = useState(false)
+    const [isInitialLoad, setIsInitialLoad] = useState(true)
 
   const filtrarPeliculas = async () => {
-    const response = await fetch(`http://localhost:8000/cineulima/peliculas?filtro=${filtro}`)
+      if (isInitialLoad){
+          setLoading(true)
+          setIsInitialLoad(false)
+      }
+      const response = await fetch(`https://cineulima.azurewebsites.net/cineulima/peliculas?filtro=${filtro}`)
     const data = await response.json()
     setMoviesData(data)
+      setLoading(false)
   }
 
   useEffect(() => {
@@ -49,6 +56,12 @@ const MoviesPage = () => {
             <MovieBody moviesData={moviesData} />
           </Container>
         </Grid>
+          <Backdrop
+              sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+              open={loading}
+          >
+              <CircularProgress color="inherit"/>
+          </Backdrop>
       </PageLayout>
   </>
 }

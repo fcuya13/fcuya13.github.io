@@ -44,9 +44,11 @@ const ReservaPage = () => {
     const navigate = useNavigate()
 
     const getFuncionInfo = async () => {
-        const response = await fetch(`http://localhost:8000/cineulima/funcioninfo?funcionid=${funcionid}`)
+        setLoading(true)
+        const response = await fetch(`https://cineulima.azurewebsites.net/cineulima/funcioninfo?funcionid=${funcionid}`)
         const data = await response.json()
         setInfoFuncion(data)
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -77,7 +79,7 @@ const ReservaPage = () => {
         ) {
             try {
                 setLoading(true)
-                const response = await fetch('http://localhost:8000/cineulima/reserva', {
+                const response = await fetch('https://cineulima.azurewebsites.net/cineulima/reserva', {
                     method: 'POST',
                     body: JSON.stringify({
                         correo: codigo,

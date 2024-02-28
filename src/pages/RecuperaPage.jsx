@@ -40,7 +40,7 @@ const RecuperaPage = () => {
 
         try {
             setLoading(true)
-            const response = await fetch("http://localhost:8000/cineulima/recovery", {
+            const response = await fetch("https://cineulima.azurewebsites.net/cineulima/recovery", {
                 method: "POST",
                 body: JSON.stringify(dataUser)
             })

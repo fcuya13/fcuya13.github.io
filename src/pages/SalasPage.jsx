@@ -1,4 +1,4 @@
-import { Container, Grid,Typography } from "@mui/material"
+import {Backdrop, CircularProgress, Container, Grid, Typography} from "@mui/material"
 import PageLayout from "../components/PageLayout"
 import SalasBody from "../components/SalasBody"
 import {useEffect, useState} from "react"
@@ -11,11 +11,18 @@ const SalasPage = () => {
   const location = useLocation()
   const {state} = location
   const salas = state ? state.filtro : []
+    const [loading, setLoading] = useState(false)
+    const [isInitialLoad, setIsInitialLoad] = useState(true)
 
     const filtrarSalas = async () => {
-        const response = await fetch(`http://localhost:8000/cineulima/salas?filtro=${filtro}`)
+        if (isInitialLoad){
+            setLoading(true)
+            setIsInitialLoad(false)
+        }
+        const response = await fetch(`https://cineulima.azurewebsites.net/cineulima/salas?filtro=${filtro}`)
         const data = await response.json()
         setSalasData(data)
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -51,6 +58,12 @@ const SalasPage = () => {
         <SalasBody salasData = { salasData }/>
       </Container>
     </Grid>
+        <Backdrop
+            sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+            open={loading}
+        >
+            <CircularProgress color="inherit"/>
+        </Backdrop>
     </PageLayout>
   </>
 }

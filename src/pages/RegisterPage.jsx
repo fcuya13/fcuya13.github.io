@@ -54,7 +54,7 @@ const RegisterPage = () => {
 
         try{
             setLoading(true)
-            const response = await fetch("http://localhost:8000/cineulima/createuser", {
+            const response = await fetch("https://cineulima.azurewebsites.net/cineulima/createuser", {
                 method: "POST",
                 body: JSON.stringify(dataUser)
             })
