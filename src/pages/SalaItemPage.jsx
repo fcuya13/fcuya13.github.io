@@ -5,22 +5,22 @@ import {CardHeader} from "react-bootstrap";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import ListaDisponibles2 from "../components/ListaDisponibles2";
+import {Helmet} from "react-helmet";
 
 const SalaItemPage = () => {
     const [peliculasData, setPeliculasData] = useState([]);
     const {path} = useParams();
-    const [sala, setSala] = useState(null);
+    const [sala, setSalas] = useState(null);
 
 
     const cargarData = async () => {
-        const responseSala = await fetch(`http://localhost:8000/cineulima/sala/${path}`);
+        const responseSala = await fetch(`http://localhost:8000/cineulima/salas?filtro=${path}`);
         const dataSala = await responseSala.json();
-        setSala(dataSala);
+        setSalas(dataSala)
     };
 
     useEffect(() => {
         cargarData();
-        console.log(sala)
     }, []);
 
     const cargarDataPelicula = async () => {
@@ -35,7 +35,10 @@ const SalaItemPage = () => {
         }
     }, [sala]);
 
-    return (
+    return <>
+        <Helmet>
+            <title>Vive la mejor experiencia en los mejores cines | Cine Ulima</title>
+        </Helmet>
         <PageLayout>
             <Grid
                 container
@@ -111,7 +114,7 @@ const SalaItemPage = () => {
                 </Container>
             </Grid>
         </PageLayout>
-    )
+    </>
 }
 
 export default SalaItemPage

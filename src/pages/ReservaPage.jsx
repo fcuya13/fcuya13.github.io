@@ -22,6 +22,7 @@ import PageLayout from "../components/PageLayout"
 import {useLocation} from "react-router-dom"
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import {Helmet} from "react-helmet";
 
 const ReservaPage = () => {
 
@@ -82,8 +83,10 @@ const ReservaPage = () => {
         }
     }
 
-    return (
-        <>
+    return <>
+        <Helmet>
+            <title>Reservar entradas | Cine Ulima</title>
+        </Helmet>
             <PageLayout>
                 <Container>
                     <Typography
@@ -244,8 +247,7 @@ const ReservaPage = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </>
-    )
+    </>
 }
 
 export default ReservaPage

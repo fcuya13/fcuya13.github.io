@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'
 
+
 const MainNavbar = () => {
   const [filtro, setFiltro] = useState([]);
   const [noEncontrado, setNoEncontrado] = useState(false)
@@ -47,7 +48,7 @@ const MainNavbar = () => {
         endAdornment={
           <InputAdornment position='end'>
             <Tooltip title="Buscar" placement="bottom">
-              <IconButton onClick={OnClickButton} edge='end'>
+              <IconButton onClick={OnClickButton} edge='end' className="click_button">
                 <SearchIcon />
               </IconButton>
             </Tooltip>

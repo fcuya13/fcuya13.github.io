@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import {Helmet} from "react-helmet";
 
 const RecuperaPage = () => {
     const [correo, setCorreo] = useState("")
@@ -61,7 +62,10 @@ const RecuperaPage = () => {
             }
     };
 
-    return (
+    return <>
+        <Helmet>
+            <title>Recuperar cuenta | Cine Ulima</title>
+        </Helmet>
         <Container maxWidth={false}
                    sx={{
                        height: "100vh",
@@ -200,7 +204,7 @@ const RecuperaPage = () => {
                 <CircularProgress color="inherit"/>
             </Backdrop>
         </Container>
-    )
+    </>
 };
 
 export default RecuperaPage;

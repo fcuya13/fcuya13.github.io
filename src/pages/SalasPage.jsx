@@ -1,18 +1,39 @@
 import { Container, Grid,Typography } from "@mui/material"
 import PageLayout from "../components/PageLayout"
 import SalasBody from "../components/SalasBody"
-import { useState } from "react"
+import {useEffect, useState} from "react"
 import { useLocation } from "react-router-dom"
+import {Helmet} from "react-helmet";
 
 const SalasPage = () => {
-  const [searchTerm, setSearchTerm] = useState("")
+    const [filtro, setFiltro] = useState('')
+    const [salasData, setSalasData] = useState([])
   const location = useLocation()
   const {state} = location
-
   const salas = state ? state.filtro : []
 
-  return(
-    <PageLayout onSearchChange={setSearchTerm}>
+    const filtrarSalas = async () => {
+        const response = await fetch(`http://localhost:8000/cineulima/salas?filtro=${filtro}`)
+        const data = await response.json()
+        setSalasData(data)
+    }
+
+    useEffect(() => {
+        if (filtro) {
+            filtrarSalas(filtro)
+        } else if (salas.length > 0) {
+            setSalasData(salas)
+        }
+        else {
+            filtrarSalas('')
+        }
+    }, [filtro,salas])
+
+  return <>
+      <Helmet>
+          <title>Salas | Cine Ulima</title>
+      </Helmet>
+    <PageLayout onSearchChange={setFiltro}>
     <Grid
       container
       style={{ fontFamily: 'Roboto, sans-serif' }}>
@@ -27,10 +48,11 @@ const SalasPage = () => {
             fontWeight: 400,
             letterSpacing: 0.25
         }}>Salas Disponibles</Typography>
-        <SalasBody searchTerm={searchTerm} salas={salas}/>
+        <SalasBody salasData = { salasData }/>
       </Container>
     </Grid>
-    </PageLayout>)
+    </PageLayout>
+  </>
 }
 
 export default SalasPage

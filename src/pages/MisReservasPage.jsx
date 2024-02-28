@@ -8,6 +8,7 @@ import {
 } from "@mui/material"
 import {useState, useEffect} from "react"
 import CardList3 from "../components/CardList3";
+import {Helmet} from "react-helmet";
 
 const MisReservasPage = () => {
 
@@ -37,8 +38,10 @@ const MisReservasPage = () => {
         cargarReservas(user_id)
     }, [])
 
-    return (
-        <>
+    return <>
+        <Helmet>
+            <title>Mis reservas | Cine Ulima</title>
+        </Helmet>
             <PageLayout>
                 <Container>
                     <Typography
@@ -62,9 +65,8 @@ const MisReservasPage = () => {
                     <CircularProgress color="inherit"/>
                 </Backdrop>
             </PageLayout>
+    </>
 
-        </>
-    )
 }
 
 export default MisReservasPage

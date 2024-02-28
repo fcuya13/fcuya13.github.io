@@ -2,6 +2,7 @@ import CarouselPage from '../components/CarouselPage'
 import MainNavbar from '../components/MainNavbar'
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import { Helmet } from 'react-helmet';
 
 const HomePage = () => {
     const [recomendaciones, setRecomendaciones] = useState([])
@@ -28,10 +29,13 @@ const HomePage = () => {
         checkLoggedIn()
     })
 
-    return <div>
+    return <>
+        <Helmet>
+            <title>Inicio | Cine Ulima</title>
+        </Helmet>
         <CarouselPage recomendaciones = { recomendaciones }/>
         <MainNavbar/>
-    </div>
+    </>
 }
 
 export default HomePage

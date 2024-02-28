@@ -12,10 +12,9 @@ urlpatterns = [
     path('fechas', getFechasEndpoint),
     path('reserva', reservaEndpoint),
     path('misreservas', misReservasEndpoint),
-    path('salas', cargarSalas),
     path('salainfofecha', salaInfoEndpoint),
-    path('sala/<str:filtro>',cargarSala),
-    path('peliculas/', cargarPeliculas),
+    path('salas',cargarSalas),
+    path('peliculas', cargarPeliculas),
     path('ventanas-peliculas', obtenerVentanasParaPeliculas),
     path('fechas-horarios', obtenerFechasHorarios)
 ]

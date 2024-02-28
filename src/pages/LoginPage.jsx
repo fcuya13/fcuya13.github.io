@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import {Helmet} from "react-helmet";
 
 const LoginPage = () => {
     const [correo, setCorreo] = useState("");
@@ -69,7 +70,10 @@ const LoginPage = () => {
 
     
 
-    return (
+    return <>
+        <Helmet>
+            <title>Iniciar Sesión | Cine Ulima</title>
+        </Helmet>
         <Container maxWidth={false}
                    sx={{
                        height: "100vh",
@@ -193,9 +197,7 @@ const LoginPage = () => {
                 <CircularProgress color="inherit"/>
             </Backdrop>
         </Container>
-
-
-    );
+    </>
 };
 
 export default LoginPage;

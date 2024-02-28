@@ -144,11 +144,11 @@ def buscarContenidoEndPoint(request, filtro):
         for sala in sala_resultados:
             dataResponse['salas'].append({
                 'id': sala.id,
-                'name': sala.nombre,
-                'address': sala.direccion,
-                'image': sala.imagen,
+                'nombre': sala.nombre,
+                'direccion': sala.direccion,
+                'imagen': sala.imagen,
                 'path': sala.path,
-                'available_times': obtener_horas_disponibles(sala)
+                'horarios': obtener_horas_disponibles(sala)
             })
 
         return HttpResponse(json.dumps(dataResponse))
@@ -289,22 +289,16 @@ def misReservasEndpoint(request):
 def cargarSalas(request):
     if request.method == "GET":
         filtro = request.GET.get("filtro")
-        salas = None
         if filtro == "":
             salas = Sala.objects.all()
         else:
-            salas = Sala.objects.filter(nombre__icontains = filtro)
+            salas = Sala.objects.filter(
+                Q(nombre__icontains = filtro) |
+                Q(path=filtro)).distinct()
+
         dataResponse = []
         for sala in salas:
                 funciones = Funcion.objects.filter(sala_id=sala.pk)
-                horarios = []
-                for funcion in funciones:
-                    hora = str(funcion.ventana_id.hora.strftime("%H:%M"))
-                    if hora not in horarios:
-                        horarios.append(hora)
-                horarios = [datetime.strptime(h, '%H:%M') for h in horarios]
-                sorted_horarios = sorted(horarios)
-                sorted_horarios_list = [str(hora.strftime("%H:%M")) for hora in sorted_horarios]
                         
                 dataResponse.append({
                     "id": sala.pk,
@@ -313,8 +307,9 @@ def cargarSalas(request):
                     "direccion": sala.direccion,
                     "imagen": sala.imagen,
                     "path": sala.path,
-                    "horarios": sorted_horarios_list
+                    "horarios": obtener_horas_disponibles(sala)
                 })
+
         return HttpResponse(json.dumps(dataResponse), status=200)
 
 
@@ -349,39 +344,24 @@ def salaInfoEndpoint(request):
                 })
 
         return HttpResponse(json.dumps(dataResponse))
-    
-def cargarSala(request, filtro):
-    if request.method == "GET":
-        sala = Sala.objects.get(path=filtro)
-        dataResponse = {
-            "id": sala.pk,
-            "siglas": sala.siglas,
-            "nombre": sala.nombre,
-            "direccion": sala.direccion,
-            "imagen": sala.imagen,
-        }
 
-        return HttpResponse(json.dumps(dataResponse))
-
-@csrf_exempt
 def cargarPeliculas(request):
     if request.method == "GET":
-        filtro = request.GET.get("pelicula", "")
-        peliculas = None
-        if filtro:
-            filtro = filtro.replace("-", " ")
-            peliculas = Pelicula.objects.filter(titulo__icontains = filtro)
-        else:
+        filtro = request.GET.get("filtro")
+        if filtro == "":
             peliculas = Pelicula.objects.all()
+        else:
+            peliculas = Pelicula.objects.filter(
+                Q(titulo__icontains = filtro) |
+                Q(path=filtro)).distinct()
+
         dataResponse = []
         for pelicula in peliculas:
                 generos_queryset = PeliculaGenero.objects.filter(pelicula_id=pelicula)
                 genres = [genero.genero for genero in generos_queryset]
-                generos_queryset = PeliculaGenero.objects.filter(pelicula_id=pelicula)
-                genres = [genero.genero for genero in generos_queryset]
                 cast_queryset = PeliculaActor.objects.filter(pelicula_id=pelicula)
                 cast = [actor.actor for actor in cast_queryset]
-                    
+
                 dataResponse.append({
                     "id": pelicula.pk,
                     "titulo": pelicula.titulo,
@@ -397,9 +377,10 @@ def cargarPeliculas(request):
                     "genres":genres,
                     "cast":cast
                 })
+
         return HttpResponse(json.dumps(dataResponse), status=200)
 
-@csrf_exempt
+
 def obtenerVentanasParaPeliculas(request):
     if request.method=="GET":
         peliculaid=request.GET.get("id")
@@ -464,7 +445,7 @@ def obtenerVentanasParaPeliculas(request):
             dataResponse.append(salaDict)
         return HttpResponse(json.dumps(dataResponse), status=200)
 
-@csrf_exempt
+
 def obtenerFechasHorarios(request):
     if request.method=="GET":
         ventanas = Ventana.objects.all()

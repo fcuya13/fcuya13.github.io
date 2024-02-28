@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
+import {Helmet} from "react-helmet";
 
 const PeliculaItemPage=()=>{
     const [salasData, setSalasData] = useState([]);
@@ -21,13 +22,16 @@ const PeliculaItemPage=()=>{
     const [noEncontrado, setNoEncontrado]=useState(false)
 
     const cargarData = async () => {
-        const responsePelis = await fetch(`http://localhost:8000/cineulima/peliculas/?pelicula=${path}`);
+        const responsePelis = await fetch(`http://localhost:8000/cineulima/peliculas?filtro=${path}`);
         const dataPeli = await responsePelis.json();
         setPeliculasData(dataPeli);
     };
     
     const obtenerInfoSalas=async (idPelicula)=>{
-        const responseSalas= await fetch(`http://localhost:8000/cineulima/ventanas-peliculas?id=${idPelicula}&fecha=${fechaFiltro}&hora=${horaFiltro}`);
+        const responseSalas= await fetch(
+            `http://localhost:8000/cineulima/ventanas-peliculas?id=${idPelicula}
+            &fecha=${fechaFiltro}
+            &hora=${horaFiltro}`);
         const dataSalas= await responseSalas.json();
         setSalasData(dataSalas);
         if(dataSalas.length===0){
@@ -64,7 +68,10 @@ const PeliculaItemPage=()=>{
         }
       }, [fechaFiltro, horaFiltro, pelicula]);
 
-    return (
+    return <>
+        <Helmet>
+            <title>Vive la mejor experiencia de la película | Cine Ulima</title>
+        </Helmet>
     <PageLayout>
     <Grid
       container
@@ -203,8 +210,7 @@ const PeliculaItemPage=()=>{
       </Container> 
     </Grid>
     </PageLayout>
-    
-  )
+    </>
 }
 
 export default PeliculaItemPage

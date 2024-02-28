@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import {Helmet} from "react-helmet";
 
 const RegisterPage = () => {
     const [nombre, setNombre] = useState("");
@@ -79,7 +80,10 @@ const RegisterPage = () => {
         }
     }
 
-    return (
+    return <>
+        <Helmet>
+            <title>Registrarse | Cine Ulima</title>
+        </Helmet>
         <Container maxWidth={false}
                    sx={{
                        height: "100vh",
@@ -239,7 +243,7 @@ const RegisterPage = () => {
                 <CircularProgress color="inherit"/>
             </Backdrop>
         </Container>
-    );
+    </>
 };
 
 export default RegisterPage;
