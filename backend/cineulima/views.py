@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.utils import IntegrityError
 from datetime import datetime
 from django.db.models import Q
-
+import datetime
 from .models import *
 
 
@@ -403,16 +403,28 @@ def cargarPeliculas(request,filtro=None):
 def obtenerVentanasParaPeliculas(request):
     if request.method=="GET":
         peliculaid=request.GET.get("id")
+        fechafiltro=request.GET.get("fecha")
+        horafiltro=request.GET.get("hora")
+
         funciones=None
-        if not peliculaid:
-            errorDict={
-                "msg":"Debe enviar un id"
-            }
-            return HttpResponse(json.dumps(errorDict))
-        
         dataResponse=[]
         salas={}
         funciones = Funcion.objects.filter(pelicula_id=peliculaid)
+
+        if fechafiltro:
+            try:
+                fechafiltro = str(datetime.datetime.strptime(fechafiltro, "%b %d, %Y").date())
+                funciones = funciones.filter(ventana_id__fecha=fechafiltro)
+            except ValueError:
+                pass
+
+        if horafiltro:
+            try:
+                horafiltro = str(datetime.datetime.strptime(horafiltro, "%H:%M").time())
+                funciones = funciones.filter(ventana_id__hora=horafiltro)
+            except ValueError:
+                pass
+
         for funcion in funciones:
             nombresala=funcion.sala_id.nombre
             siglassala=funcion.sala_id.siglas
@@ -451,4 +463,29 @@ def obtenerVentanasParaPeliculas(request):
             }
             dataResponse.append(salaDict)
         return HttpResponse(json.dumps(dataResponse), status=200)
+
+@csrf_exempt
+def obtenerFechasHorarios(request):
+    if request.method=="GET":
+        ventanas = Ventana.objects.all()
+        fechas=[]
+        horas=[]
+        for ventana in ventanas:
+            fecha = str(ventana.fecha.strftime("%b %d, %Y"))
+            hora = str(ventana.hora.strftime("%H:%M"))
+            
+            if fecha not in fechas:
+                fechas.append(fecha)
+            if hora not in horas:
+                horas.append(hora)
+        fechas.sort()
+        horas.sort()
+
+        dataResponse={
+            "fechas":fechas,
+            "horas":horas
+        }
+
+        return HttpResponse(json.dumps(dataResponse), status=200)
+    
             

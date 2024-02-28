@@ -17,5 +17,6 @@ urlpatterns = [
     path('sala/<str:filtro>',cargarSala),
     path('peliculas/', cargarPeliculas),
     path('peliculas/<str:filtro>', cargarPeliculas),
-    path('ventanas-peliculas', obtenerVentanasParaPeliculas)
+    path('ventanas-peliculas', obtenerVentanasParaPeliculas),
+    path('fechas-horarios', obtenerFechasHorarios)
 ]

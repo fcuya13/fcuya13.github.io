@@ -1,16 +1,24 @@
-import { Container, Box, Grid, Typography, Chip, Card, CardMedia, CardContent } from "@mui/material"
+import { Container, Box, Grid, Typography, Chip, Alert, Card, CardMedia, CardContent } from "@mui/material"
 import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardHeader } from "react-bootstrap";
 import ListaDisponibles from "../components/ListaDisponibles";
 import {useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const PeliculaItemPage=()=>{
     const [salasData, setSalasData] = useState([]);
     const [peliculasData, setPeliculasData] = useState([]);
+    const [fechasHorariosData, setFechasHorariosData]=useState([]);
     const { path } = useParams();
     const [pelicula, setPelicula] = useState(null);
+    const [fechaFiltro, setFechaFiltro]=useState("");
+    const [horaFiltro, setHoraFiltro]=useState("");
+    const [noEncontrado, setNoEncontrado]=useState(false)
 
     const cargarData = async () => {
         const responsePelis = await fetch(`http://localhost:8000/cineulima/peliculas/${path}`);
@@ -19,13 +27,25 @@ const PeliculaItemPage=()=>{
     };
     
     const obtenerInfoSalas=async (idPelicula)=>{
-        const responseSalas= await fetch(`http://localhost:8000/cineulima/ventanas-peliculas?id=${idPelicula}`);
+        const responseSalas= await fetch(`http://localhost:8000/cineulima/ventanas-peliculas?id=${idPelicula}&fecha=${fechaFiltro}&hora=${horaFiltro}`);
         const dataSalas= await responseSalas.json();
         setSalasData(dataSalas);
+        if(dataSalas.length===0){
+            setNoEncontrado(true);
+        }else{
+            setNoEncontrado(false);
+        }
+    }
+
+    const fechasHorarios=async ()=>{
+        const response= await fetch(`http://localhost:8000/cineulima/fechas-horarios`);
+        const data= await response.json();
+        setFechasHorariosData(data);
     }
     
     useEffect(() => {
         cargarData();
+        fechasHorarios();
     }, []);
 
     useEffect(() => {
@@ -37,6 +57,12 @@ const PeliculaItemPage=()=>{
             }
         }
     }, [peliculasData, path]);
+
+    useEffect(() => {
+        if (pelicula && pelicula.id) {
+          obtenerInfoSalas(pelicula.id);
+        }
+      }, [fechaFiltro, horaFiltro, pelicula]);
 
     return (
     <PageLayout>
@@ -116,6 +142,43 @@ const PeliculaItemPage=()=>{
             <Typography variant="h4" sx={{ mt: 2}}>
                     Salas disponibles
             </Typography>
+            <Box>
+                <FormControl variant="standard" sx={{ m: 1, mt:4, minWidth: "9em"}}>
+                    <InputLabel>Fecha</InputLabel>
+                    <Select
+                        value={fechaFiltro}
+                        onChange={(e) => setFechaFiltro(e.target.value)}
+                        label="Age">
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        {fechasHorariosData.fechas.map((fecha) => {
+                            return <MenuItem value={fecha}>
+                                {fecha}
+                            </MenuItem>
+                        })
+                        }
+                    </Select>
+                </FormControl>
+                <FormControl variant="standard" sx={{ m: 1, mt:4, minWidth: "7em"}}>
+                    <InputLabel>Horario</InputLabel>
+                    <Select
+                        value={horaFiltro}
+                        onChange={(e) => setHoraFiltro(e.target.value)}
+                        label="Age">
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        {fechasHorariosData.horas.map((hora) => {
+                            return <MenuItem value={hora}>
+                                {hora}
+                            </MenuItem>
+                        })
+                        }
+                    </Select>
+                </FormControl>
+            </Box>
+            
             <Container sx={{mt: 4}}>
                 <ListaDisponibles
                     listaDisponibles={salasData}
@@ -123,7 +186,18 @@ const PeliculaItemPage=()=>{
                 </ListaDisponibles>
                 
             </Container>
-                    </Grid> }
+            </Grid> }
+            {
+                (() => {
+                    if (noEncontrado) {
+                      return <Alert
+                        severity="error"
+                        sx={{ mt: 2, mb: 4 }}>
+                        No se encontraron resultados
+                      </Alert>
+                    }
+                  })()
+            }
         </>
         }
       </Container> 
