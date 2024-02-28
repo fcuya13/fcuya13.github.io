@@ -21,7 +21,7 @@ const PeliculaItemPage=()=>{
     const [noEncontrado, setNoEncontrado]=useState(false)
 
     const cargarData = async () => {
-        const responsePelis = await fetch(`http://localhost:8000/cineulima/peliculas/${path}`);
+        const responsePelis = await fetch(`http://localhost:8000/cineulima/peliculas/?pelicula=${path}`);
         const dataPeli = await responsePelis.json();
         setPeliculasData(dataPeli);
     };

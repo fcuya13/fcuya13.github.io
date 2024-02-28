@@ -364,9 +364,9 @@ def cargarSala(request, filtro):
         return HttpResponse(json.dumps(dataResponse))
 
 @csrf_exempt
-def cargarPeliculas(request,filtro=None):
+def cargarPeliculas(request):
     if request.method == "GET":
-        filtro = filtro or request.GET.get("filtro", "")
+        filtro = request.GET.get("pelicula", "")
         peliculas = None
         if filtro:
             filtro = filtro.replace("-", " ")
