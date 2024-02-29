@@ -64,6 +64,7 @@ const PeliculaItemPage=()=>{
     
     const obtenerInfoSalas=async (idPelicula)=>{
         setLoadingSalas(true)
+        setSalasData([])
         try {
             const responseSalas = await Promise.race([
                 fetch(`https://cineulima.azurewebsites.net/cineulima/peliculainfofecha?fecha=${fechaFiltro}&movieid=${idPelicula}`),
@@ -80,6 +81,7 @@ const PeliculaItemPage=()=>{
             }
         }
         catch (error) {
+            console.error(error)
             navigate('/error/500')
         }
         finally {

@@ -68,6 +68,7 @@ const SalaItemPage = () => {
 
     const cargarDataPelicula = async () => {
         setLoadingPelis(true)
+        setPeliculasData([])
         const responsePelicula = await fetch(`https://cineulima.azurewebsites.net/cineulima/salainfofecha?fecha=${fechaFiltro}&salaid=${sala.id}`);
         const dataPeliculas = await responsePelicula.json();
         setPeliculasData(dataPeliculas)
