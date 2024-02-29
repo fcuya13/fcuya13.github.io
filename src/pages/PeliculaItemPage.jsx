@@ -36,57 +36,29 @@ const PeliculaItemPage=()=>{
 
     const cargarData = async () => {
         setLoading(true)
-        try {
-            const responsePelis = await Promise.race([
-                fetch(`https://cineulima.azurewebsites.net/cineulima/peliculas?filtro=${path}`),
-                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
-                    10000))
-            ])
-            const fechasResponse = await Promise.race([
-                fetch("https://cineulima.azurewebsites.net/cineulima/fechas"),
-                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
-                    10000))
-            ])
-            if (responsePelis.ok && fechasResponse.ok) {
-                const dataPeli = await responsePelis.json()
-                const dataFechas = await fechasResponse.json()
-                setPeliculasData(dataPeli)
-                setFechasHorariosData(dataFechas)
-                setFechaFiltro(dataFechas[0].value)
-            }
-        } catch (error) {
-            navigate('/error/500')
-        }
-        finally {
-            setLoading(false)
-        }
+        const responsePelis = await fetch(`https://cineulima.azurewebsites.net/cineulima/peliculas?filtro=${path}`)
+        const fechasResponse = await fetch("https://cineulima.azurewebsites.net/cineulima/fechas")
+        const dataPeli = await responsePelis.json()
+        const dataFechas = await fechasResponse.json()
+        setPeliculasData(dataPeli)
+        setFechasHorariosData(dataFechas)
+        setFechaFiltro(dataFechas[0].value)
+        setLoading(false)
     }
     
     const obtenerInfoSalas=async (idPelicula)=>{
         setLoadingSalas(true)
         setSalasData([])
-        try {
-            const responseSalas = await Promise.race([
-                fetch(`https://cineulima.azurewebsites.net/cineulima/peliculainfofecha?fecha=${fechaFiltro}&movieid=${idPelicula}`),
-                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')), 10000))
-            ])
-            if (responseSalas.ok) {
-                const dataSalas = await responseSalas.json()
-                setSalasData(dataSalas);
-                if (dataSalas.length === 0) {
-                    setNoEncontrado(true)
-                } else {
-                    setNoEncontrado(false)
-                }
-            }
+        const responseSalas = await fetch(`https://cineulima.azurewebsites.net/cineulima/peliculainfofecha?fecha=${fechaFiltro}&movieid=${idPelicula}`)
+        const dataSalas = await responseSalas.json()
+        setSalasData(dataSalas);
+        if (dataSalas.length === 0) {
+            setNoEncontrado(true)
         }
-        catch (error) {
-            console.error(error)
-            navigate('/error/500')
+        else {
+            setNoEncontrado(false)
         }
-        finally {
-            setLoadingSalas(false)
-        }
+        setLoadingSalas(false)
     }
     
     useEffect(() => {

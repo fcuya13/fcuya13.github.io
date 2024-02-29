@@ -35,31 +35,14 @@ const SalaItemPage = () => {
 
     const cargarData = async () => {
         setLoading(true)
-        try{
-            const responseSala = await Promise.race([
-                fetch(`https://cineulima.azurewebsites.net/cineulima/sala?filtro=${path}`),
-                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
-                    10000))
-            ])
-            const fechasResponse = await Promise.race([
-                fetch("https://cineulima.azurewebsites.net/cineulima/fechas"),
-                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
-                    10000))
-            ])
-            if(responseSala.ok && fechasResponse.ok){
-                const dataSala = await responseSala.json();
-                setSalas(dataSala)
-                const dataFechas = await fechasResponse.json();
-                setFechasHorariosData(dataFechas)
-                setFechaFiltro(dataFechas[0].value)
-            }
-        }
-        catch (error){
-            navigate('/error/500')
-        }
-        finally {
-            setLoading(false)
-        }
+        const responseSala = await fetch(`https://cineulima.azurewebsites.net/cineulima/sala?filtro=${path}`)
+        const fechasResponse = await fetch("https://cineulima.azurewebsites.net/cineulima/fechas")
+        const dataSala = await responseSala.json();
+        setSalas(dataSala)
+        const dataFechas = await fechasResponse.json();
+        setFechasHorariosData(dataFechas)
+        setFechaFiltro(dataFechas[0].value)
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -69,8 +52,8 @@ const SalaItemPage = () => {
     const cargarDataPelicula = async () => {
         setLoadingPelis(true)
         setPeliculasData([])
-        const responsePelicula = await fetch(`https://cineulima.azurewebsites.net/cineulima/salainfofecha?fecha=${fechaFiltro}&salaid=${sala.id}`);
-        const dataPeliculas = await responsePelicula.json();
+        const responsePelicula = await fetch(`https://cineulima.azurewebsites.net/cineulima/salainfofecha?fecha=${fechaFiltro}&salaid=${sala.id}`)
+        const dataPeliculas = await responsePelicula.json()
         setPeliculasData(dataPeliculas)
         if(dataPeliculas.length===0){
             setNoEncontrado(true)

@@ -49,7 +49,7 @@ const ReservaPage = () => {
             const response = await Promise.race([
                 fetch(`https://cineulima.azurewebsites.net/cineulima/funcioninfo?funcionid=${funcionid}`),
                 new Promise((_, reject) =>
-                    setTimeout(() => reject(new Error('Tiempo de espera excedido')), 10000)
+                    setTimeout(() => reject(new Error('Tiempo de espera excedido')), 40000)
                 )
             ])
             if(response.ok){

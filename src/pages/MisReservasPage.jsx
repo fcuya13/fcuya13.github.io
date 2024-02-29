@@ -21,7 +21,7 @@ const MisReservasPage = () => {
             const response = await Promise.race([
                 fetch(`https://cineulima.azurewebsites.net/cineulima/misreservas?user_id=${user_id}`),
                 new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
-                10000))
+                40000))
             ])
 
             if (response.status === 200) {

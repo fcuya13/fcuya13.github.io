@@ -38,37 +38,24 @@ const RecuperaPage = () => {
             "correo": correo,
         }
 
-        try {
-            setLoading(true)
-            const response = await Promise.race([
-                fetch("https://cineulima.azurewebsites.net/cineulima/recovery", {
+        setLoading(true)
+        const response = await fetch("https://cineulima.azurewebsites.net/cineulima/recovery", {
                 method: "POST",
                 body: JSON.stringify(dataUser)
-            }),
-                new Promise((_, reject) =>
-                    setTimeout(() => reject(new Error('Tiempo de espera excedido')), 10000)
-                )
-            ])
+            })
 
-            if (response.status === 200) {
-                setLoading(false)
-                setOpen(true)
-            } else {
-                const data = await response.json()
-                setErrormsg(data.msg)
-                setError(true)
-                setLoading(false)
-
-            }
+        if (response.status === 200) {
+            setLoading(false)
+            setOpen(true)
         }
-        catch (error) {
+        else {
+            const data = await response.json()
+            setErrormsg(data.msg)
             setError(true)
-            navigate('/error/500')
-        }
-        finally {
             setLoading(false)
         }
-    };
+        setLoading(false)
+    }
 
     return <>
         <Helmet>

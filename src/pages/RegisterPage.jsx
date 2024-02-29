@@ -60,7 +60,7 @@ const RegisterPage = () => {
                 body: JSON.stringify(dataUser)
             }),
                 new Promise((_, reject) =>
-                    setTimeout(() => reject(new Error('Tiempo de espera excedido')), 10000)
+                    setTimeout(() => reject(new Error('Tiempo de espera excedido')), 40000)
                 )
             ])
 
