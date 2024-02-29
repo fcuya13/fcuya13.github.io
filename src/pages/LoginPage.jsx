@@ -43,32 +43,35 @@ const LoginPage = () => {
 
         try {
             setLoading(true)
-            const response = await fetch("https://cineulima.azurewebsites.net/cineulima/users", {
-                method: "POST",
-                body: JSON.stringify(dataUser)
-            })
+            const response = await Promise.race([
+                fetch("https://cineulima.azurewebsites.net/cineulima/users", {
+                    method: "POST",
+                    body: JSON.stringify(dataUser)
+                }),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Tiempo de espera excedido')), 10000)
+                )
+            ])
 
-            const data = await response.json()
-
-            if (response.status === 200) {
-                const storageData = JSON.stringify(data);
-                navigate("/home")
-                sessionStorage.setItem("user", storageData);
-            } else {
+            if (!response.ok) {
+                const data = await response.json();
                 const errData = data.msg
                 setError(true)
                 setErrormsg(errData)
-                setLoading(false)
+            } else {
+                const data = await response.json();
+                const storageData = JSON.stringify(data);
+                navigate("/home");
+                sessionStorage.setItem("user", storageData);
             }
-        } catch (error) {
+        }
+        catch (error) {
             setError(true)
-            setErrormsg("Ha ocurrido un error. Por favor inténtelo más tarde")
+            navigate('/error/500')
+        } finally {
             setLoading(false)
         }
-
     }
-
-    
 
     return <>
         <Helmet>

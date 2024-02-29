@@ -54,10 +54,15 @@ const RegisterPage = () => {
 
         try{
             setLoading(true)
-            const response = await fetch("https://cineulima.azurewebsites.net/cineulima/createuser", {
+            const response = await Promise.race([
+                fetch("https://cineulima.azurewebsites.net/cineulima/createuser", {
                 method: "POST",
                 body: JSON.stringify(dataUser)
-            })
+            }),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Tiempo de espera excedido')), 10000)
+                )
+            ])
 
             const data = await response.json()
 
@@ -72,11 +77,13 @@ const RegisterPage = () => {
                 setLoading(false)
 
             }
-        }catch (error) {
+        }
+        catch (error) {
             setError(true)
-        setErrormsg("Ha ocurrido un error. Por favor inténtelo más tarde")
+            navigate('/error/500')
+        }
+        finally {
             setLoading(false)
-
         }
     }
 

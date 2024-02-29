@@ -16,8 +16,10 @@ const App = () => {
         <Routes>
             <Route
                 path="*"
-                element={<ErrorPage/>}
+                element={<ErrorPage img={"https://admiral.digital/wp-content/uploads/2023/08/404_page-not-found-1024x576.png"}/>}
             />
+                <Route path="/error/500" element={<ErrorPage
+                    img={"https://seo-hacker.com/wp-content/uploads/2023/07/Blog-Cover-Fixing-a-500-Internal-Server-Error-on-Your-Site-01.png"}/>} />
             <Route path="" element={<LoginPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/registro" element={<RegisterPage/>}/>
@@ -32,6 +34,5 @@ const App = () => {
         </Routes>
     );
 };
-
 
 export default App;

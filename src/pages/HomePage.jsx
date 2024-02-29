@@ -11,10 +11,24 @@ const HomePage = () => {
 
     const obtenerRecomendaciones = async () => {
         setLoading(true)
-        const response = await fetch("https://cineulima.azurewebsites.net/cineulima/recomendaciones")
-        const data = await response.json()
-        setRecomendaciones(data)
-        setLoading(false)
+        try {
+            const response = await Promise.race([
+                fetch("https://cineulima.azurewebsites.net/cineulima/recomendaciones"),
+                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
+                    10000))
+            ])
+            if (response.ok) {
+                const data = await response.json();
+                setRecomendaciones(data);
+                setLoading(false);
+            }
+        }
+        catch (error) {
+            navigate('/error/500')
+        }
+        finally {
+            setLoading(false)
+        }
     }
 
     useEffect(() =>{

@@ -10,23 +10,34 @@ const MainNavbar = (props) => {
   const navigate = useNavigate();
 
   const filtrarContenido = async (e) => {
-      props.setLoading(true)
-
-    const response = await fetch(`https://cineulima.azurewebsites.net/cineulima/busqueda/${filtro}`)
-    const data = await response.json()
-      props.setLoading(false)
-
-    if (data.peliculas.length > 0) {
-      setFiltro(data.peliculas)
-      navigate('/peliculas', { state: { filtro: data.peliculas } })
-    }
-    else if (data.salas.length > 0) {
-      setFiltro(data.salas)
-      navigate('/salas', { state: { filtro: data.salas } })
-    }
-    else {
-      setNoEncontrado(true)
-    }
+      try{
+          props.setLoading(true)
+          const response = await Promise.race([
+              fetch(`http://localhost:8000/cineulima/busqueda/${filtro}`),
+              new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
+                  10000))
+          ])
+          if(response.ok){
+              const data = await response.json()
+              if (data.peliculas.length > 0) {
+                  setFiltro(data.peliculas)
+                  navigate('/peliculas', { state: { filtro: data.peliculas } })
+              }
+              else if (data.salas.length > 0) {
+                  setFiltro(data.salas)
+                  navigate('/salas', { state: { filtro: data.salas } })
+              }
+              else {
+                  setNoEncontrado(true)
+              }
+          }
+      }
+      catch (error){
+          navigate('/error/500')
+      }
+      finally {
+          props.setLoading(false)
+      }
   }
 
   const onEnterClick = (e) => {

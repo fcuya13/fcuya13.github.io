@@ -44,11 +44,25 @@ const ReservaPage = () => {
     const navigate = useNavigate()
 
     const getFuncionInfo = async () => {
-        setLoading(true)
-        const response = await fetch(`https://cineulima.azurewebsites.net/cineulima/funcioninfo?funcionid=${funcionid}`)
-        const data = await response.json()
-        setInfoFuncion(data)
-        setLoading(false)
+        try{
+            setLoading(true)
+            const response = await Promise.race([
+                fetch(`https://cineulima.azurewebsites.net/cineulima/funcioninfo?funcionid=${funcionid}`),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Tiempo de espera excedido')), 10000)
+                )
+            ])
+            if(response.ok){
+                const data = await response.json()
+                setInfoFuncion(data)
+            }
+        }
+        catch (error){
+            navigate('/error/500')
+        }
+        finally {
+            setLoading(false)
+        }
     }
 
     useEffect(() => {

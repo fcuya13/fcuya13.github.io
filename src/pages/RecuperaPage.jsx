@@ -40,10 +40,15 @@ const RecuperaPage = () => {
 
         try {
             setLoading(true)
-            const response = await fetch("https://cineulima.azurewebsites.net/cineulima/recovery", {
+            const response = await Promise.race([
+                fetch("https://cineulima.azurewebsites.net/cineulima/recovery", {
                 method: "POST",
                 body: JSON.stringify(dataUser)
-            })
+            }),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Tiempo de espera excedido')), 10000)
+                )
+            ])
 
             if (response.status === 200) {
                 setLoading(false)
@@ -55,11 +60,14 @@ const RecuperaPage = () => {
                 setLoading(false)
 
             }
-        }catch (error) {
+        }
+        catch (error) {
             setError(true)
-            setErrormsg("Ha ocurrido un error. Por favor inténtelo más tarde")
+            navigate('/error/500')
+        }
+        finally {
             setLoading(false)
-            }
+        }
     };
 
     return <>

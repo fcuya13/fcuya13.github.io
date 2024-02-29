@@ -2,7 +2,7 @@ import {Backdrop, CircularProgress, Container, Grid, Typography} from "@mui/mate
 import PageLayout from "../components/PageLayout"
 import SalasBody from "../components/SalasBody"
 import {useEffect, useState} from "react"
-import { useLocation } from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 import {Helmet} from "react-helmet";
 
 const SalasPage = () => {
@@ -13,16 +13,30 @@ const SalasPage = () => {
   const salas = state ? state.filtro : []
     const [loading, setLoading] = useState(false)
     const [isInitialLoad, setIsInitialLoad] = useState(true)
+    const navigate = useNavigate()
 
     const filtrarSalas = async () => {
-        if (isInitialLoad){
-            setLoading(true)
-            setIsInitialLoad(false)
+        try{
+            if (isInitialLoad){
+                setLoading(true)
+                setIsInitialLoad(false)
+            }
+            const response = await Promise.race([
+                fetch(`https://cineulima.azurewebsites.net/cineulima/salas?filtro=${filtro}`),
+                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
+                    10000))
+            ])
+            if(response.ok){
+                const data = await response.json()
+                setSalasData(data)
+            }
         }
-        const response = await fetch(`https://cineulima.azurewebsites.net/cineulima/salas?filtro=${filtro}`)
-        const data = await response.json()
-        setSalasData(data)
-        setLoading(false)
+        catch (error){
+            navigate('/error/500')
+        }
+        finally {
+            setLoading(false)
+        }
     }
 
     useEffect(() => {

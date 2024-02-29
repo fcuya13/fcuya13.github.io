@@ -9,25 +9,31 @@ import {
 import {useState, useEffect} from "react"
 import CardList3 from "../components/CardList3";
 import {Helmet} from "react-helmet";
+import {useNavigate} from "react-router-dom";
 
 const MisReservasPage = () => {
-
     const [reservas, setReservas] = useState([])
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
     const cargarReservas = async (user_id) => {
         try {
             setLoading(true)
-            const response = await fetch(`https://cineulima.azurewebsites.net/cineulima/misreservas?user_id=${user_id}`, {
-                method: 'GET'
-            });
+            const response = await Promise.race([
+                fetch(`https://cineulima.azurewebsites.net/cineulima/misreservas?user_id=${user_id}`),
+                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
+                10000))
+            ])
 
             if (response.status === 200) {
-                const data = await response.json()
-                setReservas(data)
+                const data = await response.json();
+                setReservas(data);
                 setLoading(false)
             }
-        } catch (error) {
-            console.error(error);
+        }
+        catch (error) {
+            navigate('/error/500')
+        }
+        finally {
             setLoading(false)
         }
     }

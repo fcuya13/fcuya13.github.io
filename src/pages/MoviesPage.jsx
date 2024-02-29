@@ -2,7 +2,7 @@ import {Backdrop, CircularProgress, Container, Grid, Typography} from "@mui/mate
 import MovieBody from "../components/MovieBody"
 import PageLayout from "../components/PageLayout"
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 import {Helmet} from "react-helmet";
 
 const MoviesPage = () => {
@@ -13,16 +13,30 @@ const MoviesPage = () => {
   const movies = state ? state.filtro : []
   const [loading, setLoading] = useState(false)
     const [isInitialLoad, setIsInitialLoad] = useState(true)
+    const navigate = useNavigate()
 
   const filtrarPeliculas = async () => {
-      if (isInitialLoad){
-          setLoading(true)
-          setIsInitialLoad(false)
+      try {
+          if (isInitialLoad) {
+              setLoading(true)
+              setIsInitialLoad(false)
+          }
+          const response = await Promise.race([
+              fetch(`https://cineulima.azurewebsites.net/cineulima/peliculas?filtro=${filtro}`),
+              new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
+                  10000))
+          ])
+          if (response.ok) {
+              const data = await response.json()
+              setMoviesData(data)
+          }
       }
-      const response = await fetch(`https://cineulima.azurewebsites.net/cineulima/peliculas?filtro=${filtro}`)
-    const data = await response.json()
-    setMoviesData(data)
-      setLoading(false)
+      catch (error) {
+          navigate('/error/500')
+      }
+      finally {
+          setLoading(false)
+      }
   }
 
   useEffect(() => {

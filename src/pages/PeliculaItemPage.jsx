@@ -14,7 +14,7 @@ import PageLayout from "../components/PageLayout"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { CardHeader } from "react-bootstrap";
 import ListaDisponibles from "../components/ListaDisponibles";
-import {useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { useEffect, useState } from "react";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -32,52 +32,80 @@ const PeliculaItemPage=()=>{
     const [noEncontrado, setNoEncontrado]=useState(false)
     const [loading, setLoading] = useState(false)
     const [loadingSalas, setLoadingSalas] = useState(false)
+    const navigate = useNavigate()
 
     const cargarData = async () => {
         setLoading(true)
-        const responsePelis = await fetch(`https://cineulima.azurewebsites.net/cineulima/peliculas?filtro=${path}`);
-        const dataPeli = await responsePelis.json();
-        const fechasResponse = await fetch("https://cineulima.azurewebsites.net/cineulima/fechas")
-        const dataFechas = await fechasResponse.json();
-        setPeliculasData(dataPeli);
-        setFechasHorariosData(dataFechas);
-        setFechaFiltro(dataFechas[0].value)
-        setLoading(false)
-    };
+        try {
+            const responsePelis = await Promise.race([
+                fetch(`https://cineulima.azurewebsites.net/cineulima/peliculas?filtro=${path}`),
+                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
+                    10000))
+            ])
+            const fechasResponse = await Promise.race([
+                fetch("https://cineulima.azurewebsites.net/cineulima/fechas"),
+                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')),
+                    10000))
+            ])
+            if (responsePelis.ok && fechasResponse.ok) {
+                const dataPeli = await responsePelis.json()
+                const dataFechas = await fechasResponse.json()
+                setPeliculasData(dataPeli)
+                setFechasHorariosData(dataFechas)
+                setFechaFiltro(dataFechas[0].value)
+            }
+        } catch (error) {
+            navigate('/error/500')
+        }
+        finally {
+            setLoading(false)
+        }
+    }
     
     const obtenerInfoSalas=async (idPelicula)=>{
         setLoadingSalas(true)
-        const responseSalas= await fetch(
-            `https://cineulima.azurewebsites.net/cineulima/peliculainfofecha?fecha=${fechaFiltro}&movieid=${idPelicula}`);
-        const dataSalas= await responseSalas.json();
-        setSalasData(dataSalas);
-        if(dataSalas.length===0){
-            setNoEncontrado(true);
-        }else{
-            setNoEncontrado(false);
+        try {
+            const responseSalas = await Promise.race([
+                fetch(`https://cineulima.azurewebsites.net/cineulima/peliculainfofecha?fecha=${fechaFiltro}&movieid=${idPelicula}`),
+                new Promise((resolve, reject) => setTimeout(() => reject(new Error('Timeout')), 10000))
+            ])
+            if (responseSalas.ok) {
+                const dataSalas = await responseSalas.json()
+                setSalasData(dataSalas);
+                if (dataSalas.length === 0) {
+                    setNoEncontrado(true)
+                } else {
+                    setNoEncontrado(false)
+                }
+            }
         }
-        setLoadingSalas(false)
+        catch (error) {
+            navigate('/error/500')
+        }
+        finally {
+            setLoadingSalas(false)
+        }
     }
     
     useEffect(() => {
-        cargarData();
+        cargarData()
     }, []);
 
     useEffect(() => {
         if (peliculasData.length > 0) {
-            const peliLoaded = peliculasData.find(p => p.path === path);
-            setPelicula(peliLoaded);
+            const peliLoaded = peliculasData.find(p => p.path === path)
+            setPelicula(peliLoaded)
             if (pelicula) {
-                obtenerInfoSalas(pelicula.id);
+                obtenerInfoSalas(pelicula.id)
             }
         }
-    }, [peliculasData, path]);
+    }, [peliculasData, path])
 
     useEffect(() => {
         if (pelicula) {
-          obtenerInfoSalas(pelicula.id);
+          obtenerInfoSalas(pelicula.id)
         }
-      }, [fechaFiltro, pelicula]);
+      }, [fechaFiltro, pelicula])
 
     return <>
         <Helmet>
